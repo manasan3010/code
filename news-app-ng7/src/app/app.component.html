@@ -1,0 +1,91 @@
+<div style="clear: both;display: grid;grid-template-columns: 4fr 2fr;">
+
+  <div style="margin-left: 10% ;">
+    <mat-toolbar color="primary">
+      <button mat-button (click)="sidenav.toggle();">
+        <mat-icon>{{sidenavValue ? 'close' : 'menu'}}</mat-icon>
+      </button>
+      <span>News Headlines</span>
+      <span class="example-spacer"></span>
+      <button mat-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>settings</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item> Settings </button>
+      <button mat-menu-item> About </button>
+      <button mat-menu-item> Help </button>
+    </mat-menu>
+    <mat-sidenav-container class="example-container">
+
+      <mat-sidenav #sidenav class="example-sidenav" (opened)="sidenavValue=true;" (closed)="sidenavValue=false;"
+        [autoFocus]="false">
+        <mat-list class="list-nav">
+          <mat-list-item class="list-item" *ngFor="let source of mSources"
+            (click)="searchArticles(source.id);sidenav.close();">
+
+            <div mat-card-avatar [ngStyle]="{'background-image': 'url(../assets/images/'+ source.id +'.png)'}"
+              class="example-header-image"></div>
+
+            <span class="source-name"> {{source.name}}</span>
+
+          </mat-list-item>
+        </mat-list>
+      </mat-sidenav>
+      <mat-card class="example-card" *ngFor="let article of mArticles">
+        <mat-card-header>
+          <div mat-card-avatar [ngStyle]="{'background-image': 'url(../assets/images/'+ article.source.id +'.png)'}"
+            class="example-header-image"></div>
+          <mat-card-title class="title">{{article.title}}</mat-card-title>
+          <mat-card-subtitle>{{article.source.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="img-article" src={{article.urlToImage}} alt="">
+        <mat-card-content>
+          <p>
+            {{article.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="action-buttons">
+          <button mat-button color="primary">
+            <mat-icon>thumb_up_alt</mat-icon> 12 Likes
+          </button>
+          <button mat-button color="primary">
+            <mat-icon>comment</mat-icon> Comments
+          </button>
+          <button mat-button color="primary">
+            <mat-icon>share</mat-icon> Share
+          </button>
+          <a mat-button color="primary" href={{article.url}} target="_blank">
+            <mat-icon>visibility</mat-icon> More
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </mat-sidenav-container>
+  </div>
+
+
+
+  <div style="height: auto;width: auto;">
+    <div style="position: fixed;">
+      <div *ngIf="weatherData"
+        style="background-color:#8bc34a;min-height: 200px;width: 200px;margin-left:5%;padding: 15px;border-radius: 6%;">
+        <h3 id="city"><b>Weather of {{ weatherData.request.query }}</b></h3>
+        <h3 style="float: right">{{ weatherData.current.weather_descriptions[0] }}</h3>
+        <img style="float: right;margin: 10px;" src="{{weatherData.current.weather_icons[0]}}" alt="">
+        <h3><i>Wind Pressure: </i>{{ weatherData.current.pressure }}</h3>
+        <h3><i>Temperature: </i>{{ weatherData.current.temperature }}</h3>
+      </div>
+
+      <div *ngIf="weather.joke" style="margin-left:5%;">
+        <h2>{{weather.joke.setup}}</h2>
+        <h3 style="margin-left: 20px;float:left;">{{weather.joke.punchline}}</h3>
+
+        <button mat-button (click)="weather.getJoke()" style="margin-left:20pxx;margin-top:10px;float:left;">
+          <mat-icon>redo</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Mansalva Regular';
+  src: url('Mansalva-Regular.eot'); /* IE9 Compat Modes */
+  src: url('Mansalva-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Mansalva-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Mansalva-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Mansalva-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('Mansalva-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}

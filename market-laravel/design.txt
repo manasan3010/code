@@ -1,0 +1,3 @@
+Users [isAdmin,addNewProduct]
+Products[Category] -> Users
+General[key:value]

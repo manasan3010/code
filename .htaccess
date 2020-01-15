@@ -1,0 +1,2 @@
+RewriteEngine on
+Redirect /song /scratch/remote_music_client.php
