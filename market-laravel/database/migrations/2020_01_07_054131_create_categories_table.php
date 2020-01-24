@@ -14,8 +14,8 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->unsignedBigInteger('product_id')->index()->unsigned();
-            foreach (['fruits', 'nuts', 'vegetables', 'flavours'] as $category) {
+            $table->unsignedBigInteger('product_id')->index()->unique()->unsigned();
+            foreach (['fruits', 'nuts',  'roots', 'herbs', 'flavours', 'low-country-vegetables', 'up-country-vegetables'] as $category) {
 
                 $table->boolean($category)->default(false);
             }

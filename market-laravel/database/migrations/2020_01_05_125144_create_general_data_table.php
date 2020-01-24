@@ -14,7 +14,7 @@ class CreateGeneralDataTable extends Migration
     public function up()
     {
         Schema::create('general_data', function (Blueprint $table) {
-            $table->longText('key')->index();
+            $table->string('key')->index()->unique();
             $table->longText('value');
             $table->timestamps();
         });

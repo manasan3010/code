@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Products;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -70,6 +71,10 @@ class AdminController extends Controller
             }
         }
 
+        $category = [];
+        foreach ($request->category as $key) {
+            $category[$key] = true;
+        }
 
         // $data = request()->validate([
         //     'name' => 'required',
@@ -77,7 +82,7 @@ class AdminController extends Controller
         //     'price' => 'required',
         // ]);
         if ($request->id == null) {
-            Products::create([
+            $data = Products::create([
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
@@ -87,10 +92,16 @@ class AdminController extends Controller
                 'brand' => $request->brand,
                 'rating' => $request->rating,
                 'tags' => $request->tags,
-                'category' => json_encode($request->category),
                 'images' => json_encode($filePath),
             ]);
+
+            $category['product_id'] = $data->id;
+            DB::table('categories')->insert($category);
         } elseif ($filePath) {
+            foreach (json_decode(Products::find($request->id)->images, true) as $oldImage) {
+
+                if (file_exists(storage_path('app/public/image_files/' . $oldImage))) unlink(storage_path('app/public/image_files/' . $oldImage));
+            }
 
             Products::whereId($request->id)->update([
                 'name' => $request->name,
@@ -100,9 +111,11 @@ class AdminController extends Controller
                 'availability' => $request->availability,
                 'location' => $request->location,
                 'brand' => $request->brand,
-                'category' => json_encode($request->category),
                 'images' => json_encode($filePath),
             ]);
+
+            // $category['product_id'] = $request->id;
+            DB::table('categories')->updateOrInsert(['product_id' => $request->id], $category);
         } else {
 
             Products::whereId($request->id)->update([
@@ -113,8 +126,12 @@ class AdminController extends Controller
                 'availability' => $request->availability,
                 'location' => $request->location,
                 'brand' => $request->brand,
-                'category' => json_encode($request->category),
             ]);
+
+            // $category['product_id'] = $request->id;
+            // dd($request->id);
+
+            DB::table('categories')->updateOrInsert(['product_id' => $request->id], $category);
         }
 
 
@@ -183,7 +200,7 @@ class AdminController extends Controller
                 ->orWhere('description', 'LIKE', "%{$search}%")
                 ->orWhere('created_at', 'LIKE', "%{$search}%")
                 ->orWhere('updated_at', 'LIKE', "%{$search}%")
-                ->orWhere('category', 'LIKE', "%{$search}%")
+                // ->orWhere('category', 'LIKE', "%{$search}%")
                 ->orWhere('tags', 'LIKE', "%{$search}%")
 
                 ->offset($start)
@@ -201,7 +218,7 @@ class AdminController extends Controller
                 ->orWhere('description', 'LIKE', "%{$search}%")
                 ->orWhere('created_at', 'LIKE', "%{$search}%")
                 ->orWhere('updated_at', 'LIKE', "%{$search}%")
-                ->orWhere('category', 'LIKE', "%{$search}%")
+                // ->orWhere('category', 'LIKE', "%{$search}%")
                 ->orWhere('tags', 'LIKE', "%{$search}%")
 
                 ->count();
@@ -212,6 +229,16 @@ class AdminController extends Controller
             foreach ($posts as $post) {
                 // $show =  route('posts.show', $post->id);
                 // $edit =  route('posts.edit', $post->id);
+                $categoryArray = [];
+                $categoryTable = DB::table('categories')->where('product_id', $post->id)->first() ? DB::table('categories')->where('product_id', $post->id)->first() : [];
+
+
+                foreach ($categoryTable as $key => $value) {
+                    if ($value && $key != 'product_id') {
+                        array_push($categoryArray, $key);
+                    }
+                }
+                // dd($categoryArray);
 
                 $nestedData['id'] = $post->id;
                 $nestedData['name'] = $post->name;
@@ -220,7 +247,7 @@ class AdminController extends Controller
                 $nestedData['current_stock'] = $post->current_stock;
                 $nestedData['brand'] = $post->brand;
                 $nestedData['location'] = $post->location;
-                $nestedData['category'] = $post->category;
+                $nestedData['category'] = $categoryArray;
                 $nestedData['tags'] = $post->tags;
                 $nestedData['images'] = $post->location;
                 $nestedData['description'] = (strlen($post->description) > 50) ? substr(strip_tags($post->description), 0, 50) . "..." : $post->description;

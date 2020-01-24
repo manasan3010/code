@@ -5,7 +5,7 @@ $(document).ready(function () {
     pTable = $('#productsTable').DataTable({
 
         ajax: {
-            url: "admin/product/info",
+            url: "admin/product/get",
             dataType: "json",
             type: "POST",
             // success: function (dataR) {
@@ -37,8 +37,8 @@ $(document).ready(function () {
             data: 'availability'
         }, {
             data: 'current_stock',
-			render: function (data, type, full, meta) {
-                return data!==null ? data: 'Unlimited' ;
+            render: function (data, type, full, meta) {
+                return data !== null ? data : 'Unlimited';
             }
         }, {
             data: 'brand'
@@ -46,8 +46,8 @@ $(document).ready(function () {
             data: 'location'
         }, {
             data: 'description',
-			 render: function (data, type, full, meta) {
-                return data ? (data.length>30 ? `<div class="pDisc" >${data.substring(0,30) + '...'}</div>` : data ) : data ;
+            render: function (data, type, full, meta) {
+                return data ? (data.length > 30 ? `<div class="pDisc" >${data.substring(0, 30) + '...'}</div>` : data) : data;
             }
         }, {
             data: 'created_at'
@@ -68,7 +68,7 @@ $(document).ready(function () {
     $('#addContentHeading h1').text('Edit Product')
     $('button#submit').text('Update Product')
     $('button#delete').show()
-    $('#addContentHeading').append(`<a href="javascript:redrawTable();" style="margin-right: 110px;" class="mt-2 mt-sm-0 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-link fa-sm text-white-50 mr-1"></i> View in E-Market</a><div onclick="editHolderClose()" id="editHolderClose"  >&times;</div>`)
+    $('#addContentHeading').append(`<a href="javascript:void;" target="_blank" id="view-in-market" style="margin-right: 110px;" class="mt-2 mt-sm-0 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-link fa-sm text-white-50 mr-1"></i> View in E-Market</a><div onclick="editHolderClose()" id="editHolderClose"  >&times;</div>`)
 
     $('#productsTable').on('draw.dt', function () {
         $('#productsTable tbody tr').click(function () {
@@ -187,9 +187,10 @@ function editProduct(row) {
     }
 
     $('#productForm').append(`<input name="id" hidden value="${row.id}">`)
+    $('#view-in-market')[0].href = "/product/" + row['id'];
 
     if (row['current_stock'] == null) { $('#customCheck1').click() }
-    for (key of JSON.parse(row['category'])) {
+    for (key of row['category']) {
         $(`#multiple-select option[value=${key}]`).attr('selected', '')
     }
 

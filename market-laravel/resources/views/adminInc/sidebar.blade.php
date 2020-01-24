@@ -40,7 +40,7 @@
  	</li>
 
  	<li class="nav-item">
- 		<a class="nav-link" href="admin/product/edit">
+ 		<a class="nav-link" href="admin/transactions">
  			<i class="fas fa-fw fa-exchange-alt"></i>
  			<span>Transactions</span></a>
  	</li>

@@ -1,3 +1,33 @@
 Users [isAdmin,addNewProduct]
 Products[Category] -> Users
 General[key:value]
+
+
+
+https://saktiagro.com/
+
+
+https://www.econutrena.com/
+Econutrena | Coconut Product Manufacturer | Sri Lanka
+Econutrena is the reputed coconut product manufacturer in Sri Lanka. We offer premium quality coconut products like virgin coconut oil for the export market.
+econutrena.com
+
+http://ceyloncoconutcompany.com/
+Ceylon Coconut Company
+ceyloncoconutcompany.com
+
+
+
+Status -- 
+unassigned
+no-stock
+in-process
+in-transit
+in-dispute
+item-returned
+delivered
+
+
+~~~~~~~~~~~~~TODO~~~~~~~~~~~~
+
+- Create subcategories for main catgories

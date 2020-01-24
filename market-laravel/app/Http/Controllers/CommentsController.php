@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
@@ -14,7 +15,7 @@ class CommentsController extends Controller
 
     public function addComment(Request $request)
     {
-        if(!\Auth::User()) return redirect('/login');
+        if(!Auth::User()) return redirect('/login');
 
         $validator = Validator::make($request->all(), [
             'comment' => 'required|string|max:10000',
@@ -27,7 +28,7 @@ class CommentsController extends Controller
         }
 
         \App\Comments::create([
-            'userId' => \Auth::User()->id,
+            'userId' => Auth::User()->id,
             'productId' => $request->productId,
             'comment' => $request->comment,
             'rating' => $request->rating

@@ -9,6 +9,12 @@ class GeneralData extends Model
 
     protected $guarded = [];
 
+    protected $primaryKey = "key";
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+
+
     public static function fgh()
     {
         GeneralData::create([

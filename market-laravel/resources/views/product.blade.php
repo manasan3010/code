@@ -20,7 +20,9 @@
 	#zoomImg {
 		position: fixed;
 		display: none;
-		background: url(/storage/image_files/{{$images[0]}}) center no-repeat;
+		background: url("/storage/image_files/{{$images[0] ?? '' }}");
+		background-position: center;
+		background-repeat: no-repeat;
 		background-size: contain;
 		background-color: #e6e6e6;
 		height: 100%;
@@ -31,11 +33,15 @@
 		user-select: none;
 
 	}
+
+	.btn-default[disabled] {
+		background-color: #9E9E9E;
+	}
 </style>
 
 <div onclick="$(this).hide()" id="zoomImg" style="">
 	<div style="position: fixed;right: 24px;top: -25px;font-size: 90px;cursor:pointer;">×</div>
-	<!-- <img src="/storage/image_files/{{$images[0]}}" alt="" style="
+	<!-- <img src="/storage/image_files/" alt="" style="
 max-height: 100%;
 max-width: 100%;
 "> -->
@@ -57,7 +63,7 @@ max-width: 100%;
                                     @else /images/product-details/no-image.png
                                     @endif
                                 ' alt="">
-							<h3 onclick="$('#zoomImg').css('display','flex')" style="cursor:pointer;">ZOOM</h3>
+							<h3 onclick="$('#zoomImg').css('display','flex')" @if(!isset($images[0])) style="display:none;" @endif style="cursor:pointer;">ZOOM</h3>
 						</div>
 						<div id="similar-product" class="carousel slide" data-ride="carousel">
 
@@ -102,7 +108,7 @@ max-width: 100%;
 							<img src="images/product-details/new.jpg" class="newarrival" alt="">
 							<h2>{{$item->name}}</h2>
 							<p>Product ID: {{$item->id}}</p>
-							<div style="width:80px;overflow: hidden;" class="rating">
+							<div style="overflow: hidden;width:{{ 16.3 * $item->rating ?? 0 }}px;" class="rating">
 								<img src="images/product-details/rating.png" alt="" style="width:80px"></div>
 							<span>
 								<span>LKR {{$item->price}}</span>
@@ -111,7 +117,7 @@ max-width: 100%;
 									<input type="hidden" id="productId" value="{{$item->id}}">
 									<input type="number" id="quantity" @if((Auth::User())) value='{{ json_decode(Auth::User()->cart, true)[$item->id] ?? 1  }}' @else value='1' @endif style="width: 80px;" min="0">
 
-									<button type="button" class="btn btn-fefault cart addToCart">
+									<button type="button" class="btn btn-default cart addToCart">
 										<i class="fa fa-shopping-cart"></i>
 										@if((Auth::User()))
 										@if(isset(json_decode(Auth::User()->cart, true)[$item->id]))
@@ -123,11 +129,11 @@ max-width: 100%;
 										Add to cart
 										@endif
 									</button>
-									<button type="button" style="display:none;" class="btn btn-fefault cart addToCart" disabled>
+									<button type="button" style="display:none;" class="btn btn-default cart addToCart" disabled>
 										<img src="/images/product-details/loader.svg" alt="" style="width:19px">
 										&nbsp;Please Wait
 									</button>
-									<button type="button" style="display:none;" class="btn btn-fefault cart addToCart" disabled>
+									<button type="button" style="display:none;" class="btn btn-default cart addToCart" disabled>
 										Added to Cart
 									</button>
 
@@ -429,14 +435,9 @@ max-width: 100%;
 
 
 <script>
-	$('.rating').width(String(16.3 * {
-		{
-			$item - > rating ? ? 0
-		}
-	}) + 'px')
-
 	$('.subImg').click(function() {
-		$('#mainImg')[0].src = $('#zoomImg>img')[0].src = $(this)[0].src;
+		$('#mainImg')[0].src = $(this)[0].src;
+		$('#zoomImg').css("background-image", "url(" + $(this)[0].src + ")")
 	})
 
 	$($('.addToCart')[0]).click(function() {

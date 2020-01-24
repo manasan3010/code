@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProductsTable extends Migration
 {
-    /**
+    /** 
      * Run the migrations.
      *
      * @return void
@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->string('category')->nullable();
             $table->integer('rating')->nullable();
             $table->unsignedBigInteger('price')->nullable();
             $table->string('location')->nullable();

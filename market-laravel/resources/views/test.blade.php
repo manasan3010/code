@@ -1,1 +1,1 @@
-{{ url('hwllo/dfsdf/sdfsdf')}}
+{{ request()->path()    }}
