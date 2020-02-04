@@ -1,0 +1,22 @@
+
+    {
+        "firstName": "tom",
+        "lastName": "mark",
+        "age": 32,
+        "team": "patriots",
+        "position": "qb"
+    }
+    {
+        "firstName": "david",
+        "lastName": "vimal",
+        "age": 39,
+        "team": "patriots",
+        "position": "engineer"
+    }
+    {
+        "firstName": "sundar",
+        "lastName": "bill",
+        "age": 14,
+        "team": "goodies",
+        "position": "developer"
+    }

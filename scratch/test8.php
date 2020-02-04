@@ -1,20 +1,11 @@
 <?php
 
-function callback($buffer)
-{
-    // replace all the apples with oranges
-}
 
-ob_start("callback");
+echo '<pre>';
+
+echo( '3'==3 );
+
+print_r(['SQL','python',[2,3,['full'=>'half',3=>5,'time'=>'05:30AM']]]);
+echo "<pre/>";
 
 ?>
-<html>
-
-<body>
-    <p>It's like comparing apples to oranges.</p>
-</body>
-
-</html>
-<?php
-
-ob_end_flush();
