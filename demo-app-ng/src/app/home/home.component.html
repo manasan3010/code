@@ -1,4 +1,4 @@
-<h1 [style.color]="h1Style ? 'red' : 'blue'">Home</h1>
+<h1 [style.color]="h1Style ? 'red' : 'blue'" (click)="firstClick()">Home</h1>
 
 <ul *ngIf="users">
     <li *ngFor="let user of users.data">

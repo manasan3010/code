@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
@@ -6,12 +6,13 @@ import { DataService } from '../data.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  h1Style = false;
+  public static h1Style = true;
   users: Object;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService) {
+  }
 
   ngOnInit() {
     this.data.getUsers().subscribe(data => {
@@ -20,8 +21,13 @@ export class HomeComponent implements OnInit {
     })
 
   }
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+    // Your Logic!
+  }
 
   firstClick() {
+    // this.h1Style = !this.h1Style
   }
 
 

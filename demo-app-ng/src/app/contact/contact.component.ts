@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HomeComponent } from '../home/home.component';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(HomeComponent.h1Style)
   }
 
 }

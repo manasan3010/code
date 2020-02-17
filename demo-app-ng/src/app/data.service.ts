@@ -8,6 +8,8 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  // api = this.http.get('https://reqres.in/api/users');
+
   getUsers() {
     return this.http.get('https://reqres.in/api/users');
   }

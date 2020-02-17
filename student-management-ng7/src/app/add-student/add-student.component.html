@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Student</h4>
+                    <h6 class="card-subtitle">Add students with details</h6>
+                </div>
+                <hr class="mt-0">
+                <form class="form-horizontal r-separator" [formGroup]="addStudentForm" (ngSubmit)="onSubmit()">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label for="inputEmail3"
+                                        class="col-sm-3 text-right control-label col-form-label">Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" formControlName="name" id="inputEmail3"
+                                            placeholder="Name of Student">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row">
+                                    <label for="inputEmail3"
+                                        class="col-sm-3 text-right control-label col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <textarea type="text" class="form-control" id="inputEmail3"
+                                            formControlName="description"
+                                            placeholder="Description about Student"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row pt-3">
+                                    <label for="inputEmail3"
+                                        class="col-sm-3 text-right control-label col-form-label">Date Of Birth</label>
+                                    <div class="col-sm-9">
+                                        <!-- <input type="date" class="form-control" id="date" formControlName="date"> -->
+                                        <input type="text" class="form-control" id="date" formControlName="date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="form-group row pt-3">
+                                    <label for="inputEmail3"
+                                        class="col-sm-3 text-right control-label col-form-label">Courses</label>
+                                    <div class="col-sm-9">
+
+                                        <select formControlName="courses" type="text" class="form-control"
+                                            id="multiple-select" multiple>
+                                            <option value="nuts">nuts</option>
+                                            <option value="low">low</option>
+                                            <option value="up">up</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="form-group mb-0 text-right">
+                            <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
+                            <!-- <button type="submit" class="btn btn-dark waves-effect waves-light">Cancel</button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="height: 1000px;"></div>
