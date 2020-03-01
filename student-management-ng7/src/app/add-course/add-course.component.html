@@ -1,1 +1,34 @@
-<p>add-course works!</p>
+<select name="" id="" #select (change)="currentShape = $event.target.value;shapeChange()" style="margin: 10px;">
+    <option selected value="rectangle">rectangle</option>
+    <option value="square">square</option>
+    <option value="circle">circle</option>
+    <!-- <option value="triangle">triangle</option> -->
+    <option value="custom">custom shape</option>
+</select>
+
+<!-- <label for="drag-check">Move/Resize&nbsp;</label><input type="checkbox" name="radioBtn" id="drag-check"
+    (change)="dragChange($event.target.value)"> -->
+<label for="rotate-check">Rotate&nbsp;</label><input type="checkbox" name="radioBtn" id="rotate-check"
+    (change)="rotateShape($event.target.checked)">
+
+<label for="ratio-check">Keep-Ratio&nbsp;</label><input type="checkbox" name="radioBtn" id="ratio-check"
+    (change)="keepRatio($event.target.checked)">
+
+<!-- <label for="resize-check">Resizable&nbsp;</label><input type="radio" name="radioBtn" id="resize-check"
+    (change)="resizable = $event.target.checked;"> -->
+<ng-container *ngIf="select.value=='custom'">
+    <button *ngIf="customOnCreation" style="margin-left: 20px;" (click)="finishPath()">Finish Pathing</button>
+    <button *ngIf="!customOnCreation" style="margin-left: 20px;" (click)="customOnCreation=true">Start Pathing</button>
+</ng-container>
+
+<button style="margin-left: 20px;" (click)="populateShapes()">Populate</button>
+
+<input type="file" name="" (change)="imageRead($event.target)" accept="image/svg+xml">
+
+<!-- <div style=" margin: 0 30px;border: red solid;"> -->
+<svg #svg_container width="1" height="1" (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)"
+    (mousemove)="mouseMove($event)">
+</svg>
+<!-- </div> -->
+
+<div id="paperC" #paperC (mousedown)="mouseDown2($event)" (mousemove)="mouseMove2($event)"></div>
