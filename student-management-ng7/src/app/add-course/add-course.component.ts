@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ViewEncapsulat
 import { ThrowStmt } from '@angular/compiler';
 import { Shape } from './shape';
 // import * as test from 'path-data-polyfill/path-data-polyfill.js'
+import * as svgIntersections from 'svg-intersections';
+import { ShapeInfo, Intersection } from "kld-intersections/dist/index-esm.js";
+
 
 import { ConvertToSVGService } from './../convert-to-svg.service';
 
@@ -19,6 +22,10 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
   // @ViewChild('rect', { static: false }) rect: ElementRef;
   @ViewChild('svg_container', { static: false }) svgC: ElementRef;
   constructor(private convertToSVG: ConvertToSVGService) { }
+
+
+  intersect = svgIntersections.intersect;
+  shape = svgIntersections.shape;
   containerPath: any;
   file;
   startClick = <any>{}
@@ -35,7 +42,6 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
   paper;
   paperC;
   img = <any>{};
-
   clicked = false;
 
   ngOnInit() {
@@ -66,6 +72,25 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
     //   paper.circle(10, 10, 5),
     //   paper.circle(30, 10, 5)
     // ))
+
+    // SVG-intersection
+    var intersections = this.intersect(
+      this.shape("circle", { cx: 0, cy: 0, r: 50 }),
+      this.shape("circle", { cx: 5, cy: 5, r: 45 }),
+      this.shape("path", { d: 'M0 0 l10 20 l50 30' }),
+      this.shape("path", { d: 'M0,0H300V300H600V600H0Z' })
+    );
+    console.log(intersections)
+    //kld-intersection
+    const path1 = ShapeInfo.path("M 0 10 L 30 0 L 0 30 L -50 30 Z")
+    const path2 = ShapeInfo.path("M 0 31 L 30 21 L 0 51 L -50 51 Z")
+    // const path3 = ShapeInfo.path("M 0 32 L 30 22 L 0 52 L -50 52 Z")
+    // const path4 = ShapeInfo.path("M 0 33 L 30 23 L 0 53 L -50 53 Z")
+    const intersections2 = Intersection.intersect(path1, path2);
+
+    // intersections2.points.forEach(console.log);
+    console.log(intersections2)
+
     return false
 
     var rect2 = paper
@@ -562,14 +587,28 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
     var testPathDObj = testPath.getPathData()
     var testPathL = testPath.getTotalLength()
     var populatedElements = []
+    var populatedElementsPaths = []
     var a = 1
 
-    containerPathBB.height = 400
-    containerPathBB.width = 400
+    containerPathBB.height = 100
+    containerPathBB.width = 450
     for (let x_c = 0; x_c < containerPathBB.width; x_c++) {
       console.log(1)
       for (let y_c = 0; y_c < containerPathBB.height; y_c++) {
         this.pathIncrement([x_c, y_c], testPath, testPathDObj)
+        /*
+                var isPointInFill = false
+                populatedElements.forEach(element => {
+                  if (Intersection.intersect(element, ShapeInfo.path(testPath.getAttribute('d'))).status == 'Intersection'
+                  ) { isPointInFill = true }
+                })
+                if (!isPointInFill) {
+                  populatedElements.push(ShapeInfo.path(testPath.getAttribute('d')))
+                  populatedElementsPaths.push(testPath.getAttribute('d'))
+                  this.paper.path(testPath.getAttribute('d')).attr({ 'fill': 'blue', 'stroke-width': '0' })
+                }
+                */
+
         for (let t_l = 0; t_l <= testPathL; t_l++) {
           var testPathPoint = testPath.getPointAtLength(t_l)
           if (!this.containerPath.isPointInFill(testPathPoint)) { break }
@@ -577,9 +616,14 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
 
             // if (populatedElements[populatedElements.length - 1].isPointInFill(testPathPoint)) { break }
             var isPointInFill = false
-            populatedElements.forEach(element => {
-              if (element.isPointInFill(testPathPoint)) { isPointInFill = true }
-            });
+            // populatedElements.some(element => {
+            //   if (element.isPointInFill(testPathPoint)) { isPointInFill = true; return }
+            // });
+
+            for (let element = populatedElements.length - 1; element >= 0; element--) {
+              if (populatedElements[element].isPointInFill(testPathPoint)) { isPointInFill = true; break }
+            }
+
             if (isPointInFill) { break }
 
             if (t_l == Math.floor(testPathL)) {
@@ -602,6 +646,7 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
 
           }
         }
+
       }
     }
     console.log((new Date().getTime() - initialTime) / 1000)
