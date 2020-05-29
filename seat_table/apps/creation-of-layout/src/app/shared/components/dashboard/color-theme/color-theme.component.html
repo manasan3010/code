@@ -1,0 +1,20 @@
+<mat-icon color="primary" style="cursor: pointer" class="pt-1" [matMenuTriggerFor]="settingMenu">tune</mat-icon>
+<div class="setting-menu">
+  <mat-menu #settingMenu="matMenu" hasBackdrop="true">
+    <div class="container-fluid p-2" (click)="$event.stopPropagation()">
+      <h6 class="font-weight-bold">Color Setting</h6>
+      <hr>
+
+      <section class="scale-container">
+        <button mat-icon-button [ngStyle]="{background: clickedButton == 'red'?'red':''}"  (click)="chnageColor('red')">red</button>
+        <button mat-icon-button [ngStyle]="{background: clickedButton == 'green'?'green':''}" (click)="chnageColor('green')">green</button>
+        <button mat-icon-button [ngStyle]="{background: clickedButton == 'blue'?'blue':''}" (click)="chnageColor('blue')">blue</button>
+
+      </section>
+      <hr>
+
+
+    </div>
+
+  </mat-menu>
+</div>

@@ -1,0 +1,558 @@
+@import "../../../../../color-theme.scss";
+@import "../../../../../helper.scss";
+
+.main-Container {
+  background-color: $primary;
+
+  .right-area {
+    width: 300px;
+    height: 100%;
+
+    #config-panel {
+      .panel-content {
+        max-height: 100px;
+        overflow: auto;
+      }
+    }
+
+    #property-panel {
+      .panel-content {
+        overflow: auto;
+        transition: height 0.3s;
+      }
+    }
+
+    .panel:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    .panel-header {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      background-color: $hover-bgcolor;
+      //background-color: white;
+      //color: $default-color;
+      color: white;
+      font-weight: 600;
+      position: relative;
+      cursor: pointer;
+
+      .panel-header-image {
+        height: 30px;
+        width: 30px;
+        background-color: $hover-bgcolor;
+        color: $hover-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 20px;
+        }
+      }
+
+      .panel-header-info {
+        position: absolute;
+        right: 0;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 20px;
+        }
+      }
+
+      .numberCircle {
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        background: $default-bgcolor;
+        border: 0px solid #666;
+        color: $hover-bgcolor;
+        text-align: center;
+        margin-left: 5px;
+        margin-top: 6px;
+        line-height: 18px;
+        font-size: 10px;
+      }
+    }
+
+    .selected-panel-header {
+      background-color: $hover-bgcolor;
+      color: $hover-color;
+    }
+
+    .panel-content {
+      width: 100%;
+      background-color: white;
+      transition: height 0.3s;
+      -webkit-transition: height 0.3s;
+      -ms-transition: height 0.3s;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overflow: hidden;
+
+      .commonProperty {
+        height: fit-content;
+        width: 100%;
+        border-bottom: 1px solid $hover-bgcolor;
+        .property {
+          height: 20px;
+          line-height: 20px;
+          font-size: 12px;
+          display: flex;
+          position: relative;
+          padding-left: 8px;
+          .inputType {
+            height: 100%;
+            width: 45%;
+            position: absolute;
+            right: 8px;
+            // text-align: end;
+
+            ::ng-deep .mat-form-field-underline {
+              display: none;
+            }
+
+            ::ng-deep div .mat-form-field-infix {
+              border-top: 0 !important;
+              width: 111px !important;
+              font-size: 12px !important;
+            }
+          }
+        }
+
+        .property:last-child {
+          margin-bottom: 3px;
+        }
+      }
+
+      .panel-list-item {
+        cursor: pointer;
+        width: 100%;
+        padding: 3px;
+        font-size: 13px !important;
+        border-left: 5px solid white;
+      }
+      .expandedDiv {
+        height: 94px !important;
+        transition: height 0.3s;
+        -webkit-transition: height 0.3s;
+        -ms-transition: height 0.3s;
+      }
+      .panel-table-list {
+        height: 60px;
+        background-color: $default-bgcolor;
+        color: $default-color;
+        border-bottom: 1px solid $border-color;
+        border-left: 5px solid $default-bgcolor;
+        transition: height 0.3s;
+        -webkit-transition: height 0.3s;
+        -ms-transition: height 0.3s;
+        .selectedDiv {
+          background-color: #f2f2f2 !important;
+          border-left: $hover-bgcolor !important;
+        }
+        .table-count {
+          width: 15px;
+          height: 100%;
+          position: relative;
+          //border-right: 1px solid $border-color;
+          span {
+            font-weight: bolder;
+            @include content-center();
+          }
+        }
+
+        .table-detail {
+          flex: 1;
+
+          .svg-container {
+            height: 55px;
+            width: 50px;
+          }
+
+          .table-info {
+            height: 100%;
+            background-color: transparent !important;
+            flex: 1;
+            font-size: 10px;
+
+            padding: 0 !important;
+            padding-left: 2px !important;
+            cursor: pointer;
+            transition: 0.3s !important;
+            overflow: hidden;
+
+            .tableCount {
+              background-color: $hover-bgcolor;
+            }
+            .clickableLink:hover {
+              color: $hover-bgcolor;
+              font-weight: bold;
+            }
+
+            .table-info-row {
+              // flex: 1;
+              padding: 0 !important;
+            }
+            .tableName {
+              display: flex;
+              left: 61px;
+              top: -2px;
+              font-weight: bold;
+              max-height: 20px;
+              
+              .pointer {
+                font-weight: bold;
+              }
+              ::ng-deep .mat-form-field-infix {
+                border-top: none !important;
+                color: $default-color;
+                cursor: pointer !important;
+                height: 10px;
+                padding-bottom: 0px;
+                width: 23px;
+              }
+              ::ng-deep .mat-form-field-wrapper {
+                padding-bottom: 0px;
+              }
+              ::ng-deep .mat-form-field-underline {
+                background-color: $default-color !important;
+              }
+
+              .btn-action-group {
+                .action-btn {
+                  width: 12px;
+                  height: 12px;
+                  margin-top: 3px;
+                  line-height: 25px;
+                  border-radius: 50%;
+                  display: flex;
+                  -webkit-box-align: center;
+                  align-items: center;
+                  -webkit-box-pack: center;
+                  justify-content: center;
+
+                  i {
+                    font-size: 10px;
+                    font-weight: bold;
+                  }
+                }
+
+                .action-btn:hover {
+                  background-color: $hover-bgcolor;
+                  color: $hover-color;
+                }
+              }
+            }
+
+            .priceband {
+              display: flex;
+              .label {
+              }
+
+              .optionButton {
+                width: 10px;
+                border: none;
+                background-color:  $default-bgcolor;
+                height: 0px;
+                // color: grey;
+                .option {
+                  float: right;
+                  visibility: hidden;
+                  color: grey;
+                  margin-top: -14px;
+                  height: 28px;
+                }
+              }
+              .optionButton:hover {
+                color: $hover-bgcolor;
+                background-color:  $default-bgcolor;
+                font-weight: bold;
+              }
+            }
+            .sharedToggle {
+              width: 10px;
+              border: none;
+              background-color: $default-bgcolor;
+              height: 2px;
+            }
+            .rotatedAngle {
+              display: flex;
+            .label{
+              width: 60px;
+            }
+            .inputType{
+              width:fit-content;
+            }
+            }
+            .nonEditableVenueMapName {
+              cursor: pointer !important;
+
+              ::ng-deep .mat-form-field-underline {
+                display: none;
+                position: relative !important;
+                width: fit-content !important;
+              }
+            }
+          }
+        }
+
+        .table-action {
+          width: 30px;
+          div {
+            position: relative;
+            height: 100%;
+
+            .mat-icon {
+              @include content-center();
+              @include md-icon-size(11px);
+            }
+          }
+          .edit {
+            max-height: 18px;
+          }
+          .duplicate {
+            max-height: 18px;
+            font-size: 13px !important;
+          }
+          .expand {
+            transform: rotate(90deg);
+            max-height: 18px;
+          }
+          .colapse {
+            transform: rotate(270deg);
+            max-height: 18px;
+          }
+
+          div:hover {
+            color: $hover-bgcolor !important;
+          }
+        }
+      }
+
+      .selectedDiv {
+        background-color: #f2f2f2 !important;
+        border-left: 5px solid $hover-bgcolor;
+      }
+
+      .iconButton {
+        cursor: pointer;
+      }
+
+      .iconButton:hover {
+        color: $hover-bgcolor;
+      }
+
+      .panel-list-item:hover {
+        border-left: 5px solid $hover-bgcolor;
+      }
+
+      .panel-table-list:hover {
+        background-color: $svg-backgroundColor;
+      }
+
+      @include numberStyle();
+    }
+
+    .panel-content:hover {
+      overflow: auto;
+    }
+
+    .panel-content::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+  }
+
+  .left-area {
+    position: relative;
+    background-color: white;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    height: 100%;
+
+    .draggable-toolbar {
+      position: absolute;
+      border: 1px solid $hover-bgcolor;
+      background-color: #ffffff;
+
+      .mat-btng {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+
+      #dagger-Point {
+        position: relative;
+        cursor: grab !important;
+        background-color: $hover-bgcolor;
+
+        mat-icon {
+          @include md-icon-size(18px);
+          @include content-center;
+          cursor: grab !important;
+          color: white;
+        }
+      }
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .button-icon-group {
+      position: absolute;
+      right: 10px;
+      top: 16px;
+
+      .button-icon {
+        width: 30px;
+        height: 30px;
+        background-color: $default-bgcolor;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-box-shadow: 0 0 2px 0 rgba(145, 160, 173, 1);
+        -moz-box-shadow: 0 0 2px 0 rgba(145, 160, 173, 1);
+        box-shadow: 0 0 2px 0 rgba(145, 160, 173, 1);
+        cursor: pointer !important;
+
+        i {
+          font-size: 20px;
+          color: $default-color;
+        }
+      }
+
+      .button-icon:hover {
+        background-color: $hover-bgcolor;
+        -webkit-box-shadow: 0 0 5px 0 rgba(145, 160, 173, 1);
+        -moz-box-shadow: 0 0 5px 0 rgba(145, 160, 173, 1);
+        box-shadow: 0 0 5px 0 rgba(145, 160, 173, 1);
+
+        i {
+          font-size: 20px;
+          color: $hover-color;
+        }
+      }
+    }
+
+    .button-group {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+  }
+}
+
+.menu-container {
+  #allocateMenuSVG {
+    width: 100%;
+    height: 150px !important;
+  }
+
+  .menu-content {
+    //padding: 5px;
+  }
+}
+
+.btn-group-row {
+  border: 1px solid #dcdce8;
+  background-color: white;
+
+  .block-shape-container {
+    margin: auto !important;
+
+    button {
+      padding: 2px 5px !important;
+      line-height: 1 !important;
+      color: $default-color;
+
+      .mat-icon {
+        @include md-icon-size(20px);
+      }
+    }
+
+    button:hover {
+      background-color: #f2f2f2 !important;
+    }
+  }
+}
+
+.inputForm {
+  .inputLabel {
+    line-height: 2;
+    //@include content-center();
+  }
+  @include numberStyle();
+}
+
+.button-group {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.selection-toggle-button {
+  margin: auto;
+
+  .selection-toggle-button-group {
+    height: 25px;
+    //border-radius: 20px;
+    color: $default-color !important;
+
+    ::ng-deep .mat-button-toggle-label-content {
+      line-height: 0 !important;
+    }
+  }
+
+  .selection-toggle-button-group:hover {
+    color: $hover-bgcolor !important;
+  }
+}
+
+.activeSelection {
+  color: $hover-bgcolor !important;
+  //background-color: $hover-bgcolor !important;
+}
+.selected-facility-tap {
+  padding: 2px 7px;
+  background-color: $hover-bgcolor;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 13px;
+  margin: 5px;
+}
+
+.color-display-container {
+  position: relative;
+
+  .color-display {
+    width: 35px;
+    height: 20px;
+    border-radius: 25px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.activeSelection {
+  color: $hover-bgcolor !important;
+  //background-color: $hover-bgcolor !important;
+}
+.create-table-dialog-container {
+  max-height: 90vh !important;
+  max-width: 90vw !important;
+  padding: 0 !important;
+  height: 100%;
+  width: 100%;
+}

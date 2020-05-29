@@ -1,0 +1,67 @@
+<div class="container-fluid p-0 ">
+  <div class=' w-100 p-2 header'>
+    <p class='m-0'>{{!!images ? images.name : !!facility ? facility.name: !!otherStructure ? otherStructure.name : ' '}}</p>
+  </div>
+  <hr class='m-0'>
+  <div class='context-menu'>
+    <div *ngIf="contextMenuInputType === contextMenuType.DEFINED">
+      <div class="row m-0  menu-button" (click)="editFacility()">
+        <div class="col-2 p-0 context-menu-icon" >
+          <mat-icon class="m-0">edit</mat-icon>
+        </div>
+        <div class="col-10 p-0 context-menu-text">
+          <p class="m-0">Edit</p>
+        </div>
+      </div>
+      <div class="row m-0 menu-button" (click)="allocateSeatTable()">
+      <div class="col-2 p-0 context-menu-icon" >
+        <mat-icon class="m-0">blur_on</mat-icon>
+      </div>
+      <div class="col-10 p-0 context-menu-text ">
+        <p class="m-0">Allocate</p>
+      </div>
+    </div>
+      <div class="row m-0 menu-button" (click)="openDuplicate()">
+        <div class="col-2 p-0 context-menu-icon" >
+          <mat-icon class="m-0">file_copy</mat-icon>
+        </div>
+        <div class="col-10 p-0 context-menu-text">
+          <p class="m-0">Duplicate</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="contextMenuInputType === contextMenuType.UNDEFINED">
+      <div class="row m-0 menu-button" (click)="createFacility()">
+        <div class="col-2 p-0 context-menu-icon" >
+          <mat-icon class="m-0">add</mat-icon>
+        </div>
+        <div class="col-10 p-0 context-menu-text ">
+           <p class="m-0">Create</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="contextMenuInputType === contextMenuType.OTHERSTRUCTURE">
+      <div class="row m-0  menu-button" (click)="editFacility()">
+        <div class="col-2 p-0 context-menu-icon" >
+          <mat-icon class="m-0">edit</mat-icon>
+        </div>
+        <div class="col-10 p-0 context-menu-text">
+          <p class="m-0">Edit</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="contextMenuInputType === contextMenuType.IMAGES">
+      <div class="row m-0 menu-button" (click)="deleteImage()">
+        <div class="col-2 p-0 context-menu-icon" >
+          <mat-icon class="m-0">delete</mat-icon>
+        </div>
+        <div class="col-10 p-0 context-menu-text">
+          <p class="m-0">Delete</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

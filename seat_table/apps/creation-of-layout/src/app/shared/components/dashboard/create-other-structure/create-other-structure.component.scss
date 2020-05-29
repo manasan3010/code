@@ -1,0 +1,457 @@
+@import "../../../../../color-theme.scss";
+.othershapes {
+  display: flex;
+  background-color: $primary;
+
+  .shapeArea {
+    display: inline-block;
+    width: 200px;
+    height: -webkit-fill-available;
+
+    margin-left: 8px;
+    .shapesIcon {
+      padding: 3px;
+      margin-right: 5px;
+    }
+    .shapeType {
+      background-color: $hover-bgcolor;
+      color: white;
+      width: 100%;
+      text-align: left;
+      line-height: 30px;
+      font-weight: 600;
+      position: relative;
+      cursor: pointer;
+      scroll-padding-block: 10px;
+      display: flex;
+    }
+    .shapes {
+      margin-bottom: 10px;
+
+      .shape {
+        display: flex;
+        padding: 4px;
+        background-color: white;
+        .shapeName {
+          color: $default-color;
+        }
+        .icons {
+          color: $default-color;
+          font-size: 21px;
+        }
+      }
+    }
+
+    .shapeProperty {
+      background-color: $hover-bgcolor;
+      line-height: 30px;
+      font-weight: 600;
+      position: relative;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      color: white;
+      display: flex;
+    }
+    .inputs {
+      background-color: white;
+      .dimension {
+        display: flex;
+
+        .inputWidth {
+          display: flex;
+          width: 80%;
+          margin-left: -6px;
+          .widthLabel {
+            float: left;
+            color: $default-color;
+          }
+          .widthValue {
+            text-align: center;
+            margin-top: 8px;
+            margin-left: -1px;
+            color: $default-color;
+            max-width: 104px;
+            max-height: 24px;
+            border-bottom: solid;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: $hover-bgcolor;
+            border-width: 2px;
+          }
+          .plus {
+            margin-left: 17px;
+            max-width: 14px;
+            max-height: 24px;
+            margin-top: 8px;
+            display: flex;
+            border: none;
+            background-color: white;
+            .plusIcon {
+              margin-top: -1px;
+              margin-left: -7px;
+              font-size: 20px;
+              color: $hover-bgcolor;
+            }
+          }
+          .decrease {
+            margin-left: 26px;
+            max-width: 14px;
+            max-height: 24px;
+            margin-top: 8px;
+            display: flex;
+            border: none;
+            background-color: white;
+            .minusIcon {
+              margin-top: -1px;
+              margin-left: -7px;
+              font-size: 20px;
+              color: $hover-bgcolor;
+            }
+          }
+          .plus {
+            margin-left: -1px;
+            max-width: 21px;
+            max-height: 24px;
+            margin-top: 8px;
+            font-size: 20px;
+          }
+        }
+        .inputHeight {
+          display: flex;
+          width: 40px;
+          margin-left: 1px;
+          .heightLabel {
+            float: left;
+            margin-left: -18px;
+            color: $default-color;
+          }
+          .heightValue {
+            text-align: center;
+            margin-top: 8px;
+            margin-left: -1px;
+            color: $default-color;
+            max-width: 104px;
+            max-height: 24px;
+            border-bottom: solid;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: $hover-bgcolor;
+            border-width: 2px;
+          }
+          .decrease {
+            margin-left: 26px;
+            max-width: 14px;
+            max-height: 24px;
+            margin-top: 8px;
+            display: flex;
+            border: none;
+            background-color: white;
+            .minusIcon {
+              margin-top: -1px;
+              margin-left: -7px;
+              font-size: 20px;
+              color: $hover-bgcolor;
+            }
+          }
+          .plus {
+            margin-left: -1px;
+            max-width: 14px;
+            max-height: 24px;
+            margin-top: 8px;
+            display: flex;
+            border: none;
+            background-color: white;
+            .plusIcon {
+              margin-top: -1px;
+              margin-left: -7px;
+              font-size: 20px;
+              color: $hover-bgcolor;
+            }
+          }
+        }
+      }
+
+      .borderLine {
+        max-width: 50px;
+        margin-left: 23px;
+        border: 0px;
+      }
+      .fill {
+        margin-left: -1px;
+        color: $default-color;
+      }
+      .label {
+        color: $default-color;
+        margin-left: 10px;
+      }
+    }
+  }
+  .toolsBox {
+    display: inline-block;
+    width: 40px;
+    height: -webkit-fill-available;
+    background-color: white;
+
+    .tools {
+      margin-top: 177px;
+
+      .tool {
+        margin-left: 2px;
+        font-size: 15px;
+        color: $default-color;
+      }
+      .toolColorPicker {
+        margin-left: 7px;
+        max-width: 24px;
+        .colorPicker {
+          text-align: end;
+          padding: 12px !important;
+        }
+      }
+    }
+  }
+  .SVGArea {
+    position: absolute;
+    left: 256px;
+    height: -webkit-fill-available;
+    margin-right: 2.5px;
+    margin-bottom: 2.5px;
+    right: 0px;
+  }
+}
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0;
+}
+
+.main-container {
+  width: 100%;
+  //height: 92.5vh;
+  .svgRoot {
+    width: 100%;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .tool-bar {
+    width: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 0;
+    right: 0;
+
+    .mat-icon-button {
+      width: 30px !important;
+      height: 30px !important;
+      mat-icon {
+        @include md-icon-size(15px);
+      }
+      color: #2a2a2a;
+      line-height: 0 !important;
+      margin: 2px;
+    }
+    .mat-icon-button:hover {
+      color: #ababab;
+    }
+    .control-selected {
+      //.cdk-mouse-focused {
+      background-color: #1a8bff !important;
+      color: #e7e7e7 !important;
+      //}
+    }
+
+    .title {
+      font-size: 10px;
+      text-align: center;
+      margin: 5px auto;
+    }
+    .value {
+      font-size: 10px;
+      margin: 0 auto;
+      border: 0.5px solid black;
+    }
+  }
+  .left-panel {
+    position: relative;
+    //background-color: white;
+    //top: 0;
+    //bottom: 0;
+    //left: 0;
+    //width: 200px;
+    .shape-list {
+      cursor: pointer;
+      border-bottom: 1px solid #e2e2e2;
+      padding: 8px 16px;
+    }
+    .left-panel-tab-content {
+      padding: 10px 16px 5px 16px;
+    }
+    .shape-list:hover {
+      background-color: gainsboro !important;
+    }
+    .left-panel-tab-header {
+      padding: 8px 16px;
+      cursor: pointer;
+      background-color: #d3d3d3;
+      color: black;
+    }
+    mat-icon {
+      float: right;
+      //padding-top: 6px;
+    }
+  }
+  .shape-prop-container {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    ::ng-deep .mat-form-field-wrapper {
+      //padding: 0 !important;
+    }
+    ::ng-deep .mat-form-field-flex {
+      height: 30px;
+    }
+    ::ng-deep .mat-form-field-infix {
+      border-top: 0.34375em solid transparent;
+    }
+  }
+}
+
+.headerText {
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+
+
+  .otherStructureName {
+    position: absolute;
+    left: 20px;
+    
+
+    ::ng-deep .mat-form-field-infix {
+      border-top: none !important;
+      color: $default-color;
+      cursor: pointer !important;
+      height: 25px;
+    }
+    // ::ng-deep .mat-form-field-wrapper {
+    //   width: 200px !important;
+    // }
+    ::ng-deep .mat-form-field-underline {
+      background-color: $default-color !important;
+    }
+
+    .btn-action-group {
+      .action-btn {
+        width: 20px;
+        height: 20px;
+        margin-top: 3px;
+        line-height: 25px;
+        border-radius: 50%;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+
+        i {
+          font-size: 15px;
+          font-weight: bold;
+        }
+      }
+
+      .action-btn:hover {
+        background-color: $hover-bgcolor;
+        color: $hover-color;
+      }
+    }
+  }
+}
+
+.rotateIcon {
+  transform: rotate(90deg);
+  width: 2px;
+}
+
+.confirm-button {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  button {
+    height: 25px;
+    line-height: 21px;
+    font-size: 12px;
+    border-radius: 0px;
+  }
+}
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.number-input {
+  border: 2px solid #ddd;
+  display: inline-flex;
+}
+
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+
+.number-input button {
+  outline: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+}
+
+.number-input button:before,
+.number-input button:after {
+  display: inline-block;
+  position: absolute;
+  content: "";
+  width: 1rem;
+  height: 2px;
+  background-color: #212121;
+  transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type="number"] {
+  font-family: sans-serif;
+  max-width: 5rem;
+  padding: 0.5rem;
+  border: solid #ddd;
+  border-width: 0 2px;
+  font-size: 2rem;
+  height: 3rem;
+  font-weight: bold;
+  text-align: center;
+}

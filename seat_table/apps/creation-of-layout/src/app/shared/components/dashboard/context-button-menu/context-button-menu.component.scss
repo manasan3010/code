@@ -1,0 +1,19 @@
+.btnPos {
+  position: absolute;
+}
+.btn1 {
+  left: 0;
+  bottom: 0;
+  transform: translateY(-50%);
+}
+.btn2 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+.btn3 {
+  right: 0;
+  bottom: 0;
+  transform: translateY(-50%);
+}

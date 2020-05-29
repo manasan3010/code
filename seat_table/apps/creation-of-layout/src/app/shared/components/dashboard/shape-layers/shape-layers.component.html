@@ -1,0 +1,20 @@
+<div class="layer-container" (click)="$event.stopPropagation()">
+  <p class="mb-1 mx-2">Layers</p>
+  <hr class="mt-0 mb-1">
+  <div *ngIf="shapes.length > 0; else noLayer" style="overflow: auto;max-height: 200px;">
+    <div cdkDropList class="layer-list" (cdkDropListDropped)="drop($event)">
+      <div class="layer-box icon15px" *ngFor="let shape of shapes" cdkDrag [ngStyle]="!shape.visibility && {'background-color':'#cfcfcf'}">
+        <mat-icon (click)="switchVisibility(shape.shapeID)" style="cursor: pointer">{{shape.visibility ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <span>{{shape.shapeID}} </span>
+        <mat-icon class="float-right">menu</mat-icon>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noLayer>
+    <div class="text-center">
+      There is no Layers
+    </div>
+  </ng-template>
+</div>

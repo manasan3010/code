@@ -1,0 +1,707 @@
+<ngx-ui-loader></ngx-ui-loader>
+<div class="main-Container container-fluid d-flex m-0 p-2" [style.height.px]="componentHeight">
+  <div class="right-area mr-2 " id="rightPanel">
+    <div class="panel" id="config-panel">
+      <div class="panel-header d-flex">
+        <div class="panel-header-image mr-1">
+          <i class="material-icons">settings_applications</i>
+        </div>
+        Configurations
+      </div>
+      <div class="panel-content">
+        <div class="row m-0">
+          <div class="panel-list-item" *ngFor="let config of configs" (click)="selectConfig(config);"
+            [ngClass]="{'selectedDiv': selectedConfig && (selectedConfig.id === config.id)}">
+            {{config.name}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="property-panel">
+      <div class="panel-header d-flex">
+        <div class="panel-header-image mr-1">
+          <i class="material-icons"> {{selectedConfig.type === CONFIG_TYPE.TABLE ? 'deck' : 'event_seat'}}</i>
+        </div>
+        <div class="panel-header-info iconButton" (click)="$event.stopPropagation(); onCreateTable() "
+          *ngIf="((selectedConfig.type === CONFIG_TYPE.TABLE) && selectedTableCount===0 )">
+          <i class="material-icons">add</i>
+        </div>
+        {{(((selectedConfig.type === CONFIG_TYPE.TABLE) && selectedTableCount === 0) || ((selectedConfig.type === CONFIG_TYPE.SEAT) && (selectedSeatCount === 0))) ? 'Total' : 'Selected ' }}
+        {{selectedConfig.type === CONFIG_TYPE.TABLE ? 'Table ' : 'Seat' }}
+        <div *ngIf="(selectedConfig.type === CONFIG_TYPE.TABLE )" class="numberCircle">
+          {{(selectedConfig.type === CONFIG_TYPE.TABLE && selectedTableCount === 0) ? tablesCount : selectedTableCount }}
+        </div>
+        <div *ngIf="(selectedConfig.type === CONFIG_TYPE.SEAT )" class="numberCircle">
+          {{(IS_EDIT_MODE) ? selectedSeatCount : seatCount }}
+        </div>
+      </div>
+      <div class="panel-content" *ngIf="selectedConfig.type === CONFIG_TYPE.TABLE"
+        [style.height.px]="propertyPanelHeight">
+        <div *ngIf="selectedTableCount==0">
+          <div class="panel-table-list d-flex" *ngFor="let table of tables;index as i"
+            [ngClass]="{'selectedDiv': (selectedId === table.id )}">
+            <div class="table-detail d-flex p-1" [id]="table.id" draggable="true"
+              (dragstart)="shapeDragStart($event, table)" (dragend)="shapeDragEnd($event,table)"
+              [ngClass]="{'select_table': (selectedTable && selectedTable.id === table.id)}">
+              <div class="svg-container mr-1">
+                <svg [id]="'table' + table.id +'_' + i" style="background-color: transparent"></svg>
+              </div>
+              <div class="table-info col">
+                <div class="table-info-row row-4">
+                  <span>Table {{table.name}}</span>
+                </div>
+                <div class="table-info-row row-4">
+                  <span>Seat count : {{table.seats.length}}</span>
+                </div>
+                <div class="table-info-row row-4 clickableLink" (click)="showTables(table.id)">
+                  <span>Allocated table {{selectTableType(table.id)}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="table-action d-flex flex-column bd-highlight">
+              <div>
+                <mat-icon (click)="onAllocateClick($event, table)">double_arrow</mat-icon>
+              </div>
+              <div>
+                <mat-icon fontSet="fas" fontIcon="fa-clone" (click)="onDuplicateTable(table.id)"></mat-icon>
+              </div>
+              <div>
+                <mat-icon (click)="onCreateTable(table.id)">edit</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTableCount>0">
+          <div class="commonProperty">
+            <div class="property">
+              Price Band
+              <div class="inputType">
+                <mat-form-field class="inputLabel">
+                  <mat-label style="font-size: 12px;">Price Band</mat-label>
+                  <mat-select [(ngModel)]="priceband" name="priceband" (ngModelChange)="priceBandChange()">
+                    <mat-option *ngFor="let priceBand of priceBands" [value]="priceBand">
+                      <div class="d-flex m-0">
+                        <div style="width: 80%;">
+                          {{priceBand.name}}
+                        </div>
+                        <div style="width: 20%;" class="color-display-container">
+                          <div class="color-display" [ngStyle]="{'background-color': priceBand.color}">
+                          </div>
+                        </div>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="property">
+              Rotate Angle
+              <div class="inputType">
+                <input-number [inputValue]="rotatedAngle" [minValue]="1" [maxValue]="360"
+                  (outputValue)="mulitipleTablesEdit($event)"></input-number>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="inputPriceBand">
+            <div class="priceBandSelect">
+              <div class="priceBand">Price Band</div>
+              <div class="priceBandValue">
+                <mat-form-field class="inputLabel">
+                  <mat-label style="font-size: 12px;">Price Band</mat-label>
+                  <mat-select [(value)]="selectedPriceBand" [(ngModel)]="priceband" name="priceband" style="height: 5px;" (ngModelChange)="pricebandChange()">
+                    <mat-option *ngFor="let priceBand of priceBands" [value]="priceBand">
+                      <div class="d-flex m-0">
+                        <div style="width: 80%;">
+                          {{priceBand.name}}
+                        </div>
+                        <div style="width: 20%;" class="color-display-container">
+                          <div class="color-display" [ngStyle]="{'background-color': priceBand.color}">
+                          </div>
+                        </div>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="rotateInput">
+              <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                <label style="margin-left: 2px; font-size: 12px;">Rotation Angle</label>
+              </div>
+              <app-input [inputValue]="rotatedAngle" [minValue]="1" [maxValue]="360" (toParentValue)="changesFromInput($event)"></app-input>
+            </div>
+          </div> -->
+
+
+
+          <div class="panel-table-list d-flex" *ngFor="let table of selectedTables;index as i"
+            [ngClass]="{'expandedDiv': (table.isColapsed)}">
+            <div class="table-detail d-flex p-1" [id]="table.id"
+              [ngClass]="{'select_table': (selectedTable && selectedTable.id === table.id)}">
+              <div class="svg-container mr-1">
+                <svg [id]="'table' + table.id +'_' + i" style="background-color: transparent"></svg>
+              </div>
+              <div class="table-info ">
+                <div class="table-info-row tableName"
+                  [ngClass]="{'nonEditableVenueMapName': (editTableId !==table.id)}">
+                  <!-- <div class="tableName d-flex" [ngClass]="{'nonEditableVenueMapName': (editTableId !==table.id)}"> -->
+                  <mat-form-field class="pointer">
+                    <input matInput spellcheck="false" type="text" [value]="table.name" [(ngModel)]="table.name"
+                      matTooltip="{{table.name}}" [readonly]="!(editTableId ===table.id)"
+                      (keydown)="inputKeyPress($event)" (click)="atStart(table)" />
+                    <span #hiddenText style="visibility: hidden; white-space: pre;">{{table.name}}</span>
+                  </mat-form-field>
+
+
+                  <div class="btn-action-group d-flex pointer" *ngIf="(editTableId===table.id)">
+                    <div class="action-btn" (click)="saveName(table)">
+                      <i class="material-icons">done</i>
+                    </div>
+                    <div class="action-btn" (click)="cancelEdit(table)">
+                      <i class="material-icons">close</i>
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                </div>
+                <div class="table-info-row priceband">
+                  <span class="label">Price Band:</span>
+                  <button (click)="select.open()" class="optionButton">{{table.priceBand.name}}
+                    <mat-form-field class="option">
+                      <mat-select #select [(ngModel)]="pricebandValue" name="priceband"
+                                  (ngModelChange)="changePriceBand($event,table)">
+                        <mat-option *ngFor="let priceBand of priceBands" [value]="priceBand.name">
+                          <div class="d-flex m-0">
+                            <div style="width: 80%;">
+                              {{priceBand.name}}
+                            </div>
+                            <div style="width: 20%;" class="color-display-container">
+                              <div class="color-display" [ngStyle]="{'background-color': priceBand.color}">
+                              </div>
+                            </div>
+                          </div>
+
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </button>
+
+                </div>
+                <div class="table-info-row ">
+                  <!-- <span>Rotated Angle : {{table.rotatedAngle| number: '1.0-0'}}</span> -->
+                  <div class="rotatedAngle">
+                    <span class="label"> Rotate Angle:</span>
+                    <div class="inputType">
+                      <input-number [inputValue]="table.rotatedAngle" [minValue]="1" [maxValue]="360"
+                        (outputValue)="singleTableEdit($event,table)"></input-number>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-info-row">
+                  <span>Seats Count : {{table.seats.length|number}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="table-action d-flex flex-column bd-highlight">
+              <div class="edit">
+                <mat-icon (click)="onEditAllocatedTable($event, table)">edit</mat-icon>
+              </div>
+              <div *ngIf="!table.isColapsed" class="expand">
+                <mat-icon (click)="ShowDetails(table,false)">double_arrow</mat-icon>
+              </div>
+              <div *ngIf="(table.isColapsed) && selectedTableCount !== 1" class="colapse">
+                <mat-icon (click)="ShowDetails(table,true)">double_arrow</mat-icon>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button mat-button [matMenuTriggerFor]="tableAllocateModel" style="visibility: hidden; position: fixed"
+                id="tableAllocateModel" [style.left]="contextMenuPosition.x"
+                [style.top]="contextMenuPosition.y"></button>
+        <mat-menu #tableAllocateModel="matMenu" id="allocateTableMenu">
+          <div class="menu-container" (click)="$event.stopPropagation()">
+            <div class="MenuSvgRoot">
+              <svg id="allocateMenuSVG"
+                   style="background-color: transparent; height: 150px"></svg>
+            </div>
+            <div class="menu-content container-fluid inputForm py-2">
+              <form [formGroup]="tableDetailForm">
+                <div class="row m-0 ">
+                  <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                    <label>Number of table</label>
+                  </div>
+                  <div class="col-sm-6 col-md-6 p-0 text-center">
+                    <div class="input-group w-80">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text add-bt-left"
+                              (click)="onInputDown('#tableCount', BUTTON_CLICK_TYPE.TableCountChange)">
+                          <mat-icon>remove</mat-icon>
+                        </span>
+                      </div>
+                      <input type="number" formControlName="tableCount" name="tableCount" id="tableCount"
+                             class="form-control" min="0" max="50">
+                      <div class="input-group-append">
+                        <span class="input-group-text add-bt-right"
+                              (click)="onInputUp('#tableCount', BUTTON_CLICK_TYPE.TableCountChange)">
+                          <mat-icon>add</mat-icon>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row m-0 ">
+                  <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                    <label>Prefix</label>
+                  </div>
+                  <div class="col-sm-6 col-md-6 p-0 text-center">
+                    <div class="input-group">
+                      <input type="text" formControlName="prefix" name="prefix" id="prefix"
+                             class="form-control  form-control-sm">
+                    </div>
+                  </div>
+                </div>
+                <div class="row m-0 ">
+                  <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                    <label>Count start</label>
+                  </div>
+                  <div class="col-sm-6 col-md-6 p-0 text-center">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text add-bt-left"
+                              (click)="onInputDown('#startCount', BUTTON_CLICK_TYPE.tableStartCountChange)">
+                          <mat-icon>remove</mat-icon>
+                        </span>
+                      </div>
+                      <input type="number" formControlName="startNumber" name="startCount" id="startCount"
+                             class="form-control  form-control-sm" min="0" max="50">
+                      <div class="input-group-append">
+                        <span class="input-group-text add-bt-right"
+                              (click)="onInputUp('#startCount', BUTTON_CLICK_TYPE.tableStartCountChange)">
+                          <mat-icon>add</mat-icon>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row m-0 ">
+                  <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                    <label>Price Band</label>
+                  </div>
+                  <div class="col-sm-6 col-md-6 p-0 text-center">
+                    <div class="input-group">
+                      <select formControlName="priceBand" name="priceBand" id="priceBand"
+                              class="form-control form-control-sm">
+                        <option *ngFor="let priceBand of priceBands" [value]="priceBand.id">
+                          <div class="d-flex m-0">
+                            <div style="width: 80%;">
+                              {{priceBand.name}}
+                            </div>
+                            <div style="width: 20%;" class="color-display-container">
+                              <div class="color-display" [ngStyle]="{'background-color': priceBand.color}">
+                              </div>
+                            </div>
+                          </div>
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row m-0 ">
+                  <div class="col-sm-2 col-md-2 p-0 inputLabel">
+                    <label>Rotate</label>
+                  </div>
+                  <div class="col-sm-10 col-md-10 p-0 text-center">
+                    <div class="input-group ml-5">
+
+                      <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="default-button mr-2" (click)="rotateSelectedTable(45)">45
+                          <span>&#176;</span>
+                        </button>
+                        <button type="button" class="default-button mr-2" (click)="rotateSelectedTable(90)">90
+                          <span>&#176;</span>
+                        </button>
+                        <button type="button" class="default-button mr-2" (click)="rotateSelectedTable(135)">135
+                          <span>&#176;</span>
+                        </button>
+                        <button type="button" class="default-button" (click)="rotateSelectedTable(180)">180
+                          <span>&#176;</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row m-0 text-center">
+                  <button mat-menu-item class="default-button text-center" (click)="autoArrangeTableForFacility()"
+                          [disabled]="!canAddTable || !tableDetailForm.valid">Arrange
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="allocatedTableModel" style="visibility: hidden; position: fixed"
+                id="allocatedTableEditBtn"
+                [style.left]="contextMenuPosition.x"
+                [style.top]="contextMenuPosition.y"></button>
+        <mat-menu #allocatedTableModel="matMenu" id="allocatedTableEditMenu" (closed)="menuClosed()">
+          <div class="menu-container" (click)="$event.stopPropagation()">
+            <div class="MenuSvgRoot" *ngIf="!!selectedAllocatedTableType4Edit">
+              <svg id="allocateMenuSVG"
+                   appCreateTable
+                   [table]='selectedAllocatedTableType4Edit'
+                   [isAllocatedTableEdit]=true
+                   [tableProperties]="allocatedTableEditProperties"
+                   (maxSeatCount)="maxSeatCountChangeATable($event);"
+                   (tableData)="onAllocatedTableDataChanges($event)"
+                   style="background-color: transparent; height: 150px">
+                <g id="shapeGroup">
+                </g>
+              </svg>
+            </div>
+            <div class="menu-content container-fluid inputForm py-2">
+                <div class="row m-0 ">
+                  <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                    <label>Seat count</label>
+                  </div>
+                  <div class="col-sm-6 col-md-6 p-0 text-center">
+                    <div class="input-group w-80">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text add-bt-left"
+                              (click)="onInputDown('#allocatedTableSeatCount', BUTTON_CLICK_TYPE.allocatedTableSeatCountChange)">
+                          <mat-icon>remove</mat-icon>
+                        </span>
+                      </div>
+                      <input type="number" [(ngModel)]="allocatedTableEditedSeatCount" (ngModelChange)="allocatedTableSeatCountChange($event)" name="allocatedTableSeatCount" id="allocatedTableSeatCount"
+                             class="form-control" min="1" [max]="selectedAllocatedTableMaxSeatCount">
+                      <div class="input-group-append">
+                        <span class="input-group-text add-bt-right"
+                              (click)="onInputUp('#allocatedTableSeatCount', BUTTON_CLICK_TYPE.allocatedTableSeatCountChange)">
+                          <mat-icon>add</mat-icon>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="row m-0 pt-1 text-center">
+                <button mat-menu-item class="default-button text-center" (click)="saveAllocatedTableEdit()">Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-menu>
+      </div>
+      <div class="panel-content" *ngIf="selectedConfig.type === CONFIG_TYPE.SEAT"
+           [style.height.px]="propertyPanelHeight">
+        <div class="container-fluid py-2">
+          <form class="inputForm pt-2" [formGroup]="seatsPropertiesFG">
+            <div class="row m-0 " *ngIf="!isMultiSeatsSelected">
+              <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                <label>Row curve</label>
+              </div>
+              <div class="col-sm-6 col-md-6 p-0 text-center">
+                <div class="input-group w-80">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text add-bt-left"
+                          (click)="onInputDown('#row-curve', BUTTON_CLICK_TYPE.seatRowCurveChange)">
+                      <mat-icon>remove</mat-icon>
+                    </span>
+                  </div>
+                  <input type="number" formControlName="curve" name="row-curve" id="row-curve" class="form-control"
+                         min="0" max="30">
+                  <div class="input-group-append">
+                    <span class="input-group-text add-bt-right"
+                          (click)="onInputUp('#row-curve', BUTTON_CLICK_TYPE.seatRowCurveChange)">
+                      <mat-icon>add</mat-icon>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row m-0 " *ngIf="!isMultiSeatsSelected">
+              <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                <label>Seat spacing</label>
+              </div>
+              <div class="col-sm-6 col-md-6 p-0 text-center">
+                <div class="input-group w-80">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text add-bt-left"
+                          (click)="onInputDown('#seat-spacing', BUTTON_CLICK_TYPE.seatSpacingChange)">
+                      <mat-icon>remove</mat-icon>
+                    </span>
+                  </div>
+                  <input type="number" formControlName="seatSpacing" name="seat-radius" id="seat-spacing"
+                         class="form-control" min="1" max="10">
+                  <div class="input-group-append">
+                    <span class="input-group-text add-bt-right"
+                          (click)="onInputUp('#seat-spacing', BUTTON_CLICK_TYPE.seatSpacingChange)">
+                      <mat-icon>add</mat-icon>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row m-0 " *ngIf="!isMultiSeatsSelected || !isMultiRowsSelected">
+              <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                <label>Row Start</label>
+              </div>
+              <div class="col-sm-6 col-md-6 p-0 text-center">
+                <div class="input-group w-80">
+                  <input type="text" formControlName="rowStart" name="seat-radius" id="Row-start-from"
+                         class="form-control" style="text-transform:uppercase">
+                </div>
+              </div>
+            </div>
+            <div class="row m-0 ">
+              <div class="col-sm-6 col-md-6 p-0 inputLabel">
+                <label>Price Band</label>
+              </div>
+              <div class="col-sm-6 col-md-6 p-0 text-center">
+                <div class="input-group">
+                  <select formControlName="priceBand" name="priceBand" id="seatPriceBand"
+                          class="form-control form-control-sm">
+                    <option value="0">-Select-</option>
+                    <option *ngFor="let priceBand of priceBands" [value]="priceBand.id">
+                      <div class="d-flex m-0">
+                        <div style="width: 80%;">
+                          {{priceBand.name}}
+                        </div>
+                        <div style="width: 20%;" class="color-display-container">
+                          <div class="color-display" [ngStyle]="{'background-color': priceBand.color}">
+                          </div>
+                        </div>
+                      </div>
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row m-0 ">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="seatLabel" formControlName="isSeatLabelAsc"
+                       required>
+                <label class="custom-control-label" for="seatLabel">Seat Label Order Asc</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-area" id="svg-root-container" (mousemove)="toolBarDrag($event)"
+       (window:resize)="toolBarPositionChange($event)">
+    <svg id="mainSvg" *ngIf='this.selectedConfig.type === CONFIG_TYPE.TABLE' xmlns="http://www.w3.org/2000/svg"
+      appZoomPan appTableArrangement [facility]="facility" [config]="selectedConfig" [tablesType]="tablesTypeTables"
+      [selectedTableInfo]="selectedTableInfo" [deleteTable]="deleteTable" (isloading)="loadingStatus($event)"
+      (zoomPanScale)="scaleChange($event)" (selectedTabledetails)="selectedTabledetails($event)"
+      (updatedTableDetails)="updateTableDetails($event)" (angle)="getRotatedAngle($event)">
+
+      <defs>
+        <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+        </pattern>
+        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+          <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <defs>
+        <pattern id="smallRuler" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+        </pattern>
+        <pattern id="ruler" width="100" height="100" patternUnits="userSpaceOnUse">
+          <rect width="100" height="100" fill="url(#smallRuler)"></rect>
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <defs>
+        <pattern id="pattern_non_seating" patternUnits="userSpaceOnUse" width="11.5" height="11.5"
+                 patternTransform="rotate(45)">
+          <line x1="0" y="0" x2="0" y2="11.5" stroke="#000000" stroke-width="3"/>
+        </pattern>
+      </defs>
+      <g *ngIf="!!setting" [ngSwitch]="setting.rulerType">
+        <g *ngSwitchCase="RULER_TYPE.GRID">
+          <rect width="100%" height="100%" fill="url(#grid)"></rect>
+        </g>
+        <g *ngSwitchCase="RULER_TYPE.RULER">
+          <rect width="100%" height="10px" fill="url(#ruler)"></rect>
+          <rect width="10px" height="100%" fill="url(#ruler)"></rect>
+        </g>
+      </g>
+      <g id="shapeGroup">
+      </g>
+    </svg>
+    <svg id="mainSvg" *ngIf='this.selectedConfig.type === CONFIG_TYPE.SEAT' xmlns="http://www.w3.org/2000/svg"
+         appZoomPan (zoomPanScale)="scaleChange($event)" appSeatsAllocation [facility]='facility'
+         [seatsProperties]="seatsProperties" (selectedSeatProperties)="updateSeatProperties($event)"
+         (updateComponentData)="onDirectiveUpdate($event)">
+      <defs>
+        <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+        </pattern>
+        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+          <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <defs>
+        <pattern id="smallRuler" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+        </pattern>
+        <pattern id="ruler" width="100" height="100" patternUnits="userSpaceOnUse">
+          <rect width="100" height="100" fill="url(#smallRuler)"></rect>
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <defs>
+        <pattern id="pattern_non_seating" patternUnits="userSpaceOnUse" width="11.5" height="11.5"
+                 patternTransform="rotate(45)">
+          <line x1="0" y="0" x2="0" y2="11.5" stroke="#000000" stroke-width="3"/>
+        </pattern>
+      </defs>
+      <g *ngIf="!!setting" [ngSwitch]="setting.rulerType">
+        <g *ngSwitchCase="RULER_TYPE.GRID">
+          <rect width="100%" height="100%" fill="url(#grid)"></rect>
+        </g>
+        <g *ngSwitchCase="RULER_TYPE.RULER">
+          <rect width="100%" height="10px" fill="url(#ruler)"></rect>
+          <rect width="10px" height="100%" fill="url(#ruler)"></rect>
+        </g>
+      </g>
+      <g id="shapeGroup">
+      </g>
+    </svg>
+    <div *ngIf='this.selectedConfig.type === CONFIG_TYPE.SEAT' class="draggable-toolbar" id="draggable-toolBar"
+         [style.top.px]="draggableToolbar.top" [style.left.px]="draggableToolbar.left">
+      <div class="d-flex flex-column bd-highlight">
+        <div class="p-2 bd-highlight" id="dagger-Point" (mousedown)="startDragToolBar()" (mouseup)="endDragToolBar()">
+          <mat-icon>drag_indicator</mat-icon>
+        </div>
+        <div class="p-2 bd-highlight position-relative" appLongPress matTooltip="Selection" matTooltipPosition="before"
+          (onLongPress)="onLongPress($event, 'selectionTypeChange')"
+          [ngClass]="{'activeSelection':selectedToolBarConfigType === TOOLBAR_CONFIG_TYPE.canSelect}"
+          (click)="changeToolbarConfig(TOOLBAR_CONFIG_TYPE.canSelect)">
+          <span id='selectionTypeChange' class="mat-btng" [matMenuTriggerFor]="selectionTypeChange"
+                style="visibility: hidden;"> </span>
+          <mat-icon *ngIf="seatingSelectionType === SELECTION_TYPE.CAN_SELECT_BLOCK " class="FA-Icon" fontSet="fas"
+                    fontIcon="fa-object-ungroup"></mat-icon>
+          <mat-icon *ngIf="seatingSelectionType === SELECTION_TYPE.CAN_SELECT_ROWS " class="FA-Icon" fontSet="fas"
+                    fontIcon="fa-grip-lines"></mat-icon>
+          <mat-icon *ngIf="seatingSelectionType === SELECTION_TYPE.CAN_SELECT_SEATS" class="FA-Icon" fontSet="fas"
+                    fontIcon="fa-circle"></mat-icon>
+        </div>
+        <div class="p-2 bd-highlight position-relative" appLongPress matTooltip="Draw block" matTooltipPosition="before"
+          (onLongPress)="onLongPress($event, 'blockShapeChange')"
+          (click)="changeToolbarConfig(TOOLBAR_CONFIG_TYPE.DrawBlocks)"
+          [ngClass]="{'activeSelection':selectedToolBarConfigType === TOOLBAR_CONFIG_TYPE.DrawBlocks}">
+          <span id='blockShapeChange' class="mat-btng" [matMenuTriggerFor]="blockShapeChange"
+                style="visibility: hidden;"> </span>
+          <mat-icon>{{
+              selectedBlockShape === SHAPE_TYPE.PATH ? 'scatter_plot' :
+                  selectedBlockShape === SHAPE_TYPE.RECTANGLE ? 'crop_5_4' :
+                      selectedBlockShape === SHAPE_TYPE.SQUARE ? 'crop_square' :
+                          selectedBlockShape === SHAPE_TYPE.CIRCLE ? 'panorama_fish_eye' :
+                              null
+            }}</mat-icon>
+        </div>
+        <div class="p-2 bd-highlight position-relative" appLongPress matTooltip="Draw seats" matTooltipPosition="before"
+          (onLongPress)="onLongPress($event, 'seatDrawTypeChange')"
+          [ngClass]="{'activeSelection':selectedToolBarConfigType === TOOLBAR_CONFIG_TYPE.DrawSeat}"
+          (click)="changeToolbarConfig(TOOLBAR_CONFIG_TYPE.DrawSeat)">
+          <span id='seatDrawTypeChange' class="mat-btng" [matMenuTriggerFor]="seatDrawTypeChange"
+                style="visibility: hidden;"> </span>
+          <mat-icon>
+            {{ selectedSeatRowType === SEATING_ROW_TYPE.SINGLE_ROW_SEATS ? 'linear_scale' :
+              selectedSeatRowType === SEATING_ROW_TYPE.MULTI_ROW_SEATS ? 'view_module' :
+                  null}}
+          </mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button-group">
+    <button mat-flat-button class="default-button mr-2" (click)="saveConfiguration()">Cancel</button>
+    <button mat-flat-button class="default-button" (click)="closeConfiguration()">Save</button>
+  </div>
+</div>
+<mat-menu #selectionTypeChange="matMenu">
+  <div class="nonSeatAreaShape">
+    <div class="w-100 text-center  py-1">
+      <span class="font-weight-bold"> Row Type</span>
+    </div>
+    <div style="cursor: pointer">
+      <div class="d-flex bd-highlight shape-list bg-light py-1"
+           [ngClass]="{'selectedDiv': (seatingSelectionType === SELECTION_TYPE.CAN_SELECT_BLOCK)}"
+           (click)="seatSelectionTypeChange(SELECTION_TYPE.CAN_SELECT_BLOCK)">
+        <div class="px-2 w-100 bd-highlight">Block Select</div>
+        <div class="px-2 flex-shrink-1 bd-highlight">
+          <mat-icon class="FA-Icon" fontSet="fas" fontIcon="fa-object-ungroup"></mat-icon>
+        </div>
+      </div>
+    </div>
+    <div style="cursor: pointer">
+      <div class="d-flex bd-highlight shape-list bg-light py-1"
+           [ngClass]="{'selectedDiv': (seatingSelectionType === SELECTION_TYPE.CAN_SELECT_ROWS)}"
+           (click)="seatSelectionTypeChange(SELECTION_TYPE.CAN_SELECT_ROWS)">
+        <div class="px-2 w-100 bd-highlight">Row Select</div>
+        <div class="px-2 flex-shrink-1 bd-highlight">
+          <mat-icon class="FA-Icon" fontSet="fas" fontIcon="fa-grip-lines"></mat-icon>
+        </div>
+      </div>
+    </div>
+    <div style="cursor: pointer">
+      <div class="d-flex bd-highlight shape-list bg-light py-1"
+           [ngClass]="{'selectedDiv': (seatingSelectionType === SELECTION_TYPE.CAN_SELECT_SEATS)}"
+           (click)="seatSelectionTypeChange(SELECTION_TYPE.CAN_SELECT_SEATS)">
+        <div class="px-2 w-100 bd-highlight">seat Select</div>
+        <div class="px-2 flex-shrink-1 bd-highlight">
+          <mat-icon class="FA-Icon" fontSet="fas" fontIcon="fa-circle"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-menu>
+<mat-menu #blockShapeChange="matMenu">
+  <div class="nonSeatAreaShape">
+    <div class="w-100 text-center  py-1">
+      <span class="font-weight-bold"> Block Shape</span>
+    </div>
+    <div *ngFor="let shape of blockShapes" style="cursor: pointer">
+      <div class="d-flex bd-highlight shape-list bg-light py-1"
+           [ngClass]="{'selectedDiv': (selectedBlockShape === shape.type)}" (click)="blockShapeTypeChange(shape.type)">
+        <div class="px-2 w-100 bd-highlight">{{shape.name}}</div>
+        <div class="px-2 flex-shrink-1 bd-highlight">
+          <mat-icon>{{shape.icon}}</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-menu>
+<mat-menu #seatDrawTypeChange="matMenu">
+  <div class="nonSeatAreaShape">
+    <div class="w-100 text-center  py-1">
+      <span class="font-weight-bold"> Row Type</span>
+    </div>
+    <div style="cursor: pointer">
+      <div class="d-flex bd-highlight shape-list bg-light py-1"
+           [ngClass]="{'selectedDiv': (selectedSeatRowType === SEATING_ROW_TYPE.MULTI_ROW_SEATS)}"
+           (click)="seatingRowTypeChange(SEATING_ROW_TYPE.MULTI_ROW_SEATS)">
+        <div class="px-2 w-100 bd-highlight">Multi Row</div>
+        <div class="px-2 flex-shrink-1 bd-highlight">
+          <mat-icon>view_module</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div style="cursor: pointer">
+      <div class="d-flex bd-highlight shape-list bg-light py-1"
+           [ngClass]="{'selectedDiv': (selectedSeatRowType === SEATING_ROW_TYPE.SINGLE_ROW_SEATS)}"
+           (click)="seatingRowTypeChange(SEATING_ROW_TYPE.SINGLE_ROW_SEATS)">
+        <div class="px-2 w-100 bd-highlight">Single Row</div>
+        <div class="px-2 flex-shrink-1 bd-highlight">
+          <mat-icon>linear_scale</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-menu>

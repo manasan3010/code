@@ -1,0 +1,43 @@
+<div class="container position-relative h-100 py-3" >
+  <button type="button" class="close" aria-label="Close"  mat-dialog-close>
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h5>
+    Upload Image
+  </h5>
+  <hr>
+  <div class="">
+    <div  class="image-container my-4 shadow-sm"
+         appFileDrop
+         (filesDropped)="handleDrop($event)"
+         (filesHovered)="dropzoneState($event)"
+         [ngClass]="{'active': dropzoneActive}"
+         [ngStyle]="dropzoneActive && {'background-color':'black'}"
+    >
+      <div class="upload-icon" (click)="fileUpload.click()"[ngStyle]="dropzoneActive && {'color':'white'}">
+        <mat-icon>cloud_upload </mat-icon>
+        <p>Drag & Drop File or, Click Here</p>
+      </div>
+    </div>
+    <div *ngIf="isImageSelected" class="w-100 container-fluid p-0 select-image-list">
+      <div *ngFor="let image of selectedImage" class="image-box position-relative">
+        <div class="image-remove-container">
+        </div>
+        <img [src]="image.src" width="95px" height="95px">
+        <button type="button" class="close position-absolute image-remove" aria-label="Close" (click)="removeImage(image.id)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div (click)="fileUpload.click()" class="image-box add-image-box ">
+        <mat-icon class="add-icon " (click)="fileUpload.click()">add</mat-icon>
+      </div>
+    </div>
+    </div>
+
+    <div class="button-container position-absolute p-3">
+      <button mat-flat-button class="default-button mr-2" mat-dialog-close>Cancel</button>
+      <button mat-flat-button class="default-button" [mat-dialog-close]="true" cdkFocusInitial (click)="onSave()">Confirm</button>
+    </div>
+    <input type="file" id="input-file-now-custom-2" multiple="multiple" class="file-upload" data-height="500"
+         (change)="onSelectFile($event)" #fileUpload style="display: none" accept="image/*"/>
+</div>

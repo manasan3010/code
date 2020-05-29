@@ -1,0 +1,41 @@
+@import "../../../../../color-theme";
+@import "../../../../../helper";
+
+.container-fluid {
+  width: 180px;
+}
+
+
+.context-menu {
+  .menu-button {
+    height: 35px;
+    line-height: 35px !important;
+    font-size: 12px;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 1px solid #cecece;
+  }
+
+  .context-menu-icon {
+    position: relative;
+    .mat-icon {
+      @include content-center();
+      @include md-icon-size(15px);
+    }
+    background-color: $hover-bgcolor;
+    color: $hover-color !important;
+  }
+
+  .context-menu-text {
+    padding-left: 10px !important;
+  }
+
+  .context-menu-text:hover {
+    background-color: $hover-bgcolor;
+    color: $hover-color !important;
+  }
+}
+
+.header {
+  font-weight: bolder;
+}

@@ -1,0 +1,40 @@
+<div 
+    class="input-group text-center"
+    (mousedown)="isActive = true" 
+    (mouseleave)="isActive = false" 
+    (mouseup)="isActive = false" 
+    (mousemove)="mouseDrag($event)" 
+    >
+    
+    <span class="left" (click)="decreaseValue()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </span>
+    <input class="form-control pointer" type="number" [(ngModel)]="inputValue" [ngClass]="{'ew-resize': isActive}" (input)="valueChange()">
+    <span class="right" (click)="increaseValue()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+    </span>
+</div>
+
+
+<!-- <div class="input-content">
+    <div class="text-center inputspace" style="cursor: ew-resize;bottom: 7px;" 
+        (mousedown)="isActive = !isActive" 
+        (mouseleave)="isActive = false" 
+        (mouseup)="isActive = false" 
+        (mousemove)="changeRotation($event)">
+        <div class="input-group w-80" style="width: 100px;">
+            <div class="input-group-prepend">
+                <span class="input-group-text add-bt-left" (click)="decreaseValue()" style="padding-left: 10px;">
+                    <mat-icon>remove</mat-icon>
+                </span>
+            </div>
+            <input class="form-control" type="number" [(ngModel)]="changeValue" style="cursor: ew-resize;">
+            <div class="input-group-apend" style="padding-right: 10px;">
+                <span class="input-group-text add-bt-right" (click)="increaseValue()">
+                    <mat-icon>add</mat-icon>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div> -->

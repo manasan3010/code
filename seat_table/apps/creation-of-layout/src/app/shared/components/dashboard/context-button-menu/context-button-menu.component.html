@@ -1,0 +1,23 @@
+
+<div *ngIf="buttonMenuType === menuType.WALL_PROPERTY">
+  <button mat-mini-fab color="primary" class="btnPos btn1" matTooltip="Delete" matTooltipPosition="left" (click)="buttonAction(actionType.DELETE_PROPERTY)">
+    <mat-icon class="matIcon">delete</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" class="btnPos btn2" matTooltip="Flip Vertical" matTooltipPosition="left" (click)="buttonAction(actionType.FLIP_PROPERTY_VERICAL)">
+    <mat-icon class="matIcon">flip</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" class=" btnPos btn3" matTooltip="Flip Horizontal" matTooltipPosition="left" (click)="buttonAction(actionType.FLIP_PROPERTY_HORIZONTAL)">
+    <mat-icon class="matIcon rotateIcon">flip</mat-icon>
+  </button>
+</div>
+<div *ngIf="buttonMenuType === menuType.NON_WALL_PROPERTY">
+  <button mat-mini-fab color="primary" class="btnPos btn2" matTooltip="Delete" matTooltipPosition="left" (click)="buttonAction(actionType.DELETE_PROPERTY)">
+    <mat-icon class="matIcon">delete</mat-icon>
+  </button>
+</div>
+<div *ngIf="buttonMenuType === menuType.WALL">
+  <button mat-mini-fab color="primary" class="btnPos btn2" matTooltip="Delete" matTooltipPosition="left" (click)="buttonAction(actionType.ADD_NEW_LINE)">
+    <mat-icon class="matIcon">edit</mat-icon>
+  </button>
+</div>
+<p>{{butttonMenuType }}</p>

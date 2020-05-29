@@ -1,0 +1,38 @@
+.mat-icon {
+  color: white !important;
+}
+
+.scale-container {
+    //border-bottom: 1px solid #3A5254;
+    padding: 0 10px;
+    margin-top: 20px;
+    //border-top: 1px solid #3A5254;
+  }
+
+  .color-title {
+    top: -12px;
+    background-color: white;
+    padding: 0 4px;
+  }
+  button {
+    height: 30px;
+    line-height: 30px;
+  }
+  .right-panel-tool-content {
+    height: 20px;
+
+    .color-picker {
+      width: 20%;
+      height: 20px;
+      border: 1px solid #d0d0d0;
+      padding: 0 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      float: left;
+    }
+  }
+
+
+
+
+  //

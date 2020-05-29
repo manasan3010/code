@@ -1,0 +1,19 @@
+<div class="container py-2">
+  <div>
+    <h5>{{data.title}}</h5>
+  </div>
+  <hr>
+  <div class="pb-3">
+    {{data.bodyText}}
+  </div>
+  <div class="float-right pb-2">
+    <button  mat-flat-button class="mx-1" (click)="onNoClick()">Cancel</button>
+    <button  mat-flat-button class="mx-1"
+             *ngIf="data.confirmButton"
+             [style.background-color]="data.modalType === modalType.DELETE ? 'red' : 'green'"
+             style="color: white"
+             [mat-dialog-close]="true">
+      {{data.confirmButtonText}}
+    </button>
+  </div>
+</div>

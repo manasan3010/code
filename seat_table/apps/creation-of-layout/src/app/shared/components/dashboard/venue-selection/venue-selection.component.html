@@ -1,0 +1,157 @@
+<div class="container-fluid" *ngIf="canLoad">
+  <div class="row">
+    <div *ngIf="!newUser" class="col-md-2 p-0 shadow-sm bg-white">
+      <div class="p-0">
+        <div class="sidebar">
+          <div>
+            <!-- Venue Selector -->
+            <div>
+              <mat-form-field class="w-100">
+                <!-- <mat-label>Venue</mat-label> -->
+                <mat-select matNativeControl [(ngModel)]="selectedVenueId" (ngModelChange)='venueChange()' name="venue" required>
+                  <div *ngFor="let venue of venues; index as i">
+                    <mat-option [value]="venue.id" *ngIf="!!venue.venueMap.length > 0">
+                      {{venue.name}}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-tab-group class="w-100" (selectedIndexChange)='statusTypeChange($event)'>
+                <mat-tab label="Active">
+                  <div *ngIf="selectedVenueId && !!selectedVenue" class='venueList'>
+                    <ul class="list-group">
+                      <li *ngFor="let i of selectedVenue.venueMap| venumMapFilter : venueMapStatusEnum.ACTIVE : 'status' " class='list-group-item'>
+                        <mat-card class="venueMap" (click)="selectVenueMap(i.id)" [ngClass]="{'folded_corner': i.status === 'Inactive','selectedVenueMap': i.id === selectedVenueMap.id }" [matTooltip]="i.name">
+                          <div class="venueMapIcon">
+                            <svg [id]=" i.id" class="venueMapList" xmlns="http://www.w3.org/2000/svg" style="background-color: transparent">
+                            </svg>
+                          </div>
+                          <div class="name">
+                            <p style='font-size: 13px'>{{i.name}}</p>
+                          </div>
+                        </mat-card>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-tab>
+                <mat-tab label="Inactive">
+                  <div *ngIf="selectedVenueId && !!selectedVenue" class='venueList'>
+                    <ul class="list-group">
+                      <li *ngFor="let i of selectedVenue.venueMap| venumMapFilter : venueMapStatusEnum.INACTIVE : 'status' " class='list-group-item'>
+                        <mat-card class="venueMap" (click)="selectVenueMap(i.id)" [ngClass]="{'folded_corner': i.status === 'Inactive','selectedVenueMap': i.id === selectedVenueMap.id }" [matTooltip]="i.name">
+                          <div class="venueMapIcon">
+                            <svg [id]="i.id" class="venueMapList" xmlns="http://www.w3.org/2000/svg" style="background-color: transparent">
+                            </svg>
+                          </div>
+                          <div class="name">
+                            <p style='font-size: 13px'>{{i.name}}</p>
+                          </div>
+                        </mat-card>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-tab>
+                <mat-tab label="All">
+                  <div *ngIf="selectedVenueId && !!selectedVenue" class='venueList'>
+                    <ul class="list-group">
+                      <li *ngFor="let i of selectedVenue.venueMap| venumMapFilter : venueMapStatusEnum.ALL : 'status' " class='list-group-item'>
+                        <mat-card class="venueMap" (click)="selectVenueMap(i.id)" [ngClass]="{'folded_corner': i.status === 'Inactive','selectedVenueMap': i.id === selectedVenueMap.id }" [matTooltip]="i.name">
+                          <div class="venueMapIcon">
+                            <svg [id]="i.id" class="venueMapList" xmlns="http://www.w3.org/2000/svg" style="background-color: transparent">
+
+                            </svg>
+                          </div>
+                          <div class="name">
+                            <p style='font-size: 13px'>{{i.name}}</p>
+                          </div>
+                        </mat-card>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="newUser ? 'col-md-12 p-0' : 'col-md-10 p-0'">
+      <div class="p-0" class='venue-map-container shadow-sm bg-white'>
+        <div *ngIf="!newUser" class='layoutBoard'>
+          <div class="info-group">
+            <div class="info"> 1 : {{zoomScale}}</div>
+            <div _ class="info"></div>
+            <div class="info"></div>
+          </div>
+          <div class="expandableButtons" (clickOutside)="onClickedOutside($event)">
+            <button mat-mini-fab color="primary" style="z-index: 100;" (click)="isMenuOpen= !isMenuOpen">
+              <mat-icon class="matIcon">{{isMenuOpen ? 'close' : 'apps'}}</mat-icon>
+            </button>
+            <div *ngIf="isMenuOpen" [@myAnimation] style=" display: grid; z-index: 50;">
+              <button mat-mini-fab (click)="openVenueSelectionModal()" color="primary" matTooltip="Create New Venue Map Layout" matTooltipPosition="left">
+                <mat-icon class="matIcon">add</mat-icon>
+              </button>
+              <button mat-mini-fab color="primary" (click)="copyVenueMapLayout()" matTooltip="Copy Venue Map Layout" matTooltipPosition="left">
+                <mat-icon class="matIcon">file_copy</mat-icon>
+              </button>
+              <button mat-mini-fab color="primary" matTooltip="Edit Venue Map Layout" (click)="editSelectedVenueMap()" matTooltipPosition="left">
+                <mat-icon class="matIcon">edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="primary" matTooltip="Delete Venue Map Layout" (click)="deleteVenueMapLayout()" matTooltipPosition="left">
+                <mat-icon class="matIcon">delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <svg *ngIf="!!selectedVenueMap" id='venueMap_{{selectedVenueMap.id}}' xmlns="http://www.w3.org/2000/svg" appZoomPan (zoomPanScale)="scaleChange($event)">
+            <defs>
+              <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+              </pattern>
+              <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+              </pattern>
+            </defs>
+            <defs>
+              <pattern id="smallRuler" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+              </pattern>
+              <pattern id="ruler" width="100" height="100" patternUnits="userSpaceOnUse">
+                <rect width="100" height="100" fill="url(#smallRuler)"></rect>
+                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+              </pattern>
+            </defs>
+            <defs>
+              <pattern id="pattern_non_seating" patternUnits="userSpaceOnUse" width="11.5" height="11.5" patternTransform="rotate(45)">
+                <line x1="0" y="0" x2="0" y2="11.5" stroke="#000000" stroke-width="3" />
+              </pattern>
+            </defs>
+            <g *ngIf="!!setting" [ngSwitch]="setting.rulerType">
+              <g *ngSwitchCase="RULERTYPE.GRID">
+                <rect width="100%" height="100%" fill="url(#grid)"></rect>
+              </g>
+              <g *ngSwitchCase="RULERTYPE.RULER">
+                <rect width="100%" height="10px" fill="url(#ruler)"></rect>
+                <rect width="10px" height="100%" fill="url(#ruler)"></rect>
+              </g>
+            </g>
+            <g id="shapeGroup">
+            </g>
+          </svg>
+        </div>
+
+
+        <div *ngIf="newUser" class='layoutBoard'>
+          <div class="vertical-center">
+            <button mat-flat-button color="primary" class="createNewVenue" (click)="openVenueSelectionModal()">Create
+              New
+              Venue Map
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

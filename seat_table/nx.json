@@ -1,0 +1,30 @@
+{
+  "npmScope": "seat-table",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "creation-of-layout-e2e": {
+      "tags": []
+    },
+    "creation-of-layout": {
+      "tags": []
+    },
+    "booking-e2e": {
+      "tags": []
+    },
+    "booking": {
+      "tags": []
+    },
+    "material-ui": {
+      "tags": []
+    },
+    "common-function": {
+      "tags": []
+    }
+  }
+}

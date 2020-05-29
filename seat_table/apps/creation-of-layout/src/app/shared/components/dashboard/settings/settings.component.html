@@ -1,0 +1,53 @@
+<mat-icon color="primary" class="pt-1" style="cursor: pointer;" [matMenuTriggerFor]="settingMenu">settings</mat-icon>
+
+<mat-menu #settingMenu="matMenu" hasBackdrop="true">
+  <div class="matmenu-container container-fluid p-2" (click)="$event.stopPropagation()">
+
+    <h5 class="font-weight-bold">Settings</h5>
+    <hr>
+
+    <!-- RULER -->
+    <section>
+      <mat-radio-group class="ruler-group d-flex m-0" color="primary" [value]="setting.rulerType" (change)="svgViewChange($event)">
+        <span>Use</span>
+        <mat-radio-button [value]="RULERTYPE.RULER" class="col-4">{{RULERTYPE.RULER}}</mat-radio-button>
+        <mat-radio-button [value]="RULERTYPE.GRID" class="col-4">{{RULERTYPE.GRID}}</mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <hr>
+
+    <!-- RULER -->
+    <section>
+      <span class="font-weight-bold">Spacing</span>
+      <div class="d-flex m-0 mt-2">
+        <div class="col-6 d-flex m-0 p-0 pr-1">
+          <span>Wall</span>
+          <input class="space-input" type="number" [(ngModel)]="setting.wallTableSpace" (change)="spaceChange()" min=10 />
+        </div>
+        <div class="col-6 d-flex m-0 p-0">
+          <span>Table</span>
+          <input class="space-input" type="number" [(ngModel)]="setting.tableTableSpace"  (change)="spaceChange()" min=10 />
+        </div>
+      </div>
+    </section>
+
+  
+   
+    <!-- <hr>
+    <section class="scale-container">
+      <span style="line-height: 2">Spacing</span>
+      <div class="right-panel-tool-content">
+        <div class="tool-text" style="float: left;">TW</div>
+        <input class="color-picker" type="number" [(ngModel)]="wallSpace" (change)="spaceChange()" min=10 />
+        <div class="tool-text" style="float: left;"> TT</div>
+        <input style="float: left;" class="color-picker" [(ngModel)]="tableSpace" type="number" (change)="spaceChange()" min=10 />
+      </div>
+    </section>
+    <hr> -->
+
+    <!-- <div>
+      <button mat-flat-button color="primary" class='w-100'>Apply</button>
+    </div> -->
+  </div>
+
+</mat-menu>

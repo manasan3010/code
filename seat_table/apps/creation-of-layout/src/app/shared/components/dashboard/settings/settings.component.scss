@@ -1,0 +1,33 @@
+// ::ng-deep .mat-menu-panel {
+//   width: 280px !important;
+//   padding: 0 10px !important;
+// }
+.mat-icon {
+  color: white !important;
+}
+
+.matmenu-container {
+  hr {
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+  }
+}
+
+section {
+  .ruler-group {
+    line-height: 23px;
+  }
+
+  .space-input {
+    width: 45px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #d0d0d0;
+    padding: 0 5px;
+    margin-left: 3px;
+    border-radius: 20px;
+
+    cursor: pointer;
+    float: left;
+  }
+}

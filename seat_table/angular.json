@@ -1,0 +1,404 @@
+{
+  "version": 1,
+  "projects": {
+    "creation-of-layout": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss",
+          "spec": false
+        },
+        "@nrwl/angular:class": {
+          "spec": false
+        },
+        "@nrwl/angular:directive": {
+          "spec": false
+        },
+        "@nrwl/angular:guard": {
+          "spec": false
+        },
+        "@nrwl/angular:module": {
+          "spec": false
+        },
+        "@nrwl/angular:pipe": {
+          "spec": false
+        },
+        "@nrwl/angular:service": {
+          "spec": false
+        }
+      },
+      "root": "apps/creation-of-layout",
+      "sourceRoot": "apps/creation-of-layout/src",
+      "prefix": "seat-table",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/creation-of-layout",
+            "index": "apps/creation-of-layout/src/index.html",
+            "main": "apps/creation-of-layout/src/main.ts",
+            "polyfills": "apps/creation-of-layout/src/polyfills.ts",
+            "tsConfig": "apps/creation-of-layout/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/creation-of-layout/src/favicon.ico",
+              "apps/creation-of-layout/src/assets"
+            ],
+            "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/creation-of-layout/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/creation-of-layout/src/environments/environment.ts",
+                  "with": "apps/creation-of-layout/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "creation-of-layout:build",
+            "port": 1000
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "creation-of-layout:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "creation-of-layout:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/creation-of-layout/tsconfig.app.json",
+              "apps/creation-of-layout/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/creation-of-layout/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/creation-of-layout/jest.config.js",
+            "tsConfig": "apps/creation-of-layout/tsconfig.spec.json",
+            "setupFile": "apps/creation-of-layout/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "creation-of-layout-e2e": {
+      "root": "apps/creation-of-layout-e2e",
+      "sourceRoot": "apps/creation-of-layout-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/creation-of-layout-e2e/cypress.json",
+            "tsConfig": "apps/creation-of-layout-e2e/tsconfig.e2e.json",
+            "devServerTarget": "creation-of-layout:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "creation-of-layout:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/creation-of-layout-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/creation-of-layout-e2e/**"]
+          }
+        }
+      }
+    },
+    "booking": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss",
+          "spec": false
+        },
+        "@nrwl/angular:class": {
+          "spec": false
+        },
+        "@nrwl/angular:directive": {
+          "spec": false
+        },
+        "@nrwl/angular:guard": {
+          "spec": false
+        },
+        "@nrwl/angular:module": {
+          "spec": false
+        },
+        "@nrwl/angular:pipe": {
+          "spec": false
+        },
+        "@nrwl/angular:service": {
+          "spec": false
+        }
+      },
+      "root": "apps/booking",
+      "sourceRoot": "apps/booking/src",
+      "prefix": "seat-table",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/booking",
+            "index": "apps/booking/src/index.html",
+            "main": "apps/booking/src/main.ts",
+            "polyfills": "apps/booking/src/polyfills.ts",
+            "tsConfig": "apps/booking/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/booking/src/favicon.ico",
+              "apps/booking/src/assets"
+            ],
+            "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/booking/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/booking/src/environments/environment.ts",
+                  "with": "apps/booking/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "booking:build",
+            "port": 2000
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "booking:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "booking:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/booking/tsconfig.app.json",
+              "apps/booking/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/booking/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/booking/jest.config.js",
+            "tsConfig": "apps/booking/tsconfig.spec.json",
+            "setupFile": "apps/booking/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "booking-e2e": {
+      "root": "apps/booking-e2e",
+      "sourceRoot": "apps/booking-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/booking-e2e/cypress.json",
+            "tsConfig": "apps/booking-e2e/tsconfig.e2e.json",
+            "devServerTarget": "booking:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "booking:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/booking-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/booking-e2e/**"]
+          }
+        }
+      }
+    },
+    "material-ui": {
+      "projectType": "library",
+      "root": "libs/material-ui",
+      "sourceRoot": "libs/material-ui/src",
+      "prefix": "seat-table",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/material-ui/tsconfig.lib.json",
+              "libs/material-ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/material-ui/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/material-ui/jest.config.js",
+            "tsConfig": "libs/material-ui/tsconfig.spec.json",
+            "setupFile": "libs/material-ui/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "common-function": {
+      "projectType": "library",
+      "root": "libs/common-function",
+      "sourceRoot": "libs/common-function/src",
+      "prefix": "seat-table",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/common-function/tsconfig.lib.json",
+              "libs/common-function/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/common-function/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common-function/jest.config.js",
+            "tsConfig": "libs/common-function/tsconfig.spec.json",
+            "setupFile": "libs/common-function/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress",
+      "spec": false
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest",
+      "spec": false
+    },
+    "@nrwl/angular:component": {
+      "styleext": "scss",
+      "spec": false
+    },
+    "@nrwl/angular:class": {
+      "spec": false
+    },
+    "@nrwl/angular:directive": {
+      "spec": false
+    },
+    "@nrwl/angular:guard": {
+      "spec": false
+    },
+    "@nrwl/angular:module": {
+      "spec": false
+    },
+    "@nrwl/angular:pipe": {
+      "spec": false
+    },
+    "@nrwl/angular:service": {
+      "spec": false
+    }
+  },
+  "defaultProject": "creation-of-layout"
+}

@@ -1,0 +1,25 @@
+<div class="container-fluid p-0">
+  <div class="row m-0 p-0 model-header">
+    <div class="col-md-2 col-lg-2 col-sm-2 p-0 icon-container">
+<!--      <mat-icon fontSet="fas" fontIcon="fa-clone"></mat-icon>-->
+      <mat-icon>highlight_off</mat-icon>
+    </div>
+    <div class="col-md-10 col-lg-10 col-sm-10 p-0 title-container"><h6 class="m-auto">Confirmation</h6></div>
+  </div>
+  <div class="row m-0 p-3 W-100 facility-view-container">
+    <p>text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+    <div class="form-check form-check-inline">
+      <mat-checkbox [(ngModel)]="isKeepSpace">Keep seat space & split as rows</mat-checkbox>
+    </div>
+    <div class="form-check form-check-inline">
+      <mat-checkbox [(ngModel)]="isKeepSeatOrder">Change seat label order</mat-checkbox>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end pl-3 pr-3 pb-3 pt-0">
+    <button mat-flat-button class="default-button mr-1" [mat-dialog-close]="false">Cancel</button>
+    <button mat-flat-button class="default-button" (click)="conform()">
+      Confirm
+    </button>
+  </div>
+
+</div>

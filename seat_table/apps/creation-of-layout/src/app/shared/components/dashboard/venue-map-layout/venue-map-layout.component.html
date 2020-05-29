@@ -1,0 +1,252 @@
+<div class="venueMapLayoutArea container-fluid d-flex m-0 p-2" [style.height.px]="componentHeight">
+  <div class="right-area mr-2 ">
+    <div class="panel" id="facility-panel">
+      <div class="panel-header d-flex" [ngClass]="{'selected-panel-header':!!sidePanelDetail.facility.isSelected}"
+        (click)="sidePanelDetail.facility.isSelected = !sidePanelDetail.facility.isSelected ; setHeight()">
+        <div class="panel-header-image mr-1">
+          <i class="material-icons">account_balance</i>
+        </div>
+        <div class="panel-header-info"
+          (click)="$event.stopPropagation(); sidePanelDetail.facility.isSelected = true; setHeight()">
+          <i class="material-icons" (click)="isSearch = !isSearch">search</i>
+        </div>
+        Facility
+      </div>
+      <div class="search-box" [ngStyle]="{'height': isSearch ? '220px' : '0px' }">
+        <div class="search-box-content">
+          <form [formGroup]="form">
+            <mat-form-field>
+              <input type="text" formControlName="facName" [(ngModel)]="searchText" placeholder="Facility Name" matInput
+                [matAutocomplete]="auto">
+              <mat-error *ngIf="form.get('facName').hasError('required')">Please enter the name</mat-error>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let facname of facilities | filter: searchText" [value]="facname.name">
+                  {{facname.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Facility Type</mat-label>
+              <mat-select formControlName="facType">
+                <mat-option value="first">1</mat-option>
+                <mat-option value="second">2</mat-option>
+                <mat-option value="third">3</mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('facType').hasError('required')">Please select the type</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="category">
+                <mat-option value="volvo">Volvo</mat-option>
+                <mat-option value="saab">Saab</mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('category').hasError('required')">Please select the category</mat-error>
+            </mat-form-field>
+            <div class="search-button-row button">
+              <button mat-flat-button class="default-button" color="primary">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="panel-content px-1" [style.height.px]="sidePanelDetail.facility.height">
+        <div class="row m-0 py-1" *ngIf="isFacilityLLoad; else spinner">
+          <div class="panel-content-card col-6" *ngFor="let facility of facilities | filter: searchText;index as i"
+            (mouseup)="onSelection($event, contextMenuType.DEFINED + i.toString())">
+            <div class="panel-content-item">
+              <div class="panel-content-image" [id]="'dom_'+facility.id" [draggable]="facility.shapes.length > 0"
+                (dragstart)="shapeDrag($event, facility)" (dragend)="shapeDragEnd(facility)">
+                <svg class="minimap" [id]="facility.type + facility.id +'_' + i" cre width="100%"
+                  height="100%" style="background-color: transparent">
+                </svg>
+              </div>
+              <div class="panel-content-text ellipsis px-2">
+                {{facility.name}}
+              </div>
+              <button mat-button [matMenuTriggerFor]="contextMenuFacility" [id]="contextMenuType.DEFINED + i.toString()"
+                style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+                [style.top]="contextMenuPosition.y"></button>
+              <mat-menu #contextMenuFacility="matMenu" class="p-0" [overlapTrigger]="false">
+                <app-context-menu
+                  [contextMenuInputType]='facility.shapes.length > 0 ? contextMenuType.DEFINED : contextMenuType.UNDEFINED '
+                  [facility]='facility' [facilities]="facilities"></app-context-menu>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+        <ng-template #spinner>
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="panel" id="other-structure-panel">
+      <div class="panel-header d-flex" [ngClass]="{'selected-panel-header':!!sidePanelDetail.otherStructure.isSelected}"
+        (click)="sidePanelDetail.otherStructure.isSelected = !sidePanelDetail.otherStructure.isSelected ; setHeight()">
+        <div class="panel-header-image mr-1">
+          <i class="material-icons">business</i>
+        </div>
+        <div class="panel-header-info"
+          (click)="$event.stopPropagation(); sidePanelDetail.otherStructure.isSelected = true; setHeight();"
+          routerLink="../createotherstructure">
+          <i class="material-icons">add</i>
+        </div>
+        Other Structure
+      </div>
+      <div class="panel-content px-1" [style.height.px]="sidePanelDetail.otherStructure.height">
+        <div class="row m-0 py-1">
+          <div class="panel-content-card col-6" *ngFor="let otherStructure of otherStructures;index as i"
+            (mouseup)="onSelection($event,contextMenuType.OTHERSTRUCTURE + i.toString())">
+            <div class="panel-content-item">
+              <div class="panel-content-image" [draggable]="otherStructure.shapes.length > 0"
+                (dragstart)="shapeDrag($event, otherStructure)" (dragend)="shapeDragEnd()">
+                <svg class="minimap" [id]="otherStructure.type + otherStructure.id +'_' + i" width="100%" height="100%"
+                  style="background-color: transparent">
+                </svg>
+              </div>
+              <div class="panel-content-text ellipsis px-2">
+                {{otherStructure.name}}
+              </div>
+              <button mat-button [matMenuTriggerFor]="contextMenuOtherStructure"
+                [id]="contextMenuType.OTHERSTRUCTURE + i.toString()" style="visibility: hidden; position: fixed"
+                [style.left]="contextMenuPosition.x" [style.top]="contextMenuPosition.y"></button>
+              <mat-menu #contextMenuOtherStructure="matMenu" class="p-0" [overlapTrigger]="false">
+                <app-context-menu [contextMenuInputType]='contextMenuType.OTHERSTRUCTURE'
+                  [otherStructure]='otherStructure'></app-context-menu>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="image-panel">
+      <div class="panel-header d-flex" [ngClass]="{'selected-panel-header':!!sidePanelDetail.image.isSelected}"
+        (click)="sidePanelDetail.image.isSelected = !sidePanelDetail.image.isSelected ; setHeight()">
+        <div class="panel-header-image mr-1">
+          <i class="material-icons">image</i>
+        </div>
+        <div class="panel-header-info"
+          (click)="$event.stopPropagation(); sidePanelDetail.image.isSelected = true; setHeight();openAddImage()">
+          <i class="material-icons">add</i>
+        </div>
+        Image
+      </div>
+      <div class="panel-content px-1" [style.height.px]="sidePanelDetail.image.height">
+        <div class="row m-0 ">
+          <div class="col-md-6 mt-2 text-center " *ngFor="let url of images" (mouseup)="onSelection($event,url.id)">
+            <div class="images">
+              <img class="picture " (click)="selectImage(url.id)" [src]="url.src" draggable="true"
+                (dragstart)="shapeDrag($event, url)">
+              <button mat-button [matMenuTriggerFor]="contextMenuImage" [id]="url.id"
+                style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+                [style.top]="contextMenuPosition.y"></button>
+              <mat-menu #contextMenuImage="matMenu" class="p-0" [overlapTrigger]="false">
+                <app-context-menu [contextMenuInputType]='contextMenuType.IMAGES' [details]='url'>
+                </app-context-menu>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-area" [ngClass]="{'mouseIcon': isCenterPointSelected }">
+    <div class="venueMapLayoutName d-flex" [ngClass]="{'nonEditableVenueMapName': !isvenueMapNameEditable}">
+
+      <mat-form-field class="pointer" [ngStyle]="{'width.px': width}">
+        <input matInput spellcheck="false" type="text" (input)="resizeText()" [(ngModel)]="venueMap.name"
+          matTooltip="{{venueMap.name}}" [readonly]="!isvenueMapNameEditable" (keydown)="inputKeyPress($event)"
+          (click)="atStart()" (clickOutside)="cancelEdit()" />
+        <span #hiddenText style="visibility: hidden; white-space: pre;">{{venueMap.name}}</span>
+      </mat-form-field>
+
+      <div class="btn-action-group d-flex pointer" *ngIf="isvenueMapNameEditable">
+
+        <div class="action-btn" (click)="saveName()">
+          <i class="material-icons">done</i>
+        </div>
+        <div class="action-btn" (click)="cancelEdit()">
+          <i class="material-icons">close</i>
+        </div>
+      </div>
+    </div>
+    <div class="scaleRatio">
+      1 : {{finalZoomValue}}
+    </div>
+
+    <div class="button-icon-group d-flex">
+      <div class="button-icon  ml-2">
+        <i class="material-icons" (click)="openAddBackgroundModal()">aspect_ratio</i>
+      </div>
+      <div class="button-icon  ml-2">
+        <i class="material-icons" (click)="setCenterPoint()">all_out</i>
+      </div>
+      <div>
+        <div class="button-icon  ml-2" style="z-index: 100;" (click)="isToolMenuOpen= !isToolMenuOpen">
+          <i class="material-icons">{{isToolMenuOpen ? 'close' : 'apps'}}</i>
+        </div>
+        <div *ngIf="isToolMenuOpen" [@myAnimation] style="z-index: 50;">
+          <div class="button-icon  ml-2 mt-2">
+            <i class="material-icons">navigation</i>
+          </div>
+          <div class="button-icon  ml-2 mt-2">
+            <i class="material-icons">rotate_90_degrees_ccw</i>
+          </div>
+          <div class="button-icon  ml-2 mt-2">
+            <i class="material-icons">flip</i>
+          </div>
+          <div class="button-icon  ml-2 mt-2">
+            <i class="material-icons">flip</i>
+          </div>
+          <div class="button-icon  ml-2 mt-2">
+            <i class="material-icons">delete</i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="" [style.height.px]="(componentHeight-16)">
+      <svg id="svg" xmlns="http://www.w3.org/2000/svg" style="background:transparent"
+        [isCenterPointSelected]="isCenterPointSelected" appVenueMap
+        (disableCenterPointClick)=" deactivateCenterPoint($event)" [droppedData]="dropData" [dragEnd]="dragEnd"
+        appZoomPan (zoomPanScale)="getZoomValue($event)">
+        <defs>
+          <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+          </pattern>
+          <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+          </pattern>
+        </defs>
+        <defs>
+          <pattern id="smallRuler" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+          </pattern>
+          <pattern id="ruler" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="url(#smallRuler)"></rect>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+          </pattern>
+        </defs>
+        <g *ngIf="!!setting" [ngSwitch]="setting.rulerType">
+          <g *ngSwitchCase="RULERTYPE.GRID">
+            <rect width="100%" height="100%" fill="url(#grid)"></rect>
+          </g>
+          <g *ngSwitchCase="RULERTYPE.RULER">
+            <rect width="100%" height="10px" fill="url(#ruler)"></rect>
+            <rect width="10px" height="100%" fill="url(#ruler)"></rect>
+          </g>
+        </g>
+        <g id="shapeGroup">
+          <image class="backgroundImage" width="100%" height="100%" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="button-group">
+      <button mat-flat-button class="default-button mr-2" (click)="saveVenueMap()">Cancel</button>
+      <button mat-flat-button class="default-button" (click)="onClose()">Save</button>
+    </div>
+  </div>
+</div>

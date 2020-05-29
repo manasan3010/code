@@ -1,0 +1,35 @@
+<div style="position: relative;">
+  <div class="modal-header">
+    <div class="header-text" style="display: flex">
+      <div id="title">Add Background Image</div>
+      <!-- <div>
+        <mat-icon id='close-icon' matSuffix (click)="close()" style="position: absolute; right: 10px;">close</mat-icon>
+      </div> -->
+    </div>
+  </div>
+  <!--(filesDropped)="handleDrop($event)"-->
+  <div id='div-slider' *ngIf='croppedImage' class="slider">
+    <mat-slider id='slider' [(ngModel)]='imageOpacity' min="20" max="100" step="0.1" value='imageOpacity'
+      (input)="changeOpacity($event)" color='primary'></mat-slider>
+    &nbsp;&nbsp; <label><strong> Opacity : {{imageOpacity}} % </strong></label>
+  </div>
+  <div class="image-container my-4 shadow-sm" *ngIf='!imageChangedEvent' appFileDrop
+    (filesHovered)="dropzoneState($event)" [ngClass]="{'active': dropzoneActive}"
+    [ngStyle]="dropzoneActive && {'background-color':'black'}">
+    <div class="upload-icon" (click)="fileUpload.click()" [ngStyle]="dropzoneActive && {'color':'white'}">
+      <mat-icon>cloud_upload</mat-icon>
+      <p>Drag & Drop File or, Click Here</p>
+    </div>
+  </div>
+  <image-cropper *ngIf='imageChangedEvent' id='imageCropper' [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="false" [aspectRatio]="1/1" format="png"
+    (imageCropped)="imageCropped($event)"></image-cropper>
+
+  <mat-dialog-actions class="dialog-action">
+    <button mat-flat-button class="default-button cancel" (click)="close()">Cancel</button>
+    <button mat-flat-button class="default-button mr-2" cdkFocusInitial (click)="confirm()"
+      [disabled]='!croppedImage'>Confirm</button>
+  </mat-dialog-actions>
+</div>
+<input type="file" id="input-file-now-custom-2" class="file-upload" data-height="500" (change)="onSelectFile($event)"
+  #fileUpload style="display: none" accept="image/*" />

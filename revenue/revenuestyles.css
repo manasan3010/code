@@ -1,0 +1,123 @@
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#e7e9fd;
+	border-width: 1px;
+	padding: 6px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#ffffff;
+}
+table.hovertable td {
+	border-width: 1px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+tbody tr:hover {
+  background: #f5face;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+	background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50; 
+}
+
+.button1:hover {
+	background-color: #4CAF50;
+    color: white;
+}
+
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+
+.button2:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+.button3 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
+}
+
+.button3:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.button4 {
+    background-color: white;
+    color: black;
+    border: 2px solid #e572f9;
+}
+
+.button4:hover {background-color: #e572f9;}
+
+.button5 {
+    background-color: white;
+    color: black;
+    border: 2px solid #85fc87;
+}
+
+.button5:hover {
+    background-color: #85fc87;
+    color: white;
+}
+@media print {
+  /* style sheet for print goes here */
+  .hide-from-printer{  display:none; }
+}
+input[type=text] {
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 4px;
+	-webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 100%;
+}
+input[type=number] {
+    box-sizing: border-box;
+    border: 2px solid blue;
+    border-radius: 4px;
+}
+input[type=date] {
+    box-sizing: border-box;
+    border: 2px solid green;
+    border-radius: 4px;
+}
+input[type=password] {
+    box-sizing: border-box;
+    border: 2px solid orange;
+    border-radius: 4px;
+}

@@ -1,0 +1,139 @@
+$borderColor: #525252;
+$svgRootColor: #ededed;
+
+.topbar {
+  height: 8vh;
+  padding: 5px 0;
+}
+
+//overWrite the native metrial class 
+::ng-deep .mat-select-panel {
+  margin-top: 33px !important;
+}
+
+
+ ::ng-deep .mat-tab-label{
+  min-width: 10px  !important;
+  padding-left: 10px !important;
+  justify-content: center !important; 
+  text-align: center !important;
+  text-size-adjust: 10px !important;
+}
+
+::ng-deep .venueList{
+  width: 90% !important;
+}
+.layoutBoard {
+  height: 92vh;
+}
+
+.sidebar {
+  text-align: center !important;
+  width: 100%;
+  height: 92vh;
+  padding: 0.5em;
+  padding-top: 0px;
+  .list-group-item {
+    border: 0px solid !important;
+  }
+  ::ng-deep .mat-tab-label {
+    padding: 0 !important;
+    height: 30px !important;
+    min-width: 33% !important;
+  }
+  .venueList {
+    width: 100%;
+    height: 75vh;
+    overflow: auto;
+    .venueMap {
+      cursor: pointer;
+      text-align: center;
+      height: 150px;
+      .venueMapIcon {
+        width: 100% !important;
+        background-color: #eaeaea;
+        padding: 10px 5px;
+        margin: auto;
+        height: 100px;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .top {
+        position: relative;
+        height: 10px;
+        border-radius: 50%;
+        width: 10px;
+        background-color: red;
+        top: -11px;
+        left: 139px;
+      }
+      .name {
+        white-space: nowrap;
+        width: 80%;
+        height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        p {
+          padding: 5px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.venue-map-container {
+  height: 92vh;
+  background-color: aqua;
+  svg {
+    height: 100%;
+    width: 100%;
+    background-color: $svgRootColor;
+  }
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.createNewVenue {
+  width: 300px;
+  padding: 5px 0;
+  font-size: 20px;
+}
+.folded_corner {
+  background: linear-gradient(to top right, transparent 50%, rgba(255, 2, 2, 1) 0) no-repeat 100% 0 / 2em 2em,
+    linear-gradient(-135deg, transparent 1.5em, WHITE 0);
+}
+.selectedVenueMap {
+  -webkit-box-shadow: 0px 0px 11px 1px rgba(184,222,255,1);
+  -moz-box-shadow: 0px 0px 11px 1px rgba(184,222,255,1);
+  box-shadow: 0px 0px 11px 1px rgba(184,222,255,1);
+}
+.expandableButtons {
+  transition: max-height 0.5s;
+  -webkit-transition: max-height 0.5s;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  display: grid;
+  border-radius: 25px;
+
+  button {
+    margin: 5px;
+  }
+
+  .matIcon {
+    font-size: 20px;
+    margin-top: 3px;
+  }
+}

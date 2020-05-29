@@ -1,0 +1,240 @@
+<div class="container-fluid" xmlns:svg="http://www.w3.org/2000/svg" (mouseup)="mouseUp($event)">
+  <div class="row">
+    <div class=" left-panel col-lg-2 col-md-2 col-sm-2 p-0 m-0" [style.height.px]="heightOfTheScreen">
+      <!-- Facilities -->
+      <div class="left-panel-tab">
+        <div class="left-panel-tab-header">
+          <strong>Facility Shapes</strong>
+        </div>
+        <div class="left-panel-tab-content">
+          <div>
+            <div class="d-flex bd-highlight shape-list bg-light" *ngFor="let shape of shapeTools"
+              (click)="selectShape(shape.type)" [ngClass]="{'selectedDiv': (selectedShape === shape.type)}">
+              <div class="px-2 w-100 bd-highlight">{{shape.name}}</div>
+              <div class="px-2 flex-shrink-1 bd-highlight">
+                <mat-icon>{{shape.icon}}</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Properties -->
+      <div class="left-panel-tab">
+        <div class="left-panel-tab-header">
+          <input matInput class="property-input" type="text" [(ngModel)]="propertyText" [readonly]="!isEditableProperty"
+            (click)="toggleSearchProperty()" (keyup)=searchProperty()>
+
+          <mat-icon *ngIf="searchText" class="property-input-clear" (click)="clearSearchField()">close</mat-icon>
+          <mat-icon *ngIf="!searchText && !isEditableProperty" class="property-input-clear"
+            (click)="clearSearchField()">search
+          </mat-icon>
+        </div>
+
+        <div class="left-panel-tab-content ">
+          <mat-tree [dataSource]="propertyDataSource | PropertiePipe : searchText" [treeControl]="treeControl"
+            class="property-tree">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+              <li class="mat-tree-node icon20px disable-text-select propList" style="cursor: pointer"
+                (click)="onPropertySelect(node)" [ngStyle]="!!node.select && {'background-color':'#e0e0e0'}">
+                <button mat-icon-button matTreeNodeToggle class="bd-highlight mr-2">
+                  <mat-icon class="mat-icon-rtl-mirror float-right" *ngIf="!!node.icon"> {{node.icon}}</mat-icon>
+                </button>
+                {{node.name}}
+              </li>
+            </mat-tree-node>
+            <mat-nested-tree-node *matTreeNodeDef="let node; when: propertyHasChild">
+              <li>
+                <div class="mat-tree-node  bd-highlight icon20px disable-text-select" style="cursor: pointer"
+                  matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                  <button mat-icon-button matTreeNodeToggle class="bd-highlight  mr-2">
+                    <mat-icon class="mat-icon-rtl-mirror float-right" *ngIf="!!node.icon"> {{node.icon}}</mat-icon>
+                  </button>
+                  <div class=" bd-highlight ">
+                    {{node.name}}
+                  </div>
+                  <div class="ml-auto mr-1 bd-highlight circle-box-div">
+                    {{node.children.length}}
+                  </div>
+                </div>
+                <ul [class.property-tree-invisible]="!treeControl.isExpanded(node)">
+                  <ng-container matTreeNodeOutlet></ng-container>
+                </ul>
+              </li>
+            </mat-nested-tree-node>
+          </mat-tree>
+        </div>
+      </div>
+      <!-- Existing Facility -->
+      <div class="left-panel-tab fixed-bottom" style="position: absolute;">
+        <div class="left-panel-tab-header" (click)="addExistingFacilityLayout()">
+          <strong>Add Existing Facility Layout</strong>
+        </div>
+      </div>
+    </div>
+    <div class="right-panel-drawArea right-panel p-0 col-lg-10 col-md-10 col-sm-10"
+      [style.height.px]="heightOfTheScreen" (mousemove)="mouseMove($event)">
+
+      <div class="info-group">
+        <div class="info" style="text-align: left">
+          1 : 1
+        </div>
+        <div>
+          <button mat-button color="primary" (click)="addBackgroundImage()">Add Background Image</button>
+          <button mat-button color="primary" (click)="removeBackgroundImage()">Remove Background Image</button>
+        </div>
+      </div>
+
+      <svg id="mainSvg" class="drawingArea" xmlns="http://www.w3.org/2000/svg" appZoomPan appCommonFunction
+        [shapeStyle]="shapeStyle" [canAddProperty]="canAddProperty" (shapeData)="shapeChange($event)">
+
+        <defs>
+          <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+          </pattern>
+          <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect  x="0" y="0" width="100" height="100" fill="url(#smallGrid)"></rect>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+          </pattern>
+        </defs>
+
+        <defs>
+          <pattern id="smallRuler" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+          </pattern>
+          <pattern id="ruler" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect  x="0" y="0" width="100" height="100" fill="url(#smallRuler)"></rect>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+          </pattern>
+        </defs>
+        <defs>
+          <pattern id="pattern_non_seating" patternUnits="userSpaceOnUse" width="11.5" height="11.5"
+            patternTransform="rotate(45)">
+            <line x1="0" y="0" x2="0" y2="11.5" stroke="#000000" stroke-width="3" />
+          </pattern>
+        </defs>
+
+
+        <g *ngIf="!!setting" [ngSwitch]="setting.rulerType">
+          <g *ngSwitchCase="RULERTYPE.GRID">
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#grid)"></rect>
+          </g>
+          <g *ngSwitchCase="RULERTYPE.RULER">
+            <rect x="0" y="0" width="100%" height="10px" fill="url(#ruler)"></rect>
+            <rect x="0" y="0" width="10px" height="100%" fill="url(#ruler)"></rect>
+          </g>
+        </g>
+        <svg:g id="shapeGroup">
+          <image class = "bgImage" *ngIf="isBGImage" [attr.href]="backgroundImage" width="100%" height="100%" />
+        </svg:g>
+
+
+      </svg>
+
+      <div class="button-group" style="width: 100%; position: absolute; bottom: 10px;right: 10px; text-align: right; ">
+        <button mat-flat-button class="default-button mr-2" (click)="onClose()">Cancel</button>
+        <button mat-flat-button class="default-button" (click)="onConform()">Conform</button>
+      </div>
+
+
+      <div class="right-panel-tool disable-select" [style.width.px]="toolBarWidth" (mousedown)="mouseDown($event)"
+        (mousemove)="mouseMove($event)" (click)="!isMouseMove;">
+        <div class="right-panel-tool-content">
+
+          <div class="tool-text">Fill</div>
+          <input class="color-picker" [value]="shapeStyle.fillColor" [style.background]="shapeStyle.fillColor"
+            [cpOutputFormat]="'rgba'" [cpPosition]="'left'" [(colorPicker)]="shapeStyle.fillColor"
+            (colorPickerChange)='colorChange()' />
+        </div>
+        <!--        <div class="right-panel-tool-content">-->
+        <!--          <div class="tool-text">Border</div>-->
+        <!--          <input class="color-picker" [value]="shapeStyle.borderColor" [style.background]="shapeStyle.borderColor" [cpOutputFormat]="'rgba'" [cpPosition]="'left'" [(colorPicker)]="shapeStyle.borderColor" (colorPickerChange)='colorChange()' />-->
+        <!--        </div>-->
+        <div class="tool-text">Tools</div>
+        <div class="icon20px text-center">
+          <button mat-icon-button
+            [ngClass]="{'selected-tool': selectedControls==controls.SELECT, 'icon20px':selectedControls !==controls.SELECT }"
+            (click)="controlSelect(controls.SELECT)">
+            <mat-icon>near_me</mat-icon>
+          </button>
+          <button mat-icon-button
+            [ngClass]="{'selected-tool': selectedControls==controls.BREAK_LINE, 'icon20px':selectedControls !==controls.BREAK_LINE }"
+            (click)="controlSelect(controls.BREAK_LINE)">
+            <mat-icon fontSet="fas" fontIcon="fa-draw-polygon"></mat-icon>
+          </button>
+          <button mat-icon-button
+            [ngClass]="{'selected-tool': selectedControls==controls.ADD_WALL, 'icon20px':selectedControls !==controls.ADD_WALL }"
+            (click)="controlSelect(controls.ADD_WALL)">
+            <mat-icon>linear_scale</mat-icon>
+          </button>
+          <button mat-icon-button
+            [ngClass]="{'selected-tool': selectedControls==controls.REMOVE_WALL, 'icon20px':selectedControls !==controls.REMOVE_WALL }"
+            (click)="controlSelect(controls.REMOVE_WALL)">
+            <mat-icon>money</mat-icon>
+          </button>
+          <!--          <button mat-icon-button [ngClass]="{'selected-tool': selectedControls==controls.CURVE_WALL, 'icon20px':selectedControls !==controls.CURVE_WALL }" (click)="controlSelect(controls.CURVE_WALL)">-->
+          <!--            <mat-icon>play_for_work</mat-icon>-->
+          <!--          </button>-->
+          <button mat-icon-button
+            [ngClass]="{'selected-tool': selectedControls==controls.DRAW_NON_SEAT_AREA, 'icon20px':selectedControls !==controls.DRAW_NON_SEAT_AREA }"
+            (click)="controlSelect(controls.DRAW_NON_SEAT_AREA)" appLongPress (onLongPress)="onLongPress($event)">
+            <span id='nonSeatingAreaShapeTrigger' [matMenuTriggerFor]="nonSeatingAreaChange"
+              style="visibility: hidden;"> </span>
+            <mat-icon>{{
+                selectedNonSeatAreaShape === shapeTypes.PATH ? 'scatter_plot' :
+                    selectedNonSeatAreaShape === shapeTypes.RECTANGLE ? 'crop_5_4' :
+                        selectedNonSeatAreaShape === shapeTypes.SQUARE ? 'crop_square' :
+                            selectedNonSeatAreaShape === shapeTypes.CIRCLE ? 'panorama_fish_eye' :
+                                null
+              }}</mat-icon>
+          </button>
+          <button mat-icon-button (click)="controlSelect(controls.MERGE_SHAPES)">
+            <mat-icon fontSet="fas" fontIcon="fa-object-group"></mat-icon>
+          </button>
+          <button mat-icon-button (click)="onFlipX()">
+            <mat-icon>flip</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onFlipY()">
+            <mat-icon class="rotateIcon">flip</mat-icon>
+          </button>
+          <button mat-icon-button [matMenuTriggerFor]="shapeLayersMenu">
+            <mat-icon>layers</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteSelectedShapeOrProperty()">
+            <mat-icon style="color: #83001f">delete</mat-icon>
+          </button>
+          <mat-menu #shapeLayersMenu="matMenu">
+            <app-shape-layers></app-shape-layers>
+          </mat-menu>
+
+          <div class="right-panel-tool-content">
+            <div class="tool-text">Width</div>
+            <input class="dynamicWidthAndHeight" [(ngModel)]="width" [value]="shapeWidthAndHeight.width" readonly />
+          </div>
+
+          <div class="right-panel-tool-content">
+            <div class="tool-text">Height</div>
+            <input class="dynamicWidthAndHeight" [(ngModel)]="height" [value]="shapeWidthAndHeight.height" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-menu #nonSeatingAreaChange="matMenu">
+      <div class="nonSeatAreaShape">
+        <div class="w-100 text-center  py-1">
+          <span class="font-weight-bold"> Switch Shape</span>
+        </div>
+        <div *ngFor="let shape of shapeTools">
+          <div class="d-flex bd-highlight shape-list bg-light py-1" *ngIf="shape.type !== shapeTypes.LINE"
+            [ngClass]="{'selectedDiv': (selectedNonSeatAreaShape === shape.type)}"
+            (click)="nonSeatingAreaShapeChange(shape.type)">
+            <div class="px-2 w-100 bd-highlight">{{shape.name}}</div>
+            <div class="px-2 flex-shrink-1 bd-highlight">
+              <mat-icon>{{shape.icon}}</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-menu>
+  </div>
+</div>

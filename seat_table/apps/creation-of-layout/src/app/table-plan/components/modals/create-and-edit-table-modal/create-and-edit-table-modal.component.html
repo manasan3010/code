@@ -1,0 +1,234 @@
+<div class="container-fluid m-0 p-0 model-header">
+  <div class="title-container d-flex">
+    <div style="line-height: 3;" class="px-2">
+      <mat-icon fontSet="fas"
+                [fontIcon]="tableModelType === TABLE_MODEL_TYPE.EDIT_TABLE_TYPE ? 'fa-edit' : tableModelType === TABLE_MODEL_TYPE.CREATE_TABLE_TYPE ?  'fa-plus-square' : tableModelType === TABLE_MODEL_TYPE.CREATE_TABLE_TYPE ?'fa-superscript': ''"></mat-icon>
+    </div>
+    <div>
+      <h6
+        class="m-auto">{{tableModelType === TABLE_MODEL_TYPE.EDIT_TABLE_TYPE ? 'Edit' : tableModelType === TABLE_MODEL_TYPE.CREATE_TABLE_TYPE ? 'Create' : tableModelType === TABLE_MODEL_TYPE.CREATE_TABLE_TYPE ? 'Edit Allocated' : ''}}
+        Table</h6>
+    </div>
+  </div>
+</div>
+<div class="main-Container container-fluid d-flex m-0 p-2" [style.height.px]="componentHeight">
+  <div class="right-area p-0 mr-2 " id="rightPanel-M">
+    <div class="panel" id="shape-panel">
+      <div class="panel-header d-flex">
+        <div class="panel-header-image mr-1">
+          <i class="fas fa-shapes"></i>
+        </div>
+        Table Shapes
+      </div>
+      <div class="panel-content">
+        <div class="row m-0">
+          <div class="panel-list-item" *ngFor="let shape of shapeTools" (click)="onShapeChange(shape.type);"
+               [ngClass]="{'selectedDiv': selectedShape && (selectedShape === shape.type)}">
+            {{shape.name}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header d-flex">
+        <div class="panel-header-image mr-1">
+          <i class="fas fa-tools"></i>
+        </div>
+        Properties
+      </div>
+      <div class=" panel-content" [style.height.px]="propertyPanelHeight">
+        <div class=" container-fluid " style="padding-left: 8px;">
+          <form  class="inputForm pt-2" [formGroup]="tablePropertiesFG">
+          <div class="row m-0 ">
+            <div class="col-sm-6 col-md-6 p-0 inputLabel">
+              <label class="inputLabel">Name</label>
+            </div>
+            <div class="col-sm-5 col-md-5 p-0 text-center">
+              <div class="input-group w-80">
+                <input formControlName="name" autocomplete="off" type="text" name="tableName" class="form-control">
+              </div>
+            </div>
+            <mat-error *ngIf="nameError" style="font-size: 8px; padding-left: 125px;">Name already exists!</mat-error>
+          </div>
+          <div class="row m-1 ">
+            <div class="col-sm-6 col-md-6 p-0 inputLabel">
+              <label class="inputLabel">Seat Count</label>
+            </div>
+            <div class="col-sm-5 col-md-5 p-0 text-center">
+              <div class="input-group w-80">
+                <div class="input-group-prepend">
+                    <span class="input-group-text add-bt-left"
+                          (click)="onInputDown('#seatCount', BUTTON_CLICK_TYPE.seatCountChange)">
+                      <mat-icon>remove</mat-icon>
+                    </span>
+                </div>
+                <input formControlName="seatCount"  type="number" id="seatCount"  name="seatCount" class="form-control">
+                <div class="input-group-append">
+                    <span class="input-group-text add-bt-right"
+                          (click)="onInputUp('#seatCount', BUTTON_CLICK_TYPE.seatCountChange)">
+                      <mat-icon>add</mat-icon>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-0 "  *ngIf='!!table.shape && (table.shape.type !== shapeType.CIRCLE)'>
+            <div class="col-sm-6 col-md-6 p-0 inputLabel">
+              <label class="inputLabel">Length</label>
+            </div>
+            <div class="col-sm-5 col-md-5 p-0 text-center">
+              <div class="input-group w-80">
+                <div class="input-group-prepend">
+                    <span class="input-group-text add-bt-left"
+                          (click)="onInputDown('#tableLength', BUTTON_CLICK_TYPE.lengthChange)">
+                      <mat-icon>remove</mat-icon>
+                    </span>
+                </div>
+                <input formControlName="tableLength"  type="number" id="tableLength"  name="seatCount" class="form-control">
+                <div class="input-group-append">
+                    <span class="input-group-text add-bt-right"
+                          (click)="onInputUp('#tableLength', BUTTON_CLICK_TYPE.lengthChange)">
+                      <mat-icon>add</mat-icon>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-0 "  *ngIf='!!table.shape && (table.shape.type !== shapeType.CIRCLE)'>
+            <div class="col-sm-6 col-md-6 p-0 inputLabel">
+              <label class="inputLabel">Width</label>
+            </div>
+            <div class="col-sm-5 col-md-5 p-0 text-center">
+              <div class="input-group w-80">
+                <div class="input-group-prepend">
+                    <span class="input-group-text add-bt-left"
+                          (click)="onInputDown('#tableWidth', BUTTON_CLICK_TYPE.widthChange)">
+                      <mat-icon>remove</mat-icon>
+                    </span>
+                </div>
+                <input formControlName="tableWidth"  type="number" id="tableWidth"  name="tableWidth" class="form-control">
+                <div class="input-group-append">
+                    <span class="input-group-text add-bt-right"
+                          (click)="onInputUp('#tableWidth', BUTTON_CLICK_TYPE.widthChange)">
+                      <mat-icon>add</mat-icon>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-0 "  *ngIf='!!table.shape && (table.shape.type === shapeType.CIRCLE)'>
+            <div class="col-sm-6 col-md-6 p-0 inputLabel">
+              <label class="inputLabel">Radius</label>
+            </div>
+            <div class="col-sm-5 col-md-5 p-0 text-center">
+              <div class="input-group w-80">
+                <div class="input-group-prepend">
+                    <span class="input-group-text add-bt-left"
+                          (click)="onInputDown('#tableRadius', BUTTON_CLICK_TYPE.radiusChange)">
+                      <mat-icon>remove</mat-icon>
+                    </span>
+                </div>
+                <input formControlName="tableRadius"  type="number" id="tableRadius"  name="tableRadius" class="form-control">
+                <div class="input-group-append">
+                    <span class="input-group-text add-bt-right"
+                          (click)="onInputUp('#tableRadius', BUTTON_CLICK_TYPE.radiusChange)">
+                      <mat-icon>add</mat-icon>
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row m-0 " *ngIf="tableModelType === TABLE_MODEL_TYPE.EDIT_ALLOCATED_TABLE">
+            <div class="col-sm-6 col-md-6 p-0 inputLabel">
+              <label class="inputLabel">Price Band</label>
+            </div>
+            <div class="col-sm-5 col-md-5 p-0 text-center">
+              <div class="input-group">
+                <select formControlName="priceBand" name="priceBand" id="seatPriceBand"
+                        class="form-control form-control-sm">
+                  <option *ngFor="let priceBand of priceBands" [value]="priceBand.id">
+                    <div class="d-flex m-0">
+                      <div style="width: 80%;">
+                        {{priceBand.name}}
+                      </div>
+                      <div style="width: 20%;" class="color-display-container">
+                        <div class="color-display" [ngStyle]="{'background-color': priceBand.color}">
+                        </div>
+                      </div>
+                    </div>
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row m-0 ">
+            <div class="col-sm-6 col-md-6 p-0 inputLabel">
+              <label class="inputLabel">Share type</label>
+            </div>
+            <div class="col-sm-5 col-md-5 p-0 text-center">
+              <div class="input-group">
+                <select formControlName="shareType" name="priceBand" id="shareType"
+                        class="form-control form-control-sm" style="text-transform: capitalize !important;">
+                  <option value="0">facility</option>
+                  <option value="1">venue</option>
+                  <option value="2">config</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-area">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         appCreateTable
+         [table]='table'
+         [tableProperties]="tableProperties"
+         [seatDiameter]="seatDiameter"
+         (maxSeatCount)='maxSeatCountChange($event)'
+         (tableData)="onTableChange($event)">
+
+      <defs>
+        <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+        </pattern>
+        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+          <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <defs>
+        <pattern id="smallRuler" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+        </pattern>
+        <pattern id="ruler" width="100" height="100" patternUnits="userSpaceOnUse">
+          <rect width="100" height="100" fill="url(#smallRuler)"></rect>
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <defs>
+        <pattern id="pattern_non_seating" patternUnits="userSpaceOnUse" width="11.5" height="11.5"
+                 patternTransform="rotate(45)">
+          <line x1="0" y="0" x2="0" y2="11.5" stroke="#000000" stroke-width="3"/>
+        </pattern>
+      </defs>
+      <g *ngIf="!!setting" [ngSwitch]="setting.rulerType">
+        <g *ngSwitchCase="RULER_TYPE.GRID">
+          <rect width="100%" height="100%" fill="url(#grid)"></rect>
+        </g>
+        <g *ngSwitchCase="RULER_TYPE.RULER">
+          <rect width="100%" height="10px" fill="url(#ruler)"></rect>
+          <rect width="10px" height="100%" fill="url(#ruler)"></rect>
+        </g>
+      </g>
+      <g id="shapeGroup">
+      </g>
+    </svg>
+  </div>
+  <div class="col text-right p-0 button-group">
+    <button mat-flat-button class="default-button mr-2" (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button class="default-button" (click)="onSave()"  [disabled]="table.shape === undefined || !isFormValid">Save</button>
+  </div>
+</div>

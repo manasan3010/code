@@ -1,0 +1,117 @@
+@import "../../../../../color-theme";
+@import "../../../../../helper";
+
+.model-header {
+  height: 40px !important;
+
+  .icon-container {
+    position: relative;
+    background-color: $hover-bgcolor;
+
+    .mat-icon {
+      color: $hover-color;
+      @include content-center();
+      @include md-icon-size(20px)
+    }
+  }
+
+  .title-container {
+    padding-left: 10px !important;
+
+    h6 {
+      line-height: 40px !important;
+    }
+  }
+}
+
+
+.svg-view-container {
+  border-right: 0.5px solid #dedededd;
+
+  svg {
+    background-color: transparent !important;
+    height: 360px !important;
+  }
+}
+
+.main-container {
+  height: 360px !important;
+
+  .data-container {
+    height: 360px !important;
+
+    .search-inputBox {
+      position: relative;
+      border: 1px solid #dfe1e5;
+      border-radius: 22px;
+      margin: 3px;
+
+      .search-icon {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        @include md-icon-size(15px);
+        transform: translateY(-50%);
+      }
+
+      .search-button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        color: $hover-bgcolor;
+        @include md-icon-size(18px);
+        transform: translateY(-50%);
+      }
+    }
+
+    .search-inputBox :hover {
+      border-radius: 22px;
+      border: 1px solid #dfe1e5;
+      margin: 0;
+      box-shadow: 0 0 3px -3px rgba(223, 225, 229, 0.8);
+    }
+
+    .search-input {
+      border: none;
+      background-color: transparent;
+      padding: 8px 15px;
+      box-sizing: border-box;
+      font-size: 12px;
+      height: var(--searchbox-height);
+      opacity: 1;
+      position: relative;
+      transition: none;
+    }
+
+    .facility-list-container {
+      .active {
+        background-color: #f2f2f2 !important;
+        border-color: #e0e0e0;
+        border-left: 2px solid $hover-bgcolor;
+      }
+
+      margin-top: 10px !important;
+
+      .f-list-item {
+        cursor: pointer;
+        padding: 5px 15px;
+        //border-left: 2px solid $hover-bgcolor;
+        //border-bottom: 1px solid #dfe1e5;
+        margin: 1px 0;
+      }
+    }
+  }
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.noSelectedShape {
+  @include content-center();
+  font-size: 20px;
+  font-weight: bold;
+  color: $default-color;
+}

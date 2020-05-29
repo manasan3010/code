@@ -1,0 +1,93 @@
+<div class="flex-container">
+  <div class="left-panel" [ngSwitch]="venueToggleView">
+
+    <div class="toggle-container" *ngSwitchCase="VENUETOGGLE.MAP">
+      <agm-map [latitude]="selectedVenue.latitude" [longitude]="selectedVenue.longitude" [zoom]='mapZoom'>
+        <agm-marker [latitude]="selectedVenue.latitude" [longitude]="selectedVenue.longitude"></agm-marker>
+      </agm-map>
+    </div>
+
+    <div class="toggle-container " *ngSwitchCase="VENUETOGGLE.IMAGE" [ngClass]="isToggle ? 'venue-image-container' : 'image-container'" [ngStyle]="{ 'background-image': 'url(' + startingImg + ')'}" (click)="openDialog()">
+    </div>
+
+    <div class="toggle-container" *ngSwitchCase="VENUETOGGLE.INFO">
+      <div class="info-container">
+        <div class="info">
+          <mat-icon>language</mat-icon>
+          <div class="info-content"><a href="{{selectedVenue.url}}"> {{selectedVenue.url}} </a></div>
+        </div>
+        <div class="info">
+          <mat-icon>home_work</mat-icon>
+          <div class="info-content">{{selectedVenue.direction}}</div>
+        </div>
+        <div class="info">
+          <mat-icon>email</mat-icon>
+          <div class="info-content"><a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to={{selectedVenue.email}}" target="_blank"> {{selectedVenue.email}} </a></div>
+        </div>
+        <div class="info">
+          <mat-icon>call</mat-icon>
+          <div class="info-content">{{selectedVenue.telephone}}</div>
+        </div>
+        <div class="info">
+          <mat-icon>textsms</mat-icon>
+          <div class="info-area">{{selectedVenue.description}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class='map-toggle-buttton' *ngIf="isToggle">
+      <mat-button-toggle-group class="map-toggle-buttton-group" [value]="venueToggleView" (change)='mapToggle($event)'>
+        <mat-button-toggle [value]="VENUETOGGLE.IMAGE" *ngIf="selectedVenue.image">
+          <mat-icon fontSet="fa" fontIcon="fa-image"></mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle [value]="VENUETOGGLE.MAP">
+          <mat-icon fontSet="fa" fontIcon="fa-map-marker-alt"></mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle [value]="VENUETOGGLE.INFO">
+          <mat-icon fontSet="fa" fontIcon="fa-info"></mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <div class="right-panel-content">
+      <div class="right-panel-content-header">
+        <h3>
+          Create a New Venue Map
+        </h3>
+      </div>
+
+      <div class="searchbar-container">
+        <div class="d-flex justify-content-center">
+          <div class="searchbar">
+            <input class="search_input" [(ngModel)]="searchText" type="text" placeholder="Search Venue..." name='searchText'>
+            <a class="search_icon">
+              <mat-icon>search</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="venue-list-container" *ngIf="isVenueLoaded">
+        <div class="venue-list" *ngFor="let i of venues | filter : searchText" (click)="onSelect(i)" [ngClass]="{'selectedVenue': selectedVenue.id === i.id}">
+          <mat-icon>location_on</mat-icon>
+          <div>{{i.name}}</div>
+        </div>
+      </div>
+
+      <div class="venue-list-container spinner" *ngIf="!isVenueLoaded">
+        <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner>
+      </div>
+
+      <mat-form-field class="center-input" appearance="standard">
+        <input matInput #venueMapNameInput='matInput' placeholder="Select a Venue" [(ngModel)]="venueMapName" name="VenueMapName" autofocus>
+      </mat-form-field>
+
+      <div class="modal-buttons">
+        <button mat-flat-button class="default-button mr-2" color="warn" (click)="dialogRef.close()">Cancel</button>
+        <button mat-flat-button class="default-button"  color="primary" [disabled]="!selectedVenue.id" cdkFocusInitial (click)="confirm()">Conform</button>
+      </div>
+    </div>
+  </div>
+</div>

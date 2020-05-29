@@ -1,0 +1,156 @@
+<div class="container-fluid position-relative" xmlns:svg="">
+  <div class="main-container row m-0 p-0 othershapes" [style.height.px]="componentHeight">
+
+    <div class="shapeArea">
+      <div class="shapeType">
+
+        <i class="material-icons shapesIcon">crop_landscape</i>
+        <div>
+          Shapes
+        </div>
+      </div>
+      <div class="shapes">
+        <div class="shape" *ngFor="let shape of ShapeTools" (click)="shapeSelect(shape.type)"
+          [ngClass]="{'selectedDiv': (selectedShape === shape.type)}">
+          <div class="w-100 bd-highlight shapeName">{{shape.name}}</div>
+          <div class="px-2 flex-shrink-1 bd-highlight icons">
+            <mat-icon> {{shape.icon}}</mat-icon>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="shapeProperty" *ngIf="isShapeSelected"> <i class="material-icons shapesIcon">featured_video</i>
+
+        <div>
+          Shapes Property
+        </div>
+      </div>
+      <div class="inputs" *ngIf="isShapeSelected">
+        <div class="row m-0 p-2 dimension" style="padding-top: 10px">
+          <div class=" pl-0 col-3 inputWidth" style="line-height: 3">
+            <label for="Width" class="widthLabel"> Width</label>
+            <button class="decrease" (click)="changeWidth('decrease')"><i class="material-icons minusIcon">
+                remove
+              </i></button>
+            <input [(ngModel)]="propertyAttributes.length" name="Height" class="widthValue" min="0" type="number"
+              (ngModelChange)="resizeTables('resize')">
+            <button class="plus" (click)="changeWidth('increase')">
+              <i class="material-icons plusIcon">
+                add
+              </i></button>
+          </div>
+
+        </div>
+        <div class="  row m-0 p-1 dimension">
+          <div class=" pr-0 col-3 inputHeight" style="line-height:3">
+            <label for="Height" class="heightLabel"> Height</label>
+            <button class="decrease" (click)="changeHeight('decrease')"><i class="material-icons minusIcon">
+                remove
+              </i></button>
+            <input [(ngModel)]="propertyAttributes.height" name="Height" class="heightValue" min="0" type="number"
+              (ngModelChange)="resizeTables('resize')">
+            <button class="plus" (click)="changeHeight('increase')">
+              <i class="material-icons plusIcon">
+                add
+              </i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolsBox ml-2 mb-2">
+      <div class="tools">
+        <button mat-icon-button (click)="controlSelect(CONTROLS.SELECT)">
+          <mat-icon class="tool">near_me</mat-icon>
+        </button>
+        <button mat-icon-button (click)="controlSelect(CONTROLS.MERGE_SHAPES)">
+          <mat-icon class="tool" fontSet="fas" fontIcon="fa-object-group"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="onFlipX()">
+          <mat-icon class="tool">flip</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onFlipY()">
+          <mat-icon class="rotateIcon tool">flip</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteSelectedShape()">
+          <mat-icon class="tool">delete</mat-icon>
+        </button>
+        <div class=" p-0 col-3 toolColorPicker " style="line-height: 3">
+          <input class="colorPicker" [value]="shapeStyle.fillColor" [style.background]="shapeStyle.fillColor"
+            [cpOutputFormat]="'rgba'" [(colorPicker)]="shapeStyle.fillColor" (cpSliderChange)='colorChange()'
+            [cpPosition]="'top-right'" />
+        </div>
+
+      </div>
+    </div>
+    <div class="SVGArea mb-2 ">
+      <svg #mainSvg id="mainSvg" class="drawingArea" xmlns="http://www.w3.org/2000/svg" appCommonFunction
+        [shapeStyle]="shapeStyle" [canAddProperty]="false" (shapeData)="shapeChange($event)"
+        [shapeDimension]="shapesize">
+        <defs>
+          <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="black" stroke-width="0.5"></path>
+          </pattern>
+          <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="black" stroke-width="1"></path>
+          </pattern>
+        </defs>
+        <defs>
+          <pattern id="smallRuler" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5"></path>
+          </pattern>
+          <pattern id="ruler" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="url(#smallRuler)"></rect>
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="1"></path>
+          </pattern>
+        </defs>
+        <g *ngIf="!!setting" [ngSwitch]="setting.rulerType">
+          <g *ngSwitchCase="RULERTYPE.GRID">
+            <rect width="100%" height="100%" fill="url(#grid)"></rect>
+          </g>
+          <g *ngSwitchCase="RULERTYPE.RULER">
+            <rect width="100%" height="10px" fill="url(#ruler)"></rect>
+            <rect width="10px" height="100%" fill="url(#ruler)"></rect>
+          </g>
+        </g>
+        <svg:g id="shapeGroup">
+        </svg:g>
+
+      </svg>
+      <div class='headerText'>
+        <div class="position-relative">
+          <div class="d-flex justify-content-between"> 
+            <div>
+              <div class="otherStructureName d-flex" >
+                <mat-form-field [ngStyle]="{'width.px': otherStructureTextWidth}">
+                  <input matInput spellcheck="false" type="text" (input)="resizeText()" [(ngModel)]="facilityName" matTooltip="{{facilityName}}" [readonly]="!editName"  (click)="atStart()" (clickOutside)="cancelEdit()" />
+                  <span #hiddenText style="visibility: hidden; white-space: pre;">{{facilityName}}</span>
+                </mat-form-field>
+                <div class="btn-action-group d-flex pointer" *ngIf="editName">
+
+                  <div class="action-btn" (click)="onSaveName()">
+                    <i class="material-icons">done</i>
+                  </div>
+                  <div class="action-btn" (click)="cancelEdit()">
+                    <i class="material-icons">close</i>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <span>1square:10m</span>
+            <!-- <span>{{shapeWidthandHeight.width}} x {{shapeWidthandHeight.height}}</span> -->
+          </div>
+        </div>
+      </div>
+      <div class="confirm-button">
+        <button mat-flat-button class="default-button mr-2" (click)="onClose()">Cancel</button>
+        <button mat-flat-button class="default-button" (click)="onSave()">Save</button>
+      </div>
+    </div>
+
+
+  </div>
+</div>
