@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_cash" value="name:receiptID;datatype:int,name:date;datatype:date,name:Reservedfrom;datatype:string,name:amount;datatype:real,name:reason;datatype:string,name:amountword;datatype:string" />
+</info>

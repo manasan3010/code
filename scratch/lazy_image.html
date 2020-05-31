@@ -1,0 +1,59 @@
+<style>
+    .div1 {
+
+        margin: 25vh auto;
+        height: 50%;
+        width: 50%;
+        background-color: hsla(207, 86%, 27%, 0.856);
+    }
+
+    body {
+        margin: 0;
+    }
+
+    img {
+        width: 400px;
+        height: 400px;
+        display: block;
+    }
+</style>
+
+<!-- <div class="div1"></div> -->
+
+<script> window.onload = function () {
+imgCount = 0
+        html = ''
+        for (var i = 0; i < 10; i++) {
+            html += `<img data-src=\"https://i.picsum.photos/id/${Math.floor(Math.random()*1000)}/30/30.jpg\"> `;
+        }
+
+        document.body.innerHTML = html
+        options = {}
+
+        observer = new IntersectionObserver((entries, observer) => {
+            console.log(imgCount)
+            if (imgCount < 3) {
+                    document.body.insertAdjacentHTML( 'beforeend',`<img data-src=\"https://i.picsum.photos/id/${Math.floor(Math.random()*1000)}/30/30.jpg\"> `); 
+                    
+                    observer.observe(document.querySelector('img:last-child'))
+                    imgCount++;
+                }
+
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                entry.target.setAttribute('src', entry.target.getAttribute('data-src'))
+                observer.unobserve(entry.target)
+                imgCount--
+
+            })
+        }, options)
+
+
+        images = document.querySelectorAll('img')
+        images.forEach(element => {
+            observer.observe(element)
+            imgCount++;
+        });
+
+    }</script>

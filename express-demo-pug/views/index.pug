@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome5 to #{title}
+  form(action="/", method="POST")
+    input(type="email", placeholder="Enter your Email address" required name="lead_email")
+    button#red.der.io(type="submit" ) Submit For All!!! 

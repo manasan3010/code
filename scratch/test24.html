@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Movable and Re-sizable Raphael JS Shape</title>
+</head>
+
+<body>
+
+    <div id="paper"></div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.js"></script>
+    <!-- 
+    <script>
+        /**
+      *  GETTER / SETTER METHOD(s)
+      * */
+        getX(rect, ddx) {
+            var width = rect.paper.width,
+                thisBox = rect.getBBox();
+
+            if (ddx < 0) {
+                ddx = 0;
+            } else if (ddx > width - thisBox.width) {
+                ddx = width - thisBox.width;
+            }
+
+            return ddx;
+        }
+
+        getY(rect, ddy) {
+            var height = rect.paper.height,
+                thisBox = rect.getBBox();
+
+            if (ddy < 0) {
+                ddy = 0;
+            } else if (ddy > height - thisBox.height) {
+                ddy = height - thisBox.height;
+            }
+
+            return ddy;
+        }
+
+        getWidth(rect, ddw) {
+            var width = rect.paper.width,
+                thisBox = rect.getBBox();
+
+            if (ddw < 45) {
+                ddw = 45;
+            } else if (ddw > width - thisBox.x) {
+                ddw = width - thisBox.x;
+            }
+
+            return ddw;
+        }
+
+        getHeight(rect, ddh) {
+            var height = rect.paper.height,
+                thisBox = rect.getBBox();
+
+            if (ddh < 45) {
+                ddh = 45;
+            } else if (ddh > height - thisBox.y) {
+                ddh = height - thisBox.y;
+            }
+
+            return ddh;
+        }
+
+        /**
+         * RAPHAEL EVENT(s)
+         * */
+        dragStart() {
+            this.ox = this.attr('x');
+            this.oy = this.attr('y');
+            this.ow = this.attr('width');
+            this.oh = this.attr('height');
+            this.dragging = true;
+        }
+
+        dragMove(dx, dy) {
+            var ddx = this.ox + dx;
+            var ddy = this.oy + dy;
+
+            switch (this.attr('cursor')) {
+                case 'nw-resize':
+                    this.attr({
+                        x: getX(this, ddx),
+                        y: getY(this, ddy),
+                        width: getWidth(this, this.ow - dx),
+                        height: getHeight(this, this.oh - dy)
+                    });
+                    break;
+                case 'ne-resize':
+                    this.attr({
+                        y: getY(this, ddy),
+                        width: getWidth(this, this.ow + dx),
+                        height: getHeight(this, this.oh - dy)
+                    });
+                    break;
+                case 'se-resize':
+                    this.attr({
+                        width: getWidth(this, this.ow + dx),
+                        height: getHeight(this, this.oh + dy)
+                    });
+                    break;
+                case 'sw-resize':
+                    this.attr({
+                        x: getX(this, ddx),
+                        width: getWidth(this, this.ow - dx),
+                        height: getHeight(this, this.oh + dy)
+                    });
+                    break;
+                case 'w-resize':
+                    this.attr({
+                        x: getX(this, ddx, this.ow - dx),
+                        width: getWidth(this, this.ow - dx)
+                    });
+                    break;
+                case 'e-resize':
+                    this.attr({
+                        width: getWidth(this, this.ow + dx)
+                    });
+                    break;
+                case 's-resize':
+                    this.attr({
+                        height: getHeight(this, this.oh + dy)
+                    });
+                    break;
+                case 'n-resize':
+                    this.attr({
+                        y: getY(this, ddy),
+                        height: getHeight(this, this.oh - dy)
+                    });
+                    break;
+                default:
+                    this.attr({
+                        x: getX(this, ddx),
+                        y: getY(this, ddy)
+                    });
+                    break;
+            }
+        }
+
+        dragEnd(e) {
+            this.dragging = false;
+        }
+
+        changeCursor(e, mouseX, mouseY) {
+            if (this.dragging === true) {
+                return;
+            }
+
+            var relativeX = mouseX - ($('#paper').offset().left) - this.attr('x');
+            var relativeY = mouseY - ($('#paper').offset().top) - this.attr('y');
+            var shapeWidth = this.attr('width');
+            var shapeHeight = this.attr('height');
+            var resizeBorder = 10;
+
+            if (relativeX < resizeBorder && relativeY < resizeBorder) {
+                this.attr('cursor', 'nw-resize');
+            } else if (relativeX > shapeWidth - resizeBorder && relativeY < resizeBorder) {
+                this.attr('cursor', 'ne-resize');
+            } else if (relativeX > shapeWidth - resizeBorder && relativeY > shapeHeight - resizeBorder) {
+                this.attr('cursor', 'se-resize');
+            } else if (relativeX < resizeBorder && relativeY > shapeHeight - resizeBorder) {
+                this.attr('cursor', 'sw-resize');
+            } else if (relativeX < resizeBorder && relativeY < shapeHeight - resizeBorder) {
+                this.attr('cursor', 'w-resize');
+            } else if (relativeX > shapeWidth - resizeBorder && relativeY < shapeHeight - resizeBorder) {
+                this.attr('cursor', 'e-resize');
+            } else if (relativeX > resizeBorder && relativeY > shapeHeight - resizeBorder) {
+                this.attr('cursor', 's-resize');
+            } else if (relativeX > resizeBorder && relativeY < resizeBorder) {
+                this.attr('cursor', 'n-resize');
+            } else {
+                this.attr('cursor', 'move');
+            }
+        }
+    </script> -->
+
+
+    <script type="text/javascript" src="raphael.free_transform.js"></script>
+
+    <div id="holder" style="height: 100%;"></div>
+    <input type="file" name="" id="svgf" accept="image/svg+xml">
+
+    <script type="text/javascript">
+
+        var target = document.getElementById("svgf");
+        var fr = new FileReader();
+        fr.onload = function (e) {
+            target.data = this.result;
+            console.log(target.data)
+        };
+
+        var paper = Raphael(110, 110, 500, 500);
+
+        var rect = paper
+            .rect(200, 200, 100, 100)
+            .attr('fill', '#f00');
+
+        // // Add freeTransform
+        // var ft = paper.freeTransform(rect);
+
+        // // Hide freeTransform handles
+        // ft.hideHandles();
+
+        // // Show hidden freeTransform handles
+        // ft.showHandles();
+
+        // // Apply transformations programmatically
+        // ft.attrs.rotate = 45;
+
+        // ft.apply();
+
+        // // Remove freeTransform completely
+        // ft.unplug();
+
+        // // Add freeTransform with options and callback
+        ft = paper.freeTransform(rect, { keepRatio: true, draw: 'bbox' }, function (ft, events) {
+            console.log(ft.attrs);
+        });
+
+        // // Change options on the fly
+        // ft.setOpts({ keepRatio: false });
+
+        var rect2 = paper
+            .path("M220 110 l10 20 l50 30")
+            .attr('fill', '#f00')
+            .attr('stroke', '#f00')
+
+        // Add freeTransform
+        // var ft2 = paper.freeTransform(rect2);
+
+        // // Hide freeTransform handles
+        // ft2.hideHandles();
+
+        // Show hidden freeTransform handles
+        // ft2.showHandles();
+
+
+        ft2 = paper.freeTransform(rect2, { draw: 'bbox' }, function (ft2, events) {
+            console.log(ft2.attrs);
+        });
+        // // Apply transformations programmatically
+        // ft2.attrs.rotate = 45;
+
+        // ft2.apply();
+
+        // // Remove freeTransform completely
+        // ft2.unplug();
+
+        // Add freeTransform with options and callback
+
+
+        // // Change options on the fly
+        // ft2.setOpts({ keepRatio: false });
+
+        var rect3 = paper
+            .circle(200, 200, 100)
+            .attr('fill', '#00f');
+
+
+        ft3 = paper.freeTransform(rect3, { draw: 'bbox' }, function (ft2, events) {
+            console.log(ft2.attrs);
+        });
+        var rect4 = paper
+            .rect(200, 200, 200, 100)
+            .attr('fill', '#00f');
+
+
+        ft4 = paper.freeTransform(rect4, { draw: 'bbox' }, function (ft2, events) {
+            console.log(ft4.attrs)
+        });
+    </script>
+
+</body>
+
+</html>

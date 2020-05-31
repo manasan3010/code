@@ -1,0 +1,250 @@
+"Akamai Technologies",,20940,Open,Content,Global,"10 Tbps+","Heavy Outbound",192,98
+"Limelight Networks Global",llnw.net,22822,Selective,Content,Global,"1 Tbps+","Mostly Outbound",100,61
+BBC,"BBC, BBC Internet Services",2818,Open,Content,Global,"100-200 Gbps","Heavy Outbound",9,7
+Rackspace,"36248, 45187, 58683, 15395, 27357, 33070, 19994",12200,Open,Content,Global,"100-200 Gbps","Heavy Outbound",9,6
+Yahoo!,"Yahoo! , Oath Global Network , Verizon Media",10310,Selective,Content,Global,,"Mostly Outbound",162,56
+YellowBrix,,18740,Open,Content,Regional,20-100Mbps,"Heavy Outbound",0,0
+"Kewlio.net Limited",Kewlio,3344,Open,Content,Europe,100-1000Mbps,Balanced,0,3
+Easyhost,,28747,Selective,Content,Europe,1-5Gbps,"Mostly Outbound",0,1
+"Bebo, Inc.",,36168,Open,Content,Global,1-5Gbps,"Heavy Outbound",0,0
+wan2many,,29608,Open,Content,Europe,1-5Gbps,Balanced,3,7
+"METANET AG",METANET,21069,Open,Content,Europe,10-20Gbps,"Mostly Outbound",2,2
+"rh-tec Business GmbH",,25560,Open,Content,Regional,1-5Gbps,"Mostly Outbound",1,5
+"M6 Web",,30972,Open,Content,Europe,"100-200 Gbps","Heavy Outbound",2,2
+Giganews,,30094,Open,Content,Global,"100-200 Gbps","Heavy Outbound",5,4
+"AdJuggler, Inc.","Thruport Technologies",15266,Open,Content,"North America",100-1000Mbps,"Mostly Outbound",0,1
+DataPipe,"AS14492 US-East, AS22205 US-West, AS16805 US-Mid, AS24778 London, AS24043 Hong Kong",14492,Open,Content,Global,1-5Gbps,Balanced,6,10
+"Novia Internetworking",,4306,Open,Content,"North America",1-5Gbps,"Heavy Outbound",0,1
+Namecheap,,22612,Open,Content,"North America",5-10Gbps,"Mostly Outbound",1,0
+Headlight,,6666,Open,Content,Europe,100-1000Mbps,"Mostly Outbound",0,7
+"ratiokontakt GmbH",,8741,Open,Content,Europe,100-1000Mbps,"Mostly Outbound",5,2
+"Secura Hosting Ltd",Secura,29452,Open,Content,Europe,1-5Gbps,"Mostly Outbound",2,1
+"UNITED COLO GmbH / NGZ-Server.de",unitedolo.de,13301,Open,Content,Europe,5-10Gbps,"Mostly Outbound",0,1
+"Reflex Internet",,29444,Open,Content,Europe,20-100Mbps,Balanced,0,1
+NuCDN,"NuCDN LLC, BelugaCDN LLC",23393,Selective,Content,Global,,"Mostly Outbound",16,13
+"B33f Networks",,12528,Open,Content,Europe,20-100Mbps,"Mostly Outbound",0,0
+SdV,"SdV Plurimedia",8839,Selective,Content,Europe,10-20Gbps,"Heavy Outbound",5,4
+PPR,,15422,Open,Content,Global,5-10Gbps,"Mostly Outbound",2,2
+"Priority Colo AS30176",PCOLO,30176,Open,Content,"North America",5-10Gbps,"Mostly Outbound",1,3
+"International Data Group",,25443,Open,Content,Europe,100-1000Mbps,"Heavy Outbound",0,0
+"The Planet Internet Services",,21844,Restrictive,Content,Global,"50-100 Gbps","Mostly Outbound",0,0
+"Flexential Internet Services","13845, 18565, 10628, 19947, 29699, 32868, 19271",13649,Restrictive,Content,"North America","50-100 Gbps","Mostly Outbound",0,21
+DreamHost,"New Dream Network, LLC",26347,Open,Content,Global,"20-50 Gbps","Heavy Outbound",1,0
+Pricegrabber.com,,26108,Open,Content,Regional,20-100Mbps,"Mostly Outbound",0,0
+"Altopia Corporation",alt.net,6456,Open,Content,Global,,Balanced,4,1
+"Affinity Internet, Inc.","gate.com, ValueWeb, SkyNetWeb, BigStep, CyberGate",3064,Open,Content,Global,1-5Gbps,"Heavy Outbound",0,0
+GoDaddy,,26496,Selective,Content,Global,"50-100 Gbps","Mostly Outbound",4,6
+Conversant,"Mediaplex, Commission Junction, FastClick, Dotomi, ValueClick, SET.tv, 41041, 26762, 19834",25751,Open,Content,Regional,,Balanced,10,4
+"Google LLC","Google, YouTube (for Google Fiber see AS16591 record)",15169,Open,Content,Global,,"Mostly Outbound",205,117
+"IRC Hispano",,29117,Open,Content,Global,,"Mostly Outbound",1,0
+Netflix,,2906,Open,Content,Global,"10 Tbps+","Heavy Outbound",170,69
+"Speedbone GmbH",SPEEDBONE-AS,15657,Open,Content,Europe,5-10Gbps,"Mostly Outbound",3,1
+"Eaton Kaye Ltd",,34746,Open,Content,Europe,"0-20 Mbps","Mostly Outbound",1,1
+"Exponential Interactive, Inc.","Tribal Fusion, FullTango, Firefly Video, Adotube, Appsnack",33419,Open,Content,"North America",,Balanced,3,4
+"Sungard Availability Services (Europe)","Comdisco, ixGuardian, Hosting 365 (IE)",15533,Open,Content,Europe,5-10Gbps,Balanced,3,4
+"Web Age Ltd",,34243,Open,Content,Europe,20-100Mbps,"Mostly Outbound",0,2
+"GCIS Inc.","Stable Networks",36472,Open,Content,"North America",20-100Mbps,Balanced,0,0
+"American Internet Services, LLC","American Digital Network / ADNC / AIS / WebCC",6130,Open,Content,Regional,5-10Gbps,Balanced,3,3
+"NetNation Communications Inc.","Hostway Canada Inc.",14280,Open,Content,Regional,1-5Gbps,"Mostly Outbound",2,2
+"IP2 Internet B.V.",,34486,Open,Content,Europe,20-100Mbps,Balanced,2,1
+"iomart - Asia/Middle East",,25108,Open,Content,Europe,20-100Mbps,"Mostly Outbound",1,3
+"QSC AG Colocation","formerly IP Exchange GmbH",15598,Open,Content,Europe,"20-50 Gbps","Mostly Outbound",4,5
+Openminds,,30961,Restrictive,Content,Europe,1-5Gbps,"Mostly Outbound",0,2
+"domainfactory GmbH",,34011,Open,Content,Regional,10-20Gbps,"Mostly Outbound",2,0
+"Hudson Digital",,33472,Open,Content,Regional,20-100Mbps,"Mostly Outbound",1,2
+"eBay Inc.",eBay,11643,Selective,Content,"North America",,"Heavy Outbound",0,0
+"Sony Online Entertainment Inc.",,13720,Selective,Content,Global,5-10Gbps,"Mostly Outbound",0,0
+"InterServer, Inc",NJIIX,19318,Open,Content,Regional,"100-200 Gbps",Balanced,3,2
+NCSoft,"NC Interactive, NCWest",30588,Open,Content,Global,"20-50 Gbps","Heavy Outbound",0,2
+"Central Host, Inc.",,26458,Open,Content,"North America",1-5Gbps,"Heavy Outbound",0,5
+"Vone Services Ltd",,8276,Open,Content,Regional,"0-20 Mbps","Mostly Outbound",0,1
+"Netegral Limited",,34623,Open,Content,Europe,"0-20 Mbps","Mostly Outbound",0,1
+"Rack Sense Ltd",,34706,Selective,Content,Europe,20-100Mbps,"Mostly Outbound",0,2
+"SpeedPartner GmbH",,34225,Open,Content,Europe,100-1000Mbps,"Mostly Outbound",2,8
+"LeaseWeb Network",,16265,Selective,Content,Global,,"Heavy Outbound",29,22
+"Catalyst2 Services Ltd",catalyst2,29636,Open,Content,Europe,100-1000Mbps,"Heavy Outbound",0,3
+"ElektroPost AB","EPiServerHotell, EP Hosting Center, EPiServer Hosting Center",30811,Open,Content,Europe,1-5Gbps,"Heavy Outbound",0,1
+"Broadcasting Center Europe (BCE pop in France)",FR-BCELU-AS,39196,Open,Content,Europe,100-1000Mbps,"Mostly Inbound",0,1
+Microsoft,"8068 8069",8075,Selective,Content,Global,,"Mostly Outbound",214,107
+VitalStream,,13890,Open,Content,Global,,"Heavy Outbound",0,0
+Neustar,UltraDNS,12008,Selective,Content,Global,"1 Tbps+","Mostly Inbound",1,7
+"Your.Org, Inc.",,19255,Selective,Content,Global,"20-50 Gbps","Heavy Outbound",0,1
+"Internet Online",,24587,Open,Content,Regional,1-5Gbps,Balanced,0,4
+"NMMN New Media Markets & Networks IT-Services GmbH",NMMN,20694,Open,Content,Regional,1-5Gbps,Balanced,2,3
+"NTT DATA Services - HCLS Cloud","HCLS/MEDITECH Solutions Group/Physician Services/UCA/Epic DR",10848,Open,Content,"North America",1-5Gbps,"Mostly Outbound",4,7
+"Red Hat Inc",,31976,Restrictive,Content,"North America",5-10Gbps,"Mostly Outbound",0,0
+"YouTube, Inc.",,36561,Selective,Content,"North America",,"Heavy Outbound",0,0
+"No Wires Ltd",CRYSTAL,39602,Open,Content,Europe,20-100Mbps,"Mostly Outbound",0,2
+"Yacast Media",,24963,Restrictive,Content,Europe,,"Mostly Outbound",0,0
+CWIE,,19181,Selective,Content,Global,"20-50 Gbps","Heavy Outbound",0,0
+"NovoServe B.V.","ISP services, Avira, IAF, Internet Access Facilities, Twents datacentrum",24875,Open,Content,Europe,"200-300 Gbps","Mostly Outbound",6,7
+i-Netboys,i-Netboys,35090,Selective,Content,Europe,,"Mostly Outbound",1,0
+"DMA computer services",,29001,Open,Content,Europe,20-100Mbps,"Mostly Outbound",0,1
+Mevershosting.nl,AS-MEVERSHOSTING,39615,Open,Content,Europe,"0-20 Mbps",Balanced,1,0
+"Uniserver Internet BV",,31673,Restrictive,Content,Europe,1-5Gbps,"Mostly Outbound",4,2
+"Choopa, LLC",Vultr,20473,Selective,Content,Global,,"Mostly Outbound",18,18
+DreamTank,,26067,Open,Content,Global,,Balanced,0,0
+MuntInternet,,21392,Open,Content,Europe,5-10Gbps,"Mostly Outbound",1,4
+"Global Radio","GCap Media PLC",39202,Open,Content,Europe,5-10Gbps,"Heavy Outbound",2,2
+"Exalia Ltd","Part of Group NBT / Netbenefit",31625,Selective,Content,Regional,20-100Mbps,"Mostly Outbound",0,0
+"Electronic Arts",,14891,Open,Content,Global,,"Heavy Outbound",0,0
+"Pilosoft Inc.",,26627,Open,Content,Regional,1-5Gbps,"Mostly Outbound",1,3
+"Cisco Umbrella",OpenDNS,36692,Open,Content,Global,,Balanced,35,32
+digg.com,,14833,Open,Content,Regional,,"Heavy Outbound",1,0
+"Media Corporation Plc.","Eyeconomy Ltd.",39520,Open,Content,Europe,1-5Gbps,"Heavy Outbound",0,1
+"Hypermedia Systems",,30212,Selective,Content,"Asia Pacific","20-50 Gbps","Mostly Outbound",2,1
+JumpTV,,40064,Open,Content,Global,1-5Gbps,"Mostly Outbound",0,0
+"NationalNet, Inc.",NatNet,22384,Open,Content,Regional,,Balanced,0,0
+"Extraordinary Managed Services","ExtraMSP, Xtrahost",30827,Open,Content,Regional,,"Mostly Outbound",2,4
+"PoBox Hosting Ltd",PoBox,29006,Open,Content,Europe,100-1000Mbps,"Mostly Inbound",1,0
+"FirstLink Networks",AS-FIRSTLINKNETWORKS,39628,Open,Content,Europe,10-20Gbps,Balanced,0,3
+CacheFly,"CacheNetworks, LLC",30081,Selective,Content,Global,"1 Tbps+","Heavy Outbound",18,28
+"Freethought Internet Limited",AS41000,41000,Open,Content,Europe,100-1000Mbps,"Mostly Outbound",4,4
+Mozilla,,36856,No,Content,"North America",5-10Gbps,"Heavy Outbound",0,0
+"Equinix Connect - Asia Pacific Region",,17819,Open,Content,"Asia Pacific",1-5Gbps,"Mostly Outbound",7,16
+Pulsant,"DediPower Managed Hosting",24931,Open,Content,Regional,1-5Gbps,"Mostly Outbound",1,5
+"Aixit GmbH",aixit,29551,Open,Content,Europe,"20-50 Gbps","Mostly Outbound",1,13
+"UberGlobal Pty Ltd","AussieHQ Pty Ltd",24557,Open,Content,Regional,1-5Gbps,"Mostly Outbound",1,0
+"SynergyWorks Internet",,41659,Open,Content,Europe,100-1000Mbps,Balanced,0,2
+"Telegraaf Media ICT BV.",telegraaf.nl,34106,Open,Content,Regional,5-10Gbps,"Mostly Outbound",2,0
+Ipercast,"Ipercast Network",25286,Open,Content,Global,,"Heavy Outbound",1,1
+Seeweb,,12637,Open,Content,Regional,10-20Gbps,"Mostly Outbound",7,8
+"Internet Engineering Limited","HostingUK, FibreWales",33968,Open,Content,Europe,100-1000Mbps,"Heavy Outbound",0,2
+"Association Kazar",Kazar,35189,Open,Content,Regional,20-100Mbps,Balanced,0,0
+"Blacknight Internet Solutions",Blacknight,39122,Open,Content,Europe,"20-50 Gbps",Balanced,7,8
+iomart,"iomart hosting, Easyspace, Rapidswitch, Redstation, Bytemark",20860,Selective,Content,Regional,"300-500 Gbps","Mostly Outbound",4,17
+"Facebook Inc","Facebook, Instagram, WhatsApp",32934,Selective,Content,Global,"10 Tbps+","Heavy Outbound",250,80
+Myspace,,33739,Open,Content,Global,,"Mostly Outbound",0,0
+"Free Software Foundation",FSF,22989,Open,Content,Global,100-1000Mbps,"Heavy Outbound",1,0
+"Duodecad IT Services","Docler Holding, DoclerWeb, Docler Networks, Jasmin Media Group",34655,Open,Content,Global,"50-100 Gbps","Mostly Outbound",13,14
+"myLoc managed IT AG","webtropia, myLoc, servdiscount",24961,Open,Content,Europe,"100-200 Gbps","Mostly Outbound",9,4
+FDCServers.Net,,30058,Open,Content,Regional,"500-1000 Gbps","Heavy Outbound",0,5
+"Interoute Managed Services Sweden AB","pi.se AB / AS-IONIP",8195,Selective,Content,Europe,1-5Gbps,"Heavy Outbound",2,1
+Icefrost/XHOP,,32105,Open,Content,Regional,1-5Gbps,"Mostly Outbound",1,3
+Powerset,"Powerset, Inc.",21968,Open,Content,Regional,,Balanced,0,3
+"Ebuyer (UK) Limited",AS-EBUYER,41029,Open,Content,Europe,20-100Mbps,"Mostly Inbound",0,1
+"The UK Grid Network LTD","UK Grid",39757,Open,Content,Global,100-1000Mbps,"Mostly Outbound",0,10
+"CBS Interactive","CNET Networks, Sportsline",6623,Open,Content,Global,,"Mostly Outbound",1,0
+"Zillow Group",zillow.com,18888,Open,Content,Regional,5-10Gbps,"Heavy Outbound",2,2
+Clearleap,,46199,Open,Content,Global,,Balanced,1,3
+"45RU HostAway",HostAway,24541,Open,Content,"Asia Pacific",100-1000Mbps,Balanced,1,1
+Paltalk,"AVM Software Inc.",18505,Open,Content,Global,5-10Gbps,"Mostly Outbound",0,3
+"SOLVIANS IT-Solutions",,40988,Open,Content,Europe,1-5Gbps,Balanced,0,2
+NephoScale,,13332,Open,Content,Regional,100-1000Mbps,"Mostly Outbound",0,1
+Oxymium,AS-OXYMIUM,41157,Open,Content,Europe,100-1000Mbps,Balanced,8,3
+Dailymotion,"We deliver cat and baby owl videos in 4k",41690,Selective,Content,Global,,"Heavy Outbound",13,12
+"Pixelpark GmbH",,33811,Open,Content,Europe,100-1000Mbps,Balanced,2,2
+"BitGravity, Inc.",BitGravity,40009,Restrictive,Content,Global,,"Heavy Outbound",0,0
+"Access Integrated Technologies (Ezzi.net)",,15149,Open,Content,"North America",,"Mostly Outbound",1,0
+Salesforce.com,,14340,Selective,Content,Global,,"Mostly Outbound",27,18
+"Mesh Digital Ltd",,39779,Open,Content,Europe,"0-20 Mbps","Mostly Outbound",0,0
+"Associated Networks (UK) Ltd",ANLX,25061,Open,Content,Regional,1-5Gbps,Balanced,4,4
+"RTLNederland Interactief B.V",RTL,20504,Open,Content,Europe,"100-200 Gbps","Mostly Outbound",5,0
+"Neutral Data",,33554,Selective,Content,Regional,,"Mostly Outbound",4,4
+"Easy Online Solutions, Ltd.",MojoHost,27589,Open,Content,Global,"50-100 Gbps","Heavy Outbound",3,3
+"LeaseWeb Germany / FRA-10",netdirekt,28753,Selective,Content,,,"Heavy Outbound",0,0
+"Fubra Limited",Livetodot,35456,Open,Content,Europe,100-1000Mbps,"Mostly Outbound",0,0
+"Localphone Limited",,42884,Open,Content,Europe,20-100Mbps,Balanced,0,0
+"ISP Solution UG",AS-Servercrew,31530,Open,Content,Regional,100-1000Mbps,"Mostly Outbound",0,2
+"Hostbasket NV.",,42018,Selective,Content,Europe,100-1000Mbps,"Heavy Outbound",0,0
+"Stream UK",,39621,Open,Content,Europe,,"Heavy Outbound",0,2
+"InfoSpace, Inc.",,11622,Open,Content,"North America",,"Mostly Outbound",0,0
+Zattoo,ZATTOO,8302,Selective,Content,Europe,,"Heavy Outbound",5,4
+"equada network GmbH",GlobalNOC,25220,Open,Content,Europe,100-1000Mbps,"Mostly Outbound",5,2
+Fusionstorm,"Global Netoptex, GNi",26914,Open,Content,Global,,"Mostly Outbound",1,3
+"Metapeer, Inc.",,13331,Open,Content,Global,"20-50 Gbps","Heavy Outbound",1,1
+"TierPoint Seattle",,11274,Open,Content,"North America",1-5Gbps,"Heavy Outbound",1,2
+"Symantec (EMEA)","MessageLabs Limited/Symantec Hosted Services/Symantec.cloud",21345,Selective,Content,Europe,10-20Gbps,Balanced,17,6
+"STRATO AG",,6724,Open,Content,Europe,,"Mostly Outbound",10,5
+"Zenlayer Inc",as21859,21859,Open,Content,Global,"1 Tbps+","Heavy Outbound",39,30
+OXEVA,REAGI,39104,Open,Content,Regional,1-5Gbps,"Mostly Outbound",2,2
+"Nuclearfallout Enterprises, Inc.",NFOservers,32751,Open,Content,Regional,,Balanced,2,0
+"Neovera, Inc.",,40068,Selective,Content,Regional,20-100Mbps,"Mostly Outbound",1,1
+Oversee.net,,33626,Open,Content,"North America",,"Mostly Outbound",0,0
+Diveo,,13878,Open,Content,Regional,1-5Gbps,"Mostly Outbound",2,0
+CDNetworks,AS-CDNetworks,38670,Open,Content,Global,"200-300 Gbps","Mostly Outbound",0,0
+Bitnik,Picnik.com,17346,Selective,Content,Regional,,Balanced,0,0
+OVHcloud,OVHcloud,16276,Open,Content,Global,"1 Tbps+","Heavy Outbound",52,34
+"Bytemark Limited","Bytemark Hosting",35425,No,Content,Europe,1-5Gbps,"Mostly Outbound",1,4
+UK2Group,"100TB, VPS.net",13213,Open,Content,Europe,"100-200 Gbps","Heavy Outbound",4,5
+Ultraspeed,"Six Degrees Group",25588,No,Content,,,,0,0
+"Host Europe GmbH",,20773,Open,Content,Europe,"200-300 Gbps","Heavy Outbound",6,6
+ioko,,30914,Open,Content,Europe,10-20Gbps,"Mostly Outbound",2,5
+"Accretive Networks",,11608,Restrictive,Content,Global,,"Mostly Outbound",0,0
+"velia.net Internetdienste GmbH",,29066,Open,Content,Europe,"20-50 Gbps","Mostly Outbound",0,0
+"Verizon Digital Media Services (EdgeCast Networks)","EdgeCast Networks",15133,Open,Content,Global,"10 Tbps+","Heavy Outbound",94,46
+"MetaMicro Automatisering BV",,41037,Open,Content,Global,"0-20 Mbps","Mostly Inbound",1,0
+"Coreix Limited","Coreix, dedifast, dediMAX",31708,Open,Content,Regional,10-20Gbps,"Mostly Outbound",2,4
+"IDKOM Networks GmbH",SpeedKom,12931,Open,Content,Regional,"20-50 Gbps",Balanced,9,1
+Typhon,,34948,Selective,Content,Europe,,"Heavy Outbound",0,2
+"Ericsson Broadcast Services Netherlands","Ericsson Broadcast Services Netherlands",20969,Open,Content,Europe,1-5Gbps,"Mostly Outbound",3,11
+"Duocast BV",,31477,Open,Content,Europe,1-5Gbps,Balanced,2,9
+"Technotop Internet BV",,42755,Selective,Content,Europe,1-5Gbps,"Heavy Outbound",1,4
+"CDNetworks Inc.",,36408,Open,Content,Global,"500-1000 Gbps","Mostly Outbound",38,18
+"Caveo Internet BV",,24642,Open,Content,Europe,1-5Gbps,"Mostly Outbound",1,4
+"TransIP BV","TransIP Group / team blue",20857,Open,Content,Europe,"50-100 Gbps","Mostly Outbound",4,4
+"WebJanssen ISP ltd @ Co KG",AS-WEBJANSSEN,29471,Open,Content,Global,20-100Mbps,Balanced,0,2
+"Pandora Media, Inc",,40428,Selective,Content,"North America","200-300 Gbps","Heavy Outbound",2,3
+"Rediff.com India Limited",REDF,38224,Open,Content,"Asia Pacific",5-10Gbps,Balanced,2,3
+CBS,,6102,Open,Content,"North America",,"Mostly Outbound",0,0
+"hostcamp IT-Solutions",AS-HOSTCAMP,41399,Open,Content,Regional,"0-20 Mbps",Balanced,1,3
+"Lynk Networks","Netrino, NetrinoUK Ltd, Hicap Networks",31715,Selective,Content,Europe,"100-200 Gbps","Heavy Outbound",1,11
+"Dreamscape Networks","Crazy Domains/Aust Domains/Cheap Domains/Syrahost",38719,Open,Content,"Asia Pacific",,"Heavy Outbound",12,0
+WebCentral,,7496,Open,Content,Regional,,"Heavy Outbound",1,0
+"Fast Hit Pty Ltd","Server Connection Pty Ltd",24381,Open,Content,"Asia Pacific",,"Heavy Outbound",0,0
+GoGrid,,26228,Open,Content,"North America",1-5Gbps,"Heavy Outbound",2,1
+"Bulletproof Networks",,17732,Open,Content,"Asia Pacific",1-5Gbps,"Mostly Outbound",4,2
+"Conexim Australia Pty Ltd",,37996,Selective,Content,"Asia Pacific",100-1000Mbps,"Mostly Outbound",1,1
+"MEDIA LITE SA",,43683,Open,Content,Global,1-5Gbps,"Mostly Outbound",1,1
+"Cronon AG",AS-CRONON,25504,Open,Content,Europe,,"Mostly Outbound",1,0
+"Redpill Linpro",Linpro,39029,Selective,Content,Europe,5-10Gbps,"Mostly Outbound",1,5
+"Clusters KG",,41391,Open,Content,Regional,1-5Gbps,"Mostly Outbound",3,1
+"Magic OnLine","Hegerys / EuroWeb / SDFrance / Nuxit / PHPNet / Netissime",35393,Open,Content,Europe,10-20Gbps,Balanced,3,5
+in2ip,,34141,Open,Content,Europe,1-5Gbps,"Heavy Outbound",2,4
+"NPO (Nederlandse Publieke Omroep)",AS-PUBLIEKEOMROEP,25182,Selective,Content,Europe,"200-300 Gbps","Heavy Outbound",4,3
+"Comvive Servidores",Comvive,39020,Open,Content,Europe,10-20Gbps,Balanced,1,3
+"WebEx Communications","Cisco Webex",13445,Selective,Content,Global,,"Mostly Outbound",15,10
+"Mythic Beasts Ltd",,44684,Open,Content,Europe,5-10Gbps,"Mostly Outbound",5,4
+"Prosodie Cap Gemini",MGN,8784,Open,Content,Europe,,"Mostly Outbound",3,2
+brightsolid,"Scotland Online",5564,Open,Content,Global,100-1000Mbps,Balanced,3,4
+Linkbynet,,25593,Open,Content,Europe,1-5Gbps,"Mostly Outbound",3,0
+Adapt,,24867,Open,Content,Regional,5-10Gbps,Balanced,0,3
+"IndieClick Media Group, Inc.",,29752,Open,Content,Regional,100-1000Mbps,"Heavy Outbound",0,0
+Wowrack.com,"Wow Technologies, Inc",23033,Open,Content,Global,"50-100 Gbps",Balanced,2,4
+"Peak Web Hosting",,33529,Open,Content,"North America",1-5Gbps,Balanced,0,0
+"Awareness Software Limited",,34931,Open,Content,Regional,20-100Mbps,"Mostly Outbound",0,2
+"SoftLayer Technologies, Inc. (an IBM Company)","SoftLayer an IBM Company",36351,Selective,Content,"North America","1 Tbps+","Mostly Outbound",68,36
+"Hattrick Limited",,12786,Open,Content,Global,100-1000Mbps,"Heavy Inbound",0,0
+"Neolution AG",,42784,Open,Content,Europe,,"Mostly Outbound",0,1
+"Audatex (Switzerland) GmbH",,29430,Open,Content,Europe,100-1000Mbps,"Heavy Outbound",1,1
+"Netcetera AG",AS-NETCETERA,34960,Open,Content,Regional,100-1000Mbps,Balanced,1,1
+"Nine Internet Solutions AG",nine.ch,29691,Open,Content,Europe,,"Mostly Outbound",2,3
+"Trenka Informatik AG",AS-TRENKA,29655,Open,Content,Europe,"1 Tbps+",Balanced,1,3
+"Nobis Technology Group, L.L.C.","Ubiquity Hosting",15003,Selective,Content,"North America",,"Mostly Outbound",0,12
+"webtuning AG",AS-WEBTUNING,35256,Open,Content,Europe,20-100Mbps,"Mostly Outbound",0,0
+GDDY,,8972,Open,Content,Europe,"50-100 Gbps","Mostly Outbound",0,0
+"Big Fish Games",,16773,Open,Content,"North America",1-5Gbps,"Heavy Outbound",0,0
+Devclic,AS-DEVCLIC,44141,Open,Content,Europe,100-1000Mbps,Balanced,5,5
+"Marchex, Inc",,40495,Open,Content,"North America",100-1000Mbps,"Mostly Outbound",1,0
+"Filanco AS29076","Cloud-ix.net, Citytelecom.ru, Datahouse.ru, Hoster.ru, Domenus.ru",29076,Open,Content,Europe,"200-300 Gbps","Mostly Outbound",11,11
+"Zenon N.S.P.",AHA,6903,Selective,Content,Regional,,"Mostly Outbound",1,1
+"Funke Internet Services",,34764,Open,Content,Global,1-5Gbps,"Mostly Inbound",1,1
+"SIGNAL TELECOM","SIGNAL TELCEOMMUNICATIONS, INC.",36388,Open,Content,Global,5-10Gbps,"Heavy Outbound",1,9
+"RedCoruna S.L.","REDCORUNA-AS ",44497,Open,Content,Europe,1-5Gbps,"Heavy Outbound",0,2
+Yandex,"Yandex N.V. Yandex Europe B.V. Yandex Inc. Yandex Oy. Yandex GmbH Yandex LLC",13238,Open,Content,Global,"1 Tbps+","Mostly Outbound",17,8
+"Hetzner Online",AS-Hetzner,24940,Open,Content,Europe,"1 Tbps+","Mostly Outbound",22,17
+www.eatserver.nl,,42949,Open,Content,Global,,"Mostly Outbound",0,1
+WCIX.Net,"totalstream.net, Vidillion Inc.",6473,Open,Content,"North America","20-50 Gbps","Mostly Outbound",3,3
+"TierPoint Spokane",,30340,Open,Content,Regional,1-5Gbps,Balanced,1,3
+"Dynamic Network Services, Inc.","Oracle+Dyn / Dyn / Dynect / DynDNS",33517,Selective,Content,Global,,"Mostly Outbound",7,20
+"all-connect Data Communications GmbH",AS-ACDC,21476,Open,Content,Europe,100-1000Mbps,Balanced,2,0
+"http.net Internet GmbH",,12574,Open,Content,Regional,100-1000Mbps,"Mostly Outbound",0,4
+"Engine Networks","Engine Technology S.r.l.",47316,Open,Content,Europe,1-5Gbps,"Mostly Outbound",0,4
+TIVIT,"Optiglobe, Proceda, Synapsis",16685,Selective,Content,"South America",,"Mostly Outbound",2,0
+"PHADE Software - PowerWeb",PowerWeb,35053,Open,Content,Europe,,"Mostly Outbound",3,1
+"EUSIP bvba Rack66",RACK66,34144,Open,Content,Europe,,Balanced,1,1
+"Ultra Serve Internet Pty Ltd (Managed Hosting)",,17920,Selective,Content,"Asia Pacific",100-1000Mbps,"Heavy Outbound",3,3
+"New Media Labs S.r.l.",,47880,Open,Content,Regional,100-1000Mbps,"Heavy Outbound",0,1
+"Voiceflex Ltd","Frontier Systems Ltd",24594,Open,Content,Europe,100-1000Mbps,Balanced,4,4
+Afilias,,12041,Selective,Content,Global,100-1000Mbps,"Heavy Outbound",16,6
+"Quadra Hosting","Net Quadrant Pty Ltd",24469,Open,Content,"Asia Pacific",100-1000Mbps,"Mostly Outbound",1,0

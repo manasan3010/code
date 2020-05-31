@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_duty" value="name:id;datatype:int,name:deedno;datatype:string,name:deeddate;datatype:date,name:grantorname;datatype:string,name:grantoraddress;datatype:string,name:granteename;datatype:string,name:granteeaddress;datatype:string,name:amount;datatype:real,name:landdistrict;datatype:string,name:landvillage;datatype:string,name:landname;datatype:string,name:notaryid;datatype:int,name:localauthorityid;datatype:int,name:slipno;datatype:int,name:date;datatype:date,name:sd103date;datatype:date,name:sd104date;datatype:date,name:sd105date;datatype:date,name:sd116date;datatype:date,name:sd150date;datatype:date,name:tpdate;datatype:date,name:marketdate;datatype:date,name:marketvalue;datatype:real,name:objectiondate;datatype:date,name:fileno;datatype:string,name:id;datatype:int,name:loyername;datatype:string,name:address;datatype:string,name:tp;datatype:string,name:regNo;datatype:string" />
+</info>

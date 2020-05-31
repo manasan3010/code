@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_localautho" value="name:id;datatype:int,name:name;datatype:string,name:district_council;datatype:string" />
+	<infoitem key="UD_districts" value="name:id;datatype:int,name:district;datatype:string" />
+	<infoitem key="UD_loyer" value="name:id;datatype:int,name:loyername;datatype:string,name:address;datatype:string" />
+</info>

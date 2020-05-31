@@ -1,0 +1,1 @@
+select * from cashreceipt where EXTRACT(month FROM date) =EXTRACT(month FROM CURRENT_DATE) and EXTRACT(year FROM date) =EXTRACT(year FROM CURRENT_DATE)

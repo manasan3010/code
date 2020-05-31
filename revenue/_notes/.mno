@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="PageAccessControl" value="dataupdate,dataview,admin,dataentry" />
+	<infoitem key="PageAccessControlMethod" value="useAccessList" />
+	<infoitem key="MM_Session1" value="MM_Username" />
+	<infoitem key="MM_Session_Count" value="1" />
+	<infoitem key="MM_URL1" value="localauthority" />
+	<infoitem key="MM_URL_Count" value="4" />
+	<infoitem key="MM_URL2" value="amount" />
+	<infoitem key="MM_URL3" value="month" />
+	<infoitem key="MM_URL4" value="year" />
+</info>
