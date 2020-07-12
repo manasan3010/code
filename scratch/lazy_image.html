@@ -24,7 +24,7 @@
 imgCount = 0
         html = ''
         for (var i = 0; i < 10; i++) {
-            html += `<img data-src=\"https://i.picsum.photos/id/${Math.floor(Math.random()*1000)}/30/30.jpg\"> `;
+            html += `<img data-src=\"https://picsum.photos/id/${Math.floor(Math.random()*1000)}/30/30.jpg\"> `;
         }
 
         document.body.innerHTML = html
@@ -33,7 +33,7 @@ imgCount = 0
         observer = new IntersectionObserver((entries, observer) => {
             console.log(imgCount)
             if (imgCount < 3) {
-                    document.body.insertAdjacentHTML( 'beforeend',`<img data-src=\"https://i.picsum.photos/id/${Math.floor(Math.random()*1000)}/30/30.jpg\"> `); 
+                    document.body.insertAdjacentHTML( 'beforeend',`<img data-src=\"https://picsum.photos/id/${Math.floor(Math.random()*1000)}/30/30.jpg\"> `); 
                     
                     observer.observe(document.querySelector('img:last-child'))
                     imgCount++;

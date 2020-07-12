@@ -1,0 +1,31 @@
+<?php
+$listViewDefs ['Bugs'] = 
+array (
+  'NAME' => 
+  array (
+    'width' => '32%',
+    'label' => 'LBL_LIST_SUBJECT',
+    'default' => true,
+    'link' => true,
+  ),
+  'RELEASE_NAME' => 
+  array (
+    'width' => '10%',
+    'label' => 'LBL_FOUND_IN_RELEASE',
+    'default' => false,
+    'related_fields' => 
+    array (
+      0 => 'found_in_release',
+    ),
+    'module' => 'Releases',
+    'id' => 'FOUND_IN_RELEASE',
+  ),
+  'RESOLUTION' => 
+  array (
+    'width' => '10%',
+    'label' => 'LBL_LIST_RESOLUTION',
+    'default' => false,
+  ),
+);
+;
+?>
