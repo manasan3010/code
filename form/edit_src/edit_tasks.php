@@ -5,10 +5,10 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 
-echo  count($_POST['name']);
+// echo  count($_POST['name']);
 // echo  json_encode($_POST);
 
-parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
+// parse_str(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY), $queries);
 // echo $queries['record'];
 
 $conn = new mysqli($servername, $username, $password,"suitecrm");
@@ -33,7 +33,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error;
 }
 
-$sql = "DELETE FROM tasks_extra WHERE id='{$queries['record']}'";
+$sql = "DELETE FROM tasks_extra WHERE id='{$_POST["record"]}'";
 
 if ($conn->query($sql) === TRUE) {
     echo "Record deleted successfully";
@@ -45,12 +45,12 @@ if ($conn->query($sql) === TRUE) {
 // $rows = mysqli_fetch_row($result);
 // echo $rows[0];
 
-$times=0;
-foreach ($_POST['name'] as $re) {
-   
+// $times=0;
+// foreach ($_POST['name'] as $re) {
+for ($times=0; $times < count($_POST['name']); $times++) { 
 
 $sql = "INSERT INTO tasks_extra (id,name,field1,field2,field3,field4)
-values('{$queries['record']}','{$_POST["name"][$times]}','{$_POST["field1"][$times]}','{$_POST["field2"][$times]}','{$_POST["field3"][$times]}','{$_POST["field4"][$times]}')";
+values('{$_POST["record"]}','{$_POST["name"][$times]}','{$_POST["field1"][$times]}','{$_POST["field2"][$times]}','{$_POST["field3"][$times]}','{$_POST["field4"][$times]}')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully ".$sql;
@@ -58,7 +58,7 @@ if ($conn->query($sql) === TRUE) {
     echo "ErrorRecord: " . $sql . "<br>" . $conn->error;
 }
 
-$times++;
+// $times++;
 }
 $conn->close();
 

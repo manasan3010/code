@@ -12,27 +12,9 @@ $conn = new mysqli($servername, $username, $password,"suitecrm");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
+ 
 
-
-// $sql = "CREATE TABLE test_service_main_add (
-// id SMALLINT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-// addno SMALLINT(6) UNSIGNED, 
-// name TINYTEXT ,
-// ipdata MEDIUMTEXT,
-// gpslocation MEDIUMTEXT,
-// classtimes MEDIUMTEXT,
-// adjtimes MEDIUMTEXT,
-// reg_date TINYTEXT 
-// )";
-
-// if ($conn->query($sql) === TRUE) {
-    // echo "Table MyGuests created successfully";
-// } else {
-    // echo "Error creating table: " . $conn->error;
-// }
-
-
-date_default_timezone_set('Asia/Colombo'); // I am in Athens Greece
+date_default_timezone_set('Asia/Colombo'); 
 $today = date("Y-m-d H:i:s");
 
 $query = "SELECT COUNT(*) FROM bugs";
@@ -50,5 +32,3 @@ if ($conn->query($sql) === TRUE) {
 }
 echo $today;
 $conn->close();
-
-?>

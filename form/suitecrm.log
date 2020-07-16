@@ -9450,5 +9450,39 @@ Stack trace:
 06/22/20 11:13:20 [2216][-none-][FATAL] FAILED LOGIN:attempts[1], ip[192.168.1.103], username[admin]
 06/22/20 11:13:20 [2216][-none-][FATAL] SECURITY: User authentication for admin failed
 06/22/20 11:13:20 [2216][-none-][FATAL] FAILED LOGIN:attempts[1], ip[192.168.1.103], username[admin]
-Sat Jun 27 17:06:36 2020 [10264][-none-][FATAL] Could not connect to DB server localhost as root. port : No connection could be made because the target machine actively refused it.
-
+06/28/20 05:26:21 [4480][1][FATAL] Exception handling in C:\xampp\htdocs\form\include\MVC\Controller\SugarController.php:400
+06/28/20 05:26:21 [4480][1][FATAL] Exception in Controller: json_encode error: Recursion detected
+06/28/20 05:26:21 [4480][1][FATAL] backtrace:
+#0 C:\xampp\htdocs\form\custom\Extension\modules\Tasks\Ext\LogicHooks\SMSIntegration.php(12): GuzzleHttp\json_encode(Object(Task))
+#1 C:\xampp\htdocs\form\include\utils\LogicHook.php(272): SMSIntegration->sendSMS(Object(Task), 'after_save', '')
+#2 C:\xampp\htdocs\form\include\utils\LogicHook.php(213): LogicHook->process_hooks(Array, 'after_save', '')
+#3 C:\xampp\htdocs\form\data\SugarBean.php(3129): LogicHook->call_custom_logic('Tasks', 'after_save', '')
+#4 C:\xampp\htdocs\form\data\SugarBean.php(2442): SugarBean->call_custom_logic('after_save', '')
+#5 C:\xampp\htdocs\form\modules\Tasks\Task.php(119): SugarBean->save(false)
+#6 C:\xampp\htdocs\form\modules\Tasks\Save.php(155): Task->save(false)
+#7 C:\xampp\htdocs\form\include\MVC\View\SugarView.php(834): include_once('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\form\include\MVC\View\views\view.classic.php(72): SugarView->includeClassicFile('modules/Tasks/S...')
+#9 C:\xampp\htdocs\form\include\MVC\View\SugarView.php(226): ViewClassic->display()
+#10 C:\xampp\htdocs\form\include\MVC\Controller\SugarController.php(435): SugarView->process()
+#11 C:\xampp\htdocs\form\include\MVC\Controller\SugarController.php(375): SugarController->processView()
+#12 C:\xampp\htdocs\form\include\MVC\SugarApplication.php(113): SugarController->execute()
+#13 C:\xampp\htdocs\form\index.php(52): SugarApplication->execute()
+#14 {main}
+06/28/20 05:26:45 [4480][1][FATAL] Exception handling in C:\xampp\htdocs\form\include\MVC\Controller\SugarController.php:400
+06/28/20 05:26:45 [4480][1][FATAL] Exception in Controller: json_encode error: Recursion detected
+06/28/20 05:26:45 [4480][1][FATAL] backtrace:
+#0 C:\xampp\htdocs\form\custom\Extension\modules\Tasks\Ext\LogicHooks\SMSIntegration.php(12): GuzzleHttp\json_encode(Object(Task))
+#1 C:\xampp\htdocs\form\include\utils\LogicHook.php(272): SMSIntegration->sendSMS(Object(Task), 'after_save', '')
+#2 C:\xampp\htdocs\form\include\utils\LogicHook.php(213): LogicHook->process_hooks(Array, 'after_save', '')
+#3 C:\xampp\htdocs\form\data\SugarBean.php(3129): LogicHook->call_custom_logic('Tasks', 'after_save', '')
+#4 C:\xampp\htdocs\form\data\SugarBean.php(2442): SugarBean->call_custom_logic('after_save', '')
+#5 C:\xampp\htdocs\form\modules\Tasks\Task.php(119): SugarBean->save(false)
+#6 C:\xampp\htdocs\form\modules\Tasks\Save.php(155): Task->save(false)
+#7 C:\xampp\htdocs\form\include\MVC\View\SugarView.php(834): include_once('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\form\include\MVC\View\views\view.classic.php(72): SugarView->includeClassicFile('modules/Tasks/S...')
+#9 C:\xampp\htdocs\form\include\MVC\View\SugarView.php(226): ViewClassic->display()
+#10 C:\xampp\htdocs\form\include\MVC\Controller\SugarController.php(435): SugarView->process()
+#11 C:\xampp\htdocs\form\include\MVC\Controller\SugarController.php(375): SugarController->processView()
+#12 C:\xampp\htdocs\form\include\MVC\SugarApplication.php(113): SugarController->execute()
+#13 C:\xampp\htdocs\form\index.php(52): SugarApplication->execute()
+#14 {main}
