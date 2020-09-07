@@ -9486,3 +9486,9 @@ Stack trace:
 #12 C:\xampp\htdocs\form\include\MVC\SugarApplication.php(113): SugarController->execute()
 #13 C:\xampp\htdocs\form\index.php(52): SugarApplication->execute()
 #14 {main}
+Sat Jul 25 09:29:32 2020 [4364][-none-][FATAL] Could not connect to DB server localhost as root. port : No connection could be made because the target machine actively refused it.
+
+Fri Jul 31 05:36:32 2020 [7624][-none-][FATAL] Could not connect to DB server localhost as root. port : No connection could be made because the target machine actively refused it.
+
+Thu Aug  6 18:49:01 2020 [7624][-none-][FATAL] Could not connect to DB server localhost as root. port : No connection could be made because the target machine actively refused it.
+

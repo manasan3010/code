@@ -37,6 +37,9 @@ ASTP TEC
             }
         }
         if (!isset($mobile) || !$mobile) return;
+        $mobile = trim($mobile);
+        //Check whether number is not a land-line number
+        if ($mobile[strlen($mobile) - 9] != '7') return;
 
         $status = $bean->status;
         if ($status == Status::Estimation) {
