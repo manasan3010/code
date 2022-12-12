@@ -12,7 +12,7 @@
   "dependencies": {
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "mongoose": "^5.4.14",
     "socket.io": "^2.2.0"
   }
